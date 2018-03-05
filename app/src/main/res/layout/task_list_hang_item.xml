@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWil"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/task_hang_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_button_bg"
+            android:paddingBottom="8px"
+            android:paddingLeft="34px"
+            android:paddingRight="34px"
+            android:paddingTop="8px"
+            android:text="1"
+            android:textColor="@color/colorTitle"
+            android:textSize="8pt"
+            app:layout_marginPercent="3%" />
+
+        <TextView
+            android:id="@+id/task_hang_dome_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="平山镇农户帮扶项目"
+            android:textSize="8pt"
+            app:layout_marginPercent="3%" />
+
+        <TextView
+            android:id="@+id/task_hang_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_button_bg"
+            android:padding="8px"
+            android:text="未完成"
+            android:textColor="@color/colorTitle"
+            android:textSize="8pt"
+            app:layout_marginPercent="3%" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/task_hang_publisher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发布人："
+            android:textSize="8pt"
+            app:layout_marginLeftPercent="3%"
+            app:layout_marginRightPercent="3%" />
+
+        <TextView
+            android:id="@+id/task_hang_publisher_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="刘志龙"
+            android:textSize="8pt"
+            app:layout_marginLeftPercent="3%"
+            app:layout_marginRightPercent="3%" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_marginPercent="3%">
+
+        <TextView
+            android:id="@+id/task_hang_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="发布时间："
+            android:textSize="8pt" />
+
+        <TextView
+            android:id="@+id/task_hang_star_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="2017.01.15"
+            android:textSize="8pt"
+            app:layout_marginRightPercent="3%" />
+
+        <TextView
+            android:id="@+id/task_hang_ent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="结束时间："
+            android:textSize="8pt" />
+
+        <TextView
+            android:id="@+id/task_hang_ent_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="2017.08.11"
+            android:textSize="8pt"
+            app:layout_marginRightPercent="3%" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

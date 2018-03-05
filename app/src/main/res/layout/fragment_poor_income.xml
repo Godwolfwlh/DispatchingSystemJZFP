@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/header_title_bg"
+        app:layout_heightPercent="12%w"
+        app:layout_marginTopPercent="3%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:id="@+id/poor_details_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/poor_details_title_income"
+            android:textSize="18dp"
+            app:layout_marginLeftPercent="3%w" />
+
+        <TextView
+            android:id="@+id/poor_details_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/poor_details_basic_edit"
+            android:textSize="18dp"
+            app:layout_marginRightPercent="3%w" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_marginPercent="3%w">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="clip_vertical"
+            android:text="年份："
+            android:textSize="9pt" />
+
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="50%w" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_one"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="工资性收入："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_one_ok_i"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_two"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="年收入："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_two_ok_i"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg_wi"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_nine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="生产经营性收入："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_nine_ok_i"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg_wi"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_ten"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="生产经营性支出："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_ten_ok_i"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_thirteen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="转移性收入："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_thirteen_ok_i"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_fourteen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="纯收入："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_fourteen_ok_i"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg_wi"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_eleven"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="财产性收入："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_eleven_ok_i"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg_wi"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_twelve"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="人均纯收入："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_twelve_ok_i"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_fifteen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="精准扶贫收入："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_fifteen_ok_i"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

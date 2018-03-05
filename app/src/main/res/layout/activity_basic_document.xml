@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTitle"
+        android:orientation="horizontal"
+        app:layout_heightPercent="12%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="12%w"
+            app:layout_widthPercent="12%w">
+
+            <ImageView
+                android:id="@+id/bd_title_left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="12dp"
+                android:src="@mipmap/icon_back" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <TextView
+            android:id="@+id/bd_title_name"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/basic_document"
+            android:textColor="@color/colorWil"
+            android:textSize="12pt" />
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_heightPercent="12%w">
+
+            <TextView
+                android:id="@+id/bd_title_right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="12dp"
+                android:text="@string/poor_details_basic_edit"
+                android:textColor="@color/colorWil"
+                android:textSize="10pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWil"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="名字"
+            android:textSize="10pt"
+            app:layout_marginPercent="3%w" />
+
+        <TextView
+            android:id="@+id/bd_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_marginPercent="3%w"
+            android:text="临时用户"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWil"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:layout_marginPercent="3%w"
+            android:text="联系电话"
+            android:textSize="10pt" />
+
+        <TextView
+            android:id="@+id/bd_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_marginPercent="3%w"
+            android:text="18283838383"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWil"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:layout_marginPercent="3%w"
+            android:text="公司"
+            android:textSize="10pt" />
+
+        <TextView
+            android:id="@+id/bd_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_marginPercent="3%w"
+            android:text="凯里市工商局财务处"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

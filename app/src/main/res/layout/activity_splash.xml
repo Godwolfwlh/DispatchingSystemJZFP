@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/slap_image"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/slap_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="8dp"
+        android:textColor="@color/colorWil"
+        android:padding="8dp"
+        android:background="@drawable/splash_text_bg"
+        android:textSize="10pt" />
+
+    <!--android:paddingTop="dp"-->
+    <!--android:paddingBottom="6dp"-->
+    <!--android:paddingRight="4dp"-->
+    <!--android:paddingLeft="4dp"-->
+</com.zhy.android.percent.support.PercentRelativeLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/activity_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="12%w" />
+
+    <com.yhzhcs.dispatchingsystemjzfp.view.BottomScrollView
+        android:id="@+id/act_solution_4_sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/main_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.yhzhcs.dispatchingsystemjzfp.view.BottomScrollView>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

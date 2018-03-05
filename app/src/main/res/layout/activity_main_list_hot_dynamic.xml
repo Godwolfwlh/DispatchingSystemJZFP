@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWil"
+    android:orientation="horizontal">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_heightPercent="30%w"
+        app:layout_widthPercent="67%w">
+
+        <TextView
+            android:id="@+id/hot_dyn_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="全国扶贫工作宣传会议成功在北京召开，习近平主席参加"
+            android:textSize="10pt"
+            app:layout_marginPercent="3%w" />
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_marginRightPercent="3%w">
+
+            <TextView
+                android:id="@+id/hot_dyn_butt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_button_dynamic"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="3dp"
+                android:textSize="8pt"
+                android:text="动态"
+                android:textColor="@color/colorOrange"
+                app:layout_marginPercent="3%w" />
+
+            <TextView
+                android:id="@+id/hot_dyn_publisher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="发布人"
+                android:textSize="8pt"
+                app:layout_marginPercent="3%w" />
+
+            <TextView
+                android:id="@+id/hot_dyn_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="2018-1-12"
+                android:textColor="@color/colorGray"
+                android:textSize="8pt"
+                app:layout_marginPercent="3%w" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <ImageView
+        android:id="@+id/hot_dyn_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@mipmap/mmspic_back"
+        app:layout_heightPercent="29%w"
+        app:layout_marginTopPercent="2%w"
+        app:layout_marginRightPercent="2%w"
+        app:layout_marginBottomPercent="2%w"
+        app:layout_widthPercent="30%w" />
+
+</com.zhy.android.percent.support.PercentLinearLayout>

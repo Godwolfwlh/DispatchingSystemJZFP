@@ -1,0 +1,135 @@
+package com.yhzhcs.dispatchingsystemjzfp.fragments;
+
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.lidroid.xutils.BitmapUtils;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
+import com.yhzhcs.dispatchingsystemjzfp.R;
+import com.yhzhcs.dispatchingsystemjzfp.bean.Liferequire;
+import com.yhzhcs.dispatchingsystemjzfp.bean.Poor;
+import com.yhzhcs.dispatchingsystemjzfp.bean.PoorDetailsBean;
+import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
+import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+
+/**
+ * Created by Administrator on 2018/1/24.
+ */
+
+public class DetailsFragment extends Fragment {
+
+    private String poorHouseId;
+    private View v;
+    private ImageView poorImghead;
+    private TextView nameInput, familyNum, reasonInput, attributeInput, telephoneInput, paperInput, addressInput;
+    private TextView situationOne, situationTwo, situationThree, situationFour, situationFive, situationSix, situationSeven, situationEight, situationNine, situationTen, situationEleven, situationTwelve, situationThirteen, situationFourteen, situationFifteen;
+
+    private BitmapUtils bitmapUtils;
+    private String Is = "否";
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        v = inflater.inflate(R.layout.fragment_poor_base_situation, container, false);
+        Bundle bundle = getArguments();
+        poorHouseId = bundle.getString("poorHouseId");
+        getData();
+        return v;
+    }
+
+    private void getData() {
+        HttpUtils httpUtils = new HttpUtils();
+        RequestParams params = new RequestParams();
+        params.addBodyParameter("poorHouseId", poorHouseId);
+        httpUtils.send(HttpMethod.POST, Constant.URL_POOR_DETAILS, params, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                LogUtil.v("DetailsHttp", "onSuccess" + responseInfo.result.toString());
+                String body = responseInfo.result;
+                Gson gson = new Gson();
+                PoorDetailsBean poorDetailsBean = gson.fromJson(body, PoorDetailsBean.class);
+                Poor poor = poorDetailsBean.getPoor();
+                Liferequire liferequire = poorDetailsBean.getLifeRequire();
+                intViewOne(poor);
+                intSituation(poor, liferequire);
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+                LogUtil.v("DetailsHttp", "onFailure" + s);
+            }
+        });
+    }
+
+    private void intViewOne(Poor poor) {
+        poorImghead = (ImageView) v.findViewById(R.id.poor_head_img_head);
+        nameInput = (TextView) v.findViewById(R.id.poor_head_name_input);
+        familyNum = (TextView) v.findViewById(R.id.poor_head_num_people_input);
+        reasonInput = (TextView) v.findViewById(R.id.poor_head_reason_input);
+        attributeInput = (TextView) v.findViewById(R.id.poor_head_attribute_i_input);
+        telephoneInput = (TextView) v.findViewById(R.id.poor_head_telephone_input);
+        paperInput = (TextView) v.findViewById(R.id.poor_head_paper_input);
+        addressInput = (TextView) v.findViewById(R.id.poor_head_address_input);
+
+        bitmapUtils = new BitmapUtils(getActivity());    //创建BitmapUtils对象，通过xUtils框架获取
+        bitmapUtils.configDefaultBitmapConfig(Bitmap.Config.RGB_565);   //设置图片清晰度
+        bitmapUtils.display(poorImghead, poor.getPhoto());
+
+        nameInput.setText(poor.getName());
+        familyNum.setText(poor.getFamilyNumber() + "人");
+        reasonInput.setText(poor.getMainPoorCause());
+        attributeInput.setText(poor.getPoorProperty());
+        telephoneInput.setText(poor.getPhone());
+        paperInput.setText(poor.getCradNumber());
+        addressInput.setText(poor.getCompanyName() + poor.getCounty() + poor.getTown() + poor.getVillage());
+
+    }
+
+    private void intSituation(Poor poor, Liferequire liferequire) {
+
+        situationOne = (TextView) v.findViewById(R.id.situation_td_one_ok);
+        situationTwo = (TextView) v.findViewById(R.id.situation_td_two_ok);
+        situationThree = (TextView) v.findViewById(R.id.situation_td_three_ok);
+        situationFour = (TextView) v.findViewById(R.id.situation_td_four_ok);
+        situationFive = (TextView) v.findViewById(R.id.situation_td_five_ok);
+        situationSix = (TextView) v.findViewById(R.id.situation_td_six_ok);
+        situationSeven = (TextView) v.findViewById(R.id.situation_td_seven_ok);
+        situationEight = (TextView) v.findViewById(R.id.situation_td_eight_ok);
+        situationNine = (TextView) v.findViewById(R.id.situation_td_nine_ok);
+        situationTen = (TextView) v.findViewById(R.id.situation_td_ten_ok);
+        situationEleven = (TextView) v.findViewById(R.id.situation_td_eleven_ok);
+        situationTwelve = (TextView) v.findViewById(R.id.situation_td_twelve_ok);
+        situationThirteen = (TextView) v.findViewById(R.id.situation_td_thirteen_ok);
+        situationFourteen = (TextView) v.findViewById(R.id.situation_td_fourteen_ok);
+        situationFifteen = (TextView) v.findViewById(R.id.situation_td_fifteen_ok);
+
+        situationOne.setText((liferequire.getIsCooperative().equals("")) ? Is : liferequire.getIsCooperative());
+        situationThree.setText((poor.getPoverty().equals("")) ? Is : poor.getPoverty());
+        situationFour.setText((liferequire.getIsDrinkingWater().equals("")) ? Is : liferequire.getIsDrinkingWater());
+        situationFive.setText((liferequire.getIsElectricity().equals("")) ? Is : liferequire.getIsElectricity());
+        situationSix.setText((liferequire.getIsDrinkingSafe().equals("")) ? Is : liferequire.getIsDrinkingSafe());
+        situationSeven.setText((liferequire.getIsHe().equals("")) ? Is : liferequire.getIsHe());
+        situationEight.setText((liferequire.getIsDilapidatedHouse().equals("")) ? Is : liferequire.getIsDilapidatedHouse());
+        situationNine.setText((liferequire.getIsRelocatedHouse().equals("")) ? Is : liferequire.getIsRelocatedHouse());
+        situationTen.setText((liferequire.getDangerouLevel().equals("")) ? Is : liferequire.getDangerouLevel());
+        situationEleven.setText((poor.getIsTeach().equals("")) ? Is : poor.getIsTeach());
+        situationTwelve.setText((liferequire.getIsCommodityHouse().equals("")) ? Is : liferequire.getIsCommodityHouse());
+        situationThirteen.setText((liferequire.getIsCar().equals("")) ? Is : liferequire.getIsCar());
+        situationFourteen.setText((liferequire.getIsCivilServant().equals("")) ? Is : liferequire.getIsCivilServant());
+        situationFifteen.setText((liferequire.getIsBusinessRegister().equals("")) ? Is : liferequire.getIsBusinessRegister());
+
+    }
+
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/header_title_bg"
+        app:layout_heightPercent="12%w"
+        app:layout_marginBottomPercent="8%w"
+        app:layout_marginTopPercent="3%w">
+
+        <ImageView
+            android:id="@+id/img_title_image"
+            android:layout_width="40px"
+            android:layout_height="34px"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_picture"
+            app:layout_marginLeftPercent="6%w"
+            app:layout_marginRightPercent="5%w" />
+
+        <TextView
+            android:id="@+id/img_title_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_toRightOf="@id/img_title_image"
+            android:text="图片管理"
+            android:textSize="10pt" />
+
+        <TextView
+            android:id="@+id/img_title_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="right"
+            android:text="删除"
+            android:textSize="10pt"
+            app:layout_marginRightPercent="6%w" />
+
+        <ImageView
+            android:id="@+id/img_title_png_1"
+            android:layout_width="2px"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/img_title_delete"
+            android:src="@mipmap/line_gray_1"
+            app:layout_marginRightPercent="3%w" />
+
+        <TextView
+            android:id="@+id/img_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="right"
+            android:layout_toLeftOf="@id/img_title_png_1"
+            android:text="上传"
+            android:textSize="10pt"
+            app:layout_marginRightPercent="3%w" />
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <GridView
+        android:id="@+id/img_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp"
+        app:layout_marginLeftPercent="6%w"
+        app:layout_marginRightPercent="5%w">
+
+    </GridView>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

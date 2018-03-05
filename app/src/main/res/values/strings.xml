@@ -1,0 +1,87 @@
+<resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">精准扶贫挂图调度系统</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">设置</string>
+
+    <!-- 首页 -->
+    <string name="home_title_name">精准扶贫挂图调度系统</string>
+    <string name="home_poor">平困户</string>
+    <string name="home_product">农产品</string>
+    <string name="home_forum">讨论区</string>
+    <string name="hot_information">热点资讯</string>
+    <string name="primary_details_text">产品详情</string>
+
+    <!-- Fragment -->
+    <string name="fragment_home">首页</string>
+    <string name="fragment_information">资讯</string>
+    <string name="fragment_task">任务</string>
+    <string name="fragment_personal">我的</string>
+    <!-- ListView上拉提示 -->
+    <string name="none_tip">没有更多了~~~</string>
+
+    <string name="poor_title_name">贫困户管理</string>
+    <string name="poor_list_item_name">姓名</string>
+    <string name="poor_list_item_delete">移除</string>
+    <string name="poor_list_item_family_txt">人</string>
+    <string name="poor_list_item_income_txt">元/人</string>
+
+    <string name="poor_details_title_basic">基本情况</string>
+    <string name="poor_details_title_family">家庭成员</string>
+    <string name="family">家庭情况</string>
+    <string name="poor_details_title_income">收入情况</string>
+    <string name="poor_details_title_img">图片管理</string>
+
+    <string name="poor_details_basic_name">基本情况</string>
+    <string name="poor_details_basic_edit">编辑</string>
+
+    <string name="information_title_policy">政策</string>
+    <string name="information_title_dynamic">动态</string>
+    <string name="information_title_produce">农产品</string>
+
+    <string name="task_star_time_txt">开始时间：</string>
+    <string name="task_ent_time_txt">结束时间：</string>
+
+    <string name="basic_document">基本资料</string>
+    <string name="modify_the_password">修改密码</string>
+
+    <string name="loading">正在加载中，请稍后...</string>
+
+    <string name="query">查询</string>
+    <string name="please_enter_query_date">请输入查询日期</string>
+    <string name="no_picture_information">暂无图片信息</string>
+    <string name="no_data_please_check">暂无数据,请查询</string>
+    <string name="query_date_not_empty">查询日期不能为空</string>
+    <string name="event_list">事件列表</string>
+    <string name="event_list_details">事件列表详情</string>
+
+    <string name="download_success">下载成功</string>
+    <string name="file_does_not_exist">文件不存在</string>
+    <string name="back_abnormal_results">数据返回异常</string>
+    <string name="network_anomaly_text">网络异常，请检查您的网络</string>
+    <string name="network_anomaly_hint">下拉更新数据...</string>
+
+    <string name="User_name_cannot_be_empty">用户不能为空!</string>
+    <string name="Password_cannot_be_empty">密码不能为空!</string>
+
+    <string name="is">否</string>
+
+    <string-array name="poor_date">
+        <item>全部</item>
+        <item>2018</item>
+        <item>2017</item>
+        <item>2016</item>
+        <item>2015</item>
+        <item>2014</item>
+    </string-array>
+
+    <string-array name="poor_plans">
+        <item>全部</item>
+        <item>已脱贫</item>
+        <item>未脱贫</item>
+        <item>计划脱贫</item>
+    </string-array>
+
+</resources>
+

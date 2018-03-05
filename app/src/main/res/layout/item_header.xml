@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:minHeight="250dp"
+    android:background="@color/colorWil"
+    android:orientation="vertical"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_marginPercent="3%w"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/up_to_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最新"
+                android:textSize="12pt"/>
+
+            <View
+                android:id="@+id/up_to_date_index"
+                android:layout_width="45dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="6dp"
+                android:background="#000000"
+                android:visibility="visible"/>
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_marginPercent="3%w"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hot_spot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="热点"
+                android:textSize="12pt"/>
+
+            <View
+                android:id="@+id/hot_spot_index"
+                android:layout_width="45dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="6dp"
+                android:background="#000000"
+                android:visibility="gone"/>
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_marginPercent="3%w">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="推荐"
+                android:textSize="10pt"
+                android:textColor="@color/colorTitle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:layout_marginLeftPercent="3%w"
+                app:layout_marginRightPercent="3%w"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="万潮镇香炉山村贫困户拿到扶贫产业分红"
+                android:textSize="10pt"/>
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_marginPercent="3%w">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="推荐"
+                android:textSize="10pt"
+                android:textColor="@color/colorTitle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:layout_marginLeftPercent="3%w"
+                app:layout_marginRightPercent="3%w"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="万潮镇香炉山村贫困户拿到扶贫产业分红"
+                android:textSize="10pt"/>
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_marginPercent="3%w">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="推荐"
+                android:textSize="10pt"
+                android:textColor="@color/colorTitle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:layout_marginLeftPercent="3%w"
+                app:layout_marginRightPercent="3%w"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="万潮镇香炉山村贫困户拿到扶贫产业分红"
+                android:textSize="10pt"/>
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+</LinearLayout>

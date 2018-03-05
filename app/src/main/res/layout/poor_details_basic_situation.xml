@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="12%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:id="@+id/poor_details_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/poor_details_basic_name"
+            android:textSize="18dp"
+            app:layout_marginLeftPercent="3%w" />
+
+        <TextView
+            android:id="@+id/poor_details_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/poor_details_basic_edit"
+            android:textSize="18dp"
+            app:layout_marginRightPercent="3%w" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_one"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="是否加入合作社："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_one_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_two"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="是否参保："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_two_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg_wi"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_three"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="是否脱贫："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_three_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg_wi"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_four"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="饮水是否困难："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_four_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_five"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="是否通生活用电："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_five_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_six"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="饮水是否安全："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_six_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg_wi"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_seven"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="是否参合："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_seven_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg_wi"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="是否危房："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_eight_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_nine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="是否搬迁户："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_nine_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_ten"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="危房级别："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_ten_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg_wi"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_eleven"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="教育是否有保障："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_eleven_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg_wi"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_twelve"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="是否有商品房："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_twelve_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_thirteen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="是否有车："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_thirteen_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_fourteen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="是否国家公务员："
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_fourteen_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorWil"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWil"
+        android:orientation="horizontal"
+        app:layout_heightPercent="14%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg_wi"
+            app:layout_heightPercent="14%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+            <TextView
+                android:id="@+id/situation_td_fifteen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="是否有风尚注册："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/situation_td_fifteen_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:gravity="center_vertical"
+                android:textSize="8pt" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/surface_form_bg_wi"
+            app:layout_heightPercent="14%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_widthPercent="47%w">
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/family_item_num"
+        android:layout_width="wrap_content"
+        android:layout_height="272px"
+        android:layout_margin="8dp"
+        android:text="1"
+        android:textColor="#0090FF"
+        android:textSize="8pt" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/family_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="尹秀菊"
+                android:textSize="8pt" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/family_item_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="性别："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/family_item_sex_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="8dp"
+                android:text="男"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/family_item_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="46dp"
+                android:layout_marginRight="38dp"
+                android:text="年龄："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/family_item_age_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="45岁"
+                android:textSize="8pt" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/family_item_nexus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="与户主关系："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/family_item_nexus_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="户主"
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/family_item_health"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="39dp"
+                android:text="健康状况："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/family_item_health_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="健康"
+                android:textSize="8pt" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/family_item_paper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="证件号："
+                android:textSize="8pt" />
+
+            <TextView
+                android:id="@+id/family_item_paper_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="522628199304040404"
+                android:textColor="#0090FF"
+                android:textSize="8pt" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

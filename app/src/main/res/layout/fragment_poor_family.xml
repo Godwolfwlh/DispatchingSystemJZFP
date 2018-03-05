@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/header_title_bg"
+        app:layout_heightPercent="12%w"
+        app:layout_marginTopPercent="3%w"
+        app:layout_widthPercent="100%w">
+
+        <ImageView
+            android:layout_width="40px"
+            android:layout_height="34px"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/icon_base_info"
+            android:visibility="gone"
+            app:layout_marginLeftPercent="3%" />
+
+        <TextView
+            android:id="@+id/poor_head_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/family"
+            android:textSize="18dp"
+            app:layout_marginLeftPercent="3%w" />
+
+        <TextView
+            android:id="@+id/poor_head_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/poor_details_basic_edit"
+            android:textSize="18dp"
+            app:layout_marginRightPercent="3%w" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <ListView
+        android:id="@+id/fragment_poor_family_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</com.zhy.android.percent.support.PercentLinearLayout>

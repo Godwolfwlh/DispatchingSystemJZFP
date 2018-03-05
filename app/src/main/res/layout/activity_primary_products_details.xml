@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/top"
+        layout="@layout/activity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.yhzhcs.dispatchingsystemjzfp.view.PullUpToLoadMore
+        android:id="@+id/ptlm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top"
+        android:orientation="vertical">
+
+        <com.yhzhcs.dispatchingsystemjzfp.view.MyScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/pro_details_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/img_product" />
+
+                <com.zhy.android.percent.support.PercentLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWil">
+
+                    <TextView
+                        android:id="@+id/pro_details_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="凯里市品山乡白木白菜"
+                        android:textSize="12pt"
+                        app:layout_marginPercent="3%w" />
+                </com.zhy.android.percent.support.PercentLinearLayout>
+
+                <com.zhy.android.percent.support.PercentLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWil"
+                    android:orientation="vertical">
+
+                    <com.zhy.android.percent.support.PercentLinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_marginLeftPercent="3%w">
+
+                        <ImageView
+                            android:layout_width="54px"
+                            android:layout_height="54px"
+                            android:layout_marginTop="2dp"
+                            android:src="@mipmap/icon_money_1"
+                            app:layout_marginLeftPercent="3%w"
+                            app:layout_marginRightPercent="3%w" />
+
+                        <TextView
+                            android:id="@+id/pro_details_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2.00"
+                            android:textColor="@color/colorOrange"
+                            android:textSize="10pt"
+                            app:layout_marginLeftPercent="3%" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="元/斤"
+                            android:textSize="10pt" />
+
+                        <TextView
+                            android:id="@+id/pro_details_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/greens_text_bg"
+                            android:paddingBottom="4dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="4dp"
+                            android:text="蔬菜"
+                            android:textColor="@color/colorGray"
+                            android:textSize="8pt"
+                            app:layout_marginLeftPercent="3%w" />
+
+                    </com.zhy.android.percent.support.PercentLinearLayout>
+
+                    <com.zhy.android.percent.support.PercentLinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_marginPercent="3%w">
+
+                        <ImageView
+                            android:layout_width="54px"
+                            android:layout_height="54px"
+                            android:layout_marginTop="2dp"
+                            android:src="@mipmap/icon_person"
+                            app:layout_marginLeftPercent="3%w"
+                            app:layout_marginRightPercent="3%w" />
+
+                        <TextView
+                            android:id="@+id/pro_details_farmer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="刘向阳"
+                            android:textSize="10pt"
+                            app:layout_marginLeftPercent="3%" />
+
+                    </com.zhy.android.percent.support.PercentLinearLayout>
+
+                    <com.zhy.android.percent.support.PercentLinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_marginLeftPercent="3%w"
+                        app:layout_marginBottomPercent="3%w">
+
+                        <ImageView
+                            android:layout_width="54px"
+                            android:layout_height="54px"
+                            android:layout_marginTop="2dp"
+                            android:src="@mipmap/icon_time"
+                            app:layout_marginLeftPercent="3%w" />
+
+                        <TextView
+                            android:id="@+id/pro_details_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2018-2-26"
+                            android:textSize="10pt"
+                            app:layout_marginLeftPercent="3%" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="54px"
+                            android:layout_height="54px"
+                            android:layout_marginTop="2dp"
+                            android:src="@mipmap/icon_tel"
+                            app:layout_marginLeftPercent="3%w"
+                            app:layout_marginRightPercent="3%w" />
+
+                        <TextView
+                            android:id="@+id/pro_details_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="15985555555"
+                            android:textSize="10pt"
+                            app:layout_marginRightPercent="3%" />
+
+                    </com.zhy.android.percent.support.PercentLinearLayout>
+
+                </com.zhy.android.percent.support.PercentLinearLayout>
+
+                <com.zhy.android.percent.support.PercentLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/hot_tex"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/main_list_title_bg"
+                        android:gravity="center_vertical"
+                        android:padding="12dp"
+                        android:paddingLeft="20px"
+                        android:text="@string/primary_details_text"
+                        android:textSize="12pt"
+                        app:layout_heightPercent="15%w"
+                        app:layout_widthPercent="100%w" />
+
+                </com.zhy.android.percent.support.PercentLinearLayout>
+
+                <com.zhy.android.percent.support.PercentLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/colorWil"
+                    android:orientation="vertical">
+
+                    <com.zhy.android.percent.support.PercentLinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_marginLeftPercent="3%w">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="种植面积："
+                            android:textSize="10pt"
+                            app:layout_marginPercent="3%w" />
+
+                        <TextView
+                            android:id="@+id/pro_details_area"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="200"
+                            android:textSize="10pt"
+                            app:layout_marginPercent="3%w" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="亩"
+                            android:textSize="10pt"
+                            app:layout_marginTopPercent="3%w" />
+
+                    </com.zhy.android.percent.support.PercentLinearLayout>
+
+                    <com.zhy.android.percent.support.PercentLinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_marginPercent="3%w">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="产品品种："
+                            android:textSize="10pt"
+                            app:layout_marginLeftPercent="3%w" />
+
+                        <TextView
+                            android:id="@+id/pro_details_kind"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="新疆种吊丝瓜"
+                            android:textSize="10pt"
+                            app:layout_marginLeftPercent="6%w" />
+
+                    </com.zhy.android.percent.support.PercentLinearLayout>
+
+                    <com.zhy.android.percent.support.PercentLinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_marginLeftPercent="3%w">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="产地：        "
+                            android:textSize="10pt"
+                            app:layout_marginPercent="3%w" />
+
+                        <TextView
+                            android:id="@+id/pro_details_origin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="凯里市平原乡琉璃河村"
+                            android:textSize="10pt"
+                            app:layout_marginPercent="3%w" />
+
+                    </com.zhy.android.percent.support.PercentLinearLayout>
+
+                </com.zhy.android.percent.support.PercentLinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:height="50dp"
+                        android:gravity="center"
+                        android:text="继续拖动查看图文详情" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </com.yhzhcs.dispatchingsystemjzfp.view.MyScrollView>
+
+        <com.yhzhcs.dispatchingsystemjzfp.view.MyScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.yhzhcs.dispatchingsystemjzfp.view.MyWebView
+                    android:id="@+id/pro_details_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    app:layout_marginTopPercent="3%" />
+
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+        </com.yhzhcs.dispatchingsystemjzfp.view.MyScrollView>
+
+    </com.yhzhcs.dispatchingsystemjzfp.view.PullUpToLoadMore>
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="TOP" />
+
+</RelativeLayout>
