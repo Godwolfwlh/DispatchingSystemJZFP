@@ -125,6 +125,7 @@ public class EnterActivity extends AppCompatActivity implements View.OnClickList
                 Gson gson = new Gson();
                 userLoginBean = new UserLoginBean();
                 userLoginBean = gson.fromJson(responseInfo.result, UserLoginBean.class);
+                LogUtil.v("USERHTTP", "onSuccess=========>>>" + userLoginBean.toString());
                 if (userLoginBean.getUserId() == 0) {
                     new Thread(new Runnable() {
                         public void run() {
@@ -137,7 +138,6 @@ public class EnterActivity extends AppCompatActivity implements View.OnClickList
                             Message message = new Message();
                             message.what = 0;
                             mHandler.sendMessage(message);
-
                         }
                     }).start();  //开始线程
                 } else {
