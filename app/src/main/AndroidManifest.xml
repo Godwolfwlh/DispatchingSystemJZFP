@@ -45,6 +45,8 @@
         <activity android:name=".activitys.BasicDocumentActivity"/>
         <activity android:name=".activitys.EditProfileActivity"/>
         <activity android:name=".activitys.ModifyPassActivity"/>
+        <activity android:name=".activitys.ModifyPoorDetailsO"/>
+        <activity android:name=".activitys.ModifyPoorDetailsT"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

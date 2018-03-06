@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="是否加入合作社"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="是否参保"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="是否脱贫"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="计划脱贫"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="饮水是否困难"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="是否通生活用电"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="饮水是否安全"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="是否参合"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="是否危房"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="是否搬迁户"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="危房级别"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="教育是否有保障"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="是否有商品房"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="是否有车"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="是否国家公务员"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="是否有风尚注册"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="否"
+            android:textColor="@color/sliding_left_normal"
+            android:textColorHint="@android:color/darker_gray"
+            android:textSize="10pt" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

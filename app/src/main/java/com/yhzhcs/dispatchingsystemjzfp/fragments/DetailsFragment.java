@@ -1,5 +1,6 @@
 package com.yhzhcs.dispatchingsystemjzfp.fragments;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,8 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.yhzhcs.dispatchingsystemjzfp.R;
+import com.yhzhcs.dispatchingsystemjzfp.activitys.ModifyPoorDetailsO;
+import com.yhzhcs.dispatchingsystemjzfp.activitys.ModifyPoorDetailsT;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Liferequire;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Poor;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorDetailsBean;
@@ -28,14 +31,14 @@ import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
  * Created by Administrator on 2018/1/24.
  */
 
-public class DetailsFragment extends Fragment {
+public class DetailsFragment extends Fragment implements View.OnClickListener {
 
     private String poorHouseId;
     private View v;
     private ImageView poorImghead;
     private TextView nameInput, familyNum, reasonInput, attributeInput, telephoneInput, paperInput, addressInput;
     private TextView situationOne, situationTwo, situationThree, situationFour, situationFive, situationSix, situationSeven, situationEight, situationNine, situationTen, situationEleven, situationTwelve, situationThirteen, situationFourteen, situationFifteen;
-
+    private TextView poorHeadEdit, poorDetailsEdit;
     private BitmapUtils bitmapUtils;
     private String Is = "否";
 
@@ -82,6 +85,11 @@ public class DetailsFragment extends Fragment {
         telephoneInput = (TextView) v.findViewById(R.id.poor_head_telephone_input);
         paperInput = (TextView) v.findViewById(R.id.poor_head_paper_input);
         addressInput = (TextView) v.findViewById(R.id.poor_head_address_input);
+
+        poorHeadEdit = (TextView) v.findViewById(R.id.poor_head_edit);
+        poorDetailsEdit = (TextView) v.findViewById(R.id.poor_details_edit);
+        poorHeadEdit.setOnClickListener(this);
+        poorDetailsEdit.setOnClickListener(this);
 
         bitmapUtils = new BitmapUtils(getActivity());    //创建BitmapUtils对象，通过xUtils框架获取
         bitmapUtils.configDefaultBitmapConfig(Bitmap.Config.RGB_565);   //设置图片清晰度
@@ -132,4 +140,17 @@ public class DetailsFragment extends Fragment {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.poor_head_edit:
+                Intent intento = new Intent(getActivity(), ModifyPoorDetailsO.class);
+                startActivity(intento);
+                break;
+            case R.id.poor_details_edit:
+                Intent intentt = new Intent(getActivity(), ModifyPoorDetailsT.class);
+                startActivity(intentt);
+                break;
+        }
+    }
 }

@@ -8,7 +8,7 @@ public class Constant {
 
     public static final String LOG_TAG = "logTag";
 
-    public static final String URL_TITLE = "http://192.168.1.107:8080/cathy/appController/";
+    public static final String URL_TITLE = "http://192.168.2.116:8080/cathy/appController/";
 
     /**
      * 查询新闻动态、政策数据
