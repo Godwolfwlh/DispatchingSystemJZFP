@@ -1,12 +1,16 @@
 package com.yhzhcs.dispatchingsystemjzfp.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+
 /**
  * Auto-generated: 2018-02-07 16:44:8
  *
  * @author aTool.org (i@aTool.org)
  * @website http://www.atool.org/json2javabean.php
  */
-public class Poor {
+public class Poor implements Parcelable {
 
     private int age;
     private double averageIncome;
@@ -66,6 +70,77 @@ public class Poor {
     private String workingInfo;
     private String workingTimeLimit;
     private String year;
+
+    protected Poor(Parcel in) {
+        age = in.readInt();
+        averageIncome = in.readDouble();
+        bankCard = in.readString();
+        city = in.readString();
+        companyId = in.readString();
+        companyName = in.readString();
+        county = in.readString();
+        cradNumber = in.readString();
+        createdBy = in.readString();
+        departmentId = in.readString();
+        departmentName = in.readString();
+        depositBank = in.readString();
+        education = in.readString();
+        enableWoking = in.readString();
+        enabledFlag = in.readInt();
+        familyNumber = in.readString();
+        group = in.readString();
+        groupId = in.readString();
+        health = in.readString();
+        houseId = in.readString();
+        id = in.readString();
+        isCooperative = in.readString();
+        isEat = in.readString();
+        isEmployeeInsurance = in.readString();
+        isEndowmentInsurance = in.readString();
+        isHe = in.readString();
+        isLife = in.readString();
+        isRuralMedicine = in.readString();
+        isTeach = in.readString();
+        isWear = in.readString();
+        lastUpdatedBy = in.readString();
+        mainPoorCause = in.readString();
+        missionAndPoorhouse = in.readString();
+        name = in.readString();
+        nation = in.readString();
+        notPoorYear = in.readString();
+        parentId = in.readString();
+        personId = in.readString();
+        phone = in.readString();
+        photo = in.readString();
+        poorProperty = in.readString();
+        poverty = in.readString();
+        projectPoorYear = in.readString();
+        province = in.readString();
+        sex = in.readString();
+        studyInfo = in.readString();
+        town = in.readString();
+        townId = in.readString();
+        userTown = in.readString();
+        userTownId = in.readString();
+        village = in.readString();
+        villageId = in.readString();
+        withNelation = in.readString();
+        workingInfo = in.readString();
+        workingTimeLimit = in.readString();
+        year = in.readString();
+    }
+
+    public static final Creator<Poor> CREATOR = new Creator<Poor>() {
+        @Override
+        public Poor createFromParcel(Parcel in) {
+            return new Poor(in);
+        }
+
+        @Override
+        public Poor[] newArray(int size) {
+            return new Poor[size];
+        }
+    };
 
     public int getAge() {
         return age;
@@ -593,5 +668,70 @@ public class Poor {
                 ", workingTimeLimit='" + workingTimeLimit + '\'' +
                 ", year='" + year + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(age);
+        parcel.writeDouble(averageIncome);
+        parcel.writeString(bankCard);
+        parcel.writeString(city);
+        parcel.writeString(companyId);
+        parcel.writeString(companyName);
+        parcel.writeString(county);
+        parcel.writeString(cradNumber);
+        parcel.writeString(createdBy);
+        parcel.writeString(departmentId);
+        parcel.writeString(departmentName);
+        parcel.writeString(depositBank);
+        parcel.writeString(education);
+        parcel.writeString(enableWoking);
+        parcel.writeInt(enabledFlag);
+        parcel.writeString(familyNumber);
+        parcel.writeString(group);
+        parcel.writeString(groupId);
+        parcel.writeString(health);
+        parcel.writeString(houseId);
+        parcel.writeString(id);
+        parcel.writeString(isCooperative);
+        parcel.writeString(isEat);
+        parcel.writeString(isEmployeeInsurance);
+        parcel.writeString(isEndowmentInsurance);
+        parcel.writeString(isHe);
+        parcel.writeString(isLife);
+        parcel.writeString(isRuralMedicine);
+        parcel.writeString(isTeach);
+        parcel.writeString(isWear);
+        parcel.writeString(lastUpdatedBy);
+        parcel.writeString(mainPoorCause);
+        parcel.writeString(missionAndPoorhouse);
+        parcel.writeString(name);
+        parcel.writeString(nation);
+        parcel.writeString(notPoorYear);
+        parcel.writeString(parentId);
+        parcel.writeString(personId);
+        parcel.writeString(phone);
+        parcel.writeString(photo);
+        parcel.writeString(poorProperty);
+        parcel.writeString(poverty);
+        parcel.writeString(projectPoorYear);
+        parcel.writeString(province);
+        parcel.writeString(sex);
+        parcel.writeString(studyInfo);
+        parcel.writeString(town);
+        parcel.writeString(townId);
+        parcel.writeString(userTown);
+        parcel.writeString(userTownId);
+        parcel.writeString(village);
+        parcel.writeString(villageId);
+        parcel.writeString(withNelation);
+        parcel.writeString(workingInfo);
+        parcel.writeString(workingTimeLimit);
+        parcel.writeString(year);
     }
 }

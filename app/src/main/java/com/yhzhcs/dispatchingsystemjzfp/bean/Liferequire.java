@@ -1,12 +1,15 @@
 package com.yhzhcs.dispatchingsystemjzfp.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Auto-generated: 2018-02-07 16:44:8
  *
  * @author aTool.org (i@aTool.org)
  * @website http://www.atool.org/json2javabean.php
  */
-public class Liferequire {
+public class Liferequire implements Parcelable {
 
     private String cardNumber;
     private String createdBy;
@@ -34,6 +37,45 @@ public class Liferequire {
     private String roadType;
     private String trunkDistance;
     private String year;
+
+    protected Liferequire(Parcel in) {
+        cardNumber = in.readString();
+        createdBy = in.readString();
+        dangerouLevel = in.readString();
+        enabledFlag = in.readInt();
+        fuelType = in.readString();
+        housingArea = in.readString();
+        id = in.readString();
+        isBusinessRegister = in.readString();
+        isCar = in.readString();
+        isCivilServant = in.readString();
+        isCommodityHouse = in.readString();
+        isCooperative = in.readString();
+        isDilapidatedHouse = in.readString();
+        isDrinkingSafe = in.readString();
+        isDrinkingWater = in.readString();
+        isElectricity = in.readString();
+        isHe = in.readString();
+        isRelocatedHouse = in.readString();
+        isToilet = in.readString();
+        lastUpdatedBy = in.readString();
+        poorHouseId = in.readString();
+        roadType = in.readString();
+        trunkDistance = in.readString();
+        year = in.readString();
+    }
+
+    public static final Creator<Liferequire> CREATOR = new Creator<Liferequire>() {
+        @Override
+        public Liferequire createFromParcel(Parcel in) {
+            return new Liferequire(in);
+        }
+
+        @Override
+        public Liferequire[] newArray(int size) {
+            return new Liferequire[size];
+        }
+    };
 
     public String getCardNumber() {
         return cardNumber;
@@ -273,5 +315,38 @@ public class Liferequire {
                 ", trunkDistance='" + trunkDistance + '\'' +
                 ", year='" + year + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(cardNumber);
+        parcel.writeString(createdBy);
+        parcel.writeString(dangerouLevel);
+        parcel.writeInt(enabledFlag);
+        parcel.writeString(fuelType);
+        parcel.writeString(housingArea);
+        parcel.writeString(id);
+        parcel.writeString(isBusinessRegister);
+        parcel.writeString(isCar);
+        parcel.writeString(isCivilServant);
+        parcel.writeString(isCommodityHouse);
+        parcel.writeString(isCooperative);
+        parcel.writeString(isDilapidatedHouse);
+        parcel.writeString(isDrinkingSafe);
+        parcel.writeString(isDrinkingWater);
+        parcel.writeString(isElectricity);
+        parcel.writeString(isHe);
+        parcel.writeString(isRelocatedHouse);
+        parcel.writeString(isToilet);
+        parcel.writeString(lastUpdatedBy);
+        parcel.writeString(poorHouseId);
+        parcel.writeString(roadType);
+        parcel.writeString(trunkDistance);
+        parcel.writeString(year);
     }
 }

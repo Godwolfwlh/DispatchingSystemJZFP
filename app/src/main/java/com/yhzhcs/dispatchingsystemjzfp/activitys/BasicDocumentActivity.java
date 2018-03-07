@@ -40,7 +40,7 @@ public class BasicDocumentActivity extends AppCompatActivity implements View.OnC
         Company = (TextView) findViewById(R.id.bd_company);
 
         Name.setText(userInfo.getMissionName());
-        Phone.setText(userInfo.getPhoto());
+//        Phone.setText(userInfo.getPhoto());
         Company.setText(userInfo.getMissionCompany());
 
         Ltitle.setOnClickListener(this);

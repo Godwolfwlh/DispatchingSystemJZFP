@@ -105,4 +105,8 @@ public class Constant {
      */
     public static final String URL_REMOVE_POOR = URL_TITLE + "removePoorHouse";
 
+    /**
+     *保存贫困户信息
+     * */
+
 }

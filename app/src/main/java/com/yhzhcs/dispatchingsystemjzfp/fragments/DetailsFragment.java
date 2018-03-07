@@ -26,6 +26,7 @@ import com.yhzhcs.dispatchingsystemjzfp.bean.Poor;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorDetailsBean;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+import com.yhzhcs.dispatchingsystemjzfp.utils.ToastUtil;
 
 /**
  * Created by Administrator on 2018/1/24.
@@ -41,6 +42,8 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
     private TextView poorHeadEdit, poorDetailsEdit;
     private BitmapUtils bitmapUtils;
     private String Is = "否";
+    private Bundle bundle;
+    private PoorDetailsBean poorDetailsBean;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,11 +65,15 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
                 LogUtil.v("DetailsHttp", "onSuccess" + responseInfo.result.toString());
                 String body = responseInfo.result;
                 Gson gson = new Gson();
-                PoorDetailsBean poorDetailsBean = gson.fromJson(body, PoorDetailsBean.class);
+                poorDetailsBean = gson.fromJson(body, PoorDetailsBean.class);
                 Poor poor = poorDetailsBean.getPoor();
                 Liferequire liferequire = poorDetailsBean.getLifeRequire();
                 intViewOne(poor);
                 intSituation(poor, liferequire);
+
+                bundle = new Bundle();
+                bundle.putParcelable("POOR_LIST_BUNDLE", poorDetailsBean);
+
             }
 
             @Override
@@ -145,7 +152,12 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.poor_head_edit:
                 Intent intento = new Intent(getActivity(), ModifyPoorDetailsO.class);
-                startActivity(intento);
+                if (bundle == null){
+                    ToastUtil.showInfo(getActivity(), "您尚未登入，或者网络异常！");
+                }else {
+                    intento.putExtras(bundle);
+                    startActivity(intento);
+                }
                 break;
             case R.id.poor_details_edit:
                 Intent intentt = new Intent(getActivity(), ModifyPoorDetailsT.class);

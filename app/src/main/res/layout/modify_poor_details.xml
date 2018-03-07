@@ -34,6 +34,7 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/mod_poor_details_name"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
@@ -68,6 +69,7 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/mod_poor_details_num"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
@@ -102,6 +104,7 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/mod_poor_details_one"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
@@ -136,6 +139,7 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/mod_poor_details_two"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
@@ -170,6 +174,7 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/mod_poor_details_pho"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
@@ -204,6 +209,7 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/mod_poor_details_add"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
