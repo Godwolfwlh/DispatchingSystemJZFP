@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <include
+        layout="@layout/activity_main_list_view_title"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_list_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWil"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/include_poor"
+            layout="@layout/poor_act"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_heightPercent="25%w"
+            app:layout_marginPercent="3%w"
+            app:layout_widthPercent="25%w" />
+
+
+        <include
+            android:id="@+id/include_produce"
+            layout="@layout/produce_act"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            app:layout_heightPercent="25%w"
+            app:layout_marginPercent="3%w"
+            app:layout_widthPercent="25%w" />
+
+        <include
+            android:id="@+id/include_forum"
+            layout="@layout/forum_act"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            app:layout_heightPercent="25%w"
+            app:layout_marginPercent="3%w"
+            app:layout_widthPercent="25%w" />
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+</LinearLayout>
