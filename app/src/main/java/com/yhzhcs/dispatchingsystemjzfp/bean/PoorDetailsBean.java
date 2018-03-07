@@ -21,6 +21,7 @@ public class PoorDetailsBean implements Parcelable {
 
     protected PoorDetailsBean(Parcel in) {
         poor = in.readParcelable(Poor.class.getClassLoader());
+        lifeRequire = in.readParcelable(Liferequire.class.getClassLoader());
     }
 
     public static final Creator<PoorDetailsBean> CREATOR = new Creator<PoorDetailsBean>() {
@@ -67,5 +68,6 @@ public class PoorDetailsBean implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeParcelable(poor, i);
+        parcel.writeParcelable(lifeRequire,i);
     }
 }

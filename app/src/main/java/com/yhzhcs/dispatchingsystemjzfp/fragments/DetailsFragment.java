@@ -38,7 +38,8 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
     private View v;
     private ImageView poorImghead;
     private TextView nameInput, familyNum, reasonInput, attributeInput, telephoneInput, paperInput, addressInput;
-    private TextView situationOne, situationTwo, situationThree, situationFour, situationFive, situationSix, situationSeven, situationEight, situationNine, situationTen, situationEleven, situationTwelve, situationThirteen, situationFourteen, situationFifteen;
+    private TextView situationOne, situationTwo, situationThree, situationFour, situationFive, situationSix,
+            situationSeven, situationEight, situationNine, situationTen, situationEleven, situationTwelve, situationThirteen, situationFourteen, situationFifteen;
     private TextView poorHeadEdit, poorDetailsEdit;
     private BitmapUtils bitmapUtils;
     private String Is = "否";
@@ -161,7 +162,12 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.poor_details_edit:
                 Intent intentt = new Intent(getActivity(), ModifyPoorDetailsT.class);
-                startActivity(intentt);
+                if (bundle == null){
+                    ToastUtil.showInfo(getActivity(), "您尚未登入，或者网络异常！");
+                }else {
+                    intentt.putExtras(bundle);
+                    startActivity(intentt);
+                }
                 break;
         }
     }

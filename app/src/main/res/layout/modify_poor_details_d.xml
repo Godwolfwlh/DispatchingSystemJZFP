@@ -28,11 +28,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_one"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -62,11 +62,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_two"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -96,11 +96,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_three"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="计划脱贫"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -130,11 +130,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_four"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -164,11 +164,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_five"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -198,11 +198,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_six"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -232,11 +232,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_seven"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -266,11 +266,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_eight"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -300,11 +300,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_nine"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -334,11 +334,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_ten"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -368,11 +368,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_eleven"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -402,11 +402,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_twelve"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -436,11 +436,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_thirteen"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -470,11 +470,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_fourteen"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
@@ -504,11 +504,11 @@
             android:src="@mipmap/bg_line" />
 
         <EditText
+            android:id="@+id/modify_poor_dd_fifteen"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="否"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />

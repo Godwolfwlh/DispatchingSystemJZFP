@@ -8,7 +8,7 @@ public class Constant {
 
     public static final String LOG_TAG = "logTag";
 
-    public static final String URL_TITLE = "http://192.168.2.116:8080/cathy/appController/";
+    public static final String URL_TITLE = "http://192.168.1.189:8080/cathy/appController/";
 
     /**
      * 查询新闻动态、政策数据
@@ -106,7 +106,9 @@ public class Constant {
     public static final String URL_REMOVE_POOR = URL_TITLE + "removePoorHouse";
 
     /**
-     *保存贫困户信息
+     *保存贫困户基本信息
+     * POST提交 根据身份证提交界面信息
      * */
+    public static final String URL_Modify_POOR = URL_TITLE + "savePoorBase";
 
 }
