@@ -109,6 +109,18 @@ public class Constant {
      *保存贫困户基本信息
      * POST提交 根据身份证提交界面信息
      * */
-    public static final String URL_Modify_POOR = URL_TITLE + "savePoorBase";
+    public static final String URL_MODIFY_POOR = URL_TITLE + "savePoorBase";
+
+    /**
+     * 保存生活条件信息
+     * POST提交 根据身份证提交界面信息
+     * */
+    public static final String URL_MODIFY_LIFEREQUIRE = URL_TITLE + "saveLifeRequire";
+
+    /**
+     * 查询贫困户联系地址信息（选择乡镇、街道（村））
+     * GET提交
+     * */
+    public static final String URL_POOR_ADD = URL_TITLE + "findAreaByParentId";
 
 }

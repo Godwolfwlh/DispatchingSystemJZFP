@@ -9,9 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.yhzhcs.dispatchingsystemjzfp.R;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorDetailsBean;
+import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
 
 /**
@@ -116,6 +121,20 @@ public class ModifyPoorDetailsT extends AppCompatActivity implements View.OnClic
 
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
+        params.addBodyParameter("cradNumber", poorDetailsBean.getPoor().getCradNumber());
+        if (poorDetailsBean.getPoor().getCradNumber() != null && poorDetailsBean.getPoor().getCradNumber().equals("")) {
+            httpUtils.send(HttpMethod.POST, Constant.URL_MODIFY_LIFEREQUIRE, params, new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(ResponseInfo<String> responseInfo) {
+                    LogUtil.v("MODIFYLIFEREQUIREDETAILSOHTTP", "onSuccess：" + responseInfo.result.toString());
+                }
+
+                @Override
+                public void onFailure(HttpException e, String s) {
+                    LogUtil.v("MODIFYLIFEREQUIREDETAILSOHTTP", "onFailure：" + s.toString());
+                }
+            });
+        }
 
     }
 }

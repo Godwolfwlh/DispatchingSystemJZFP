@@ -190,7 +190,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="1dp"
         android:background="@color/colorWil"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -208,16 +208,35 @@
             android:layout_marginRight="8dp"
             android:src="@mipmap/bg_line" />
 
-        <EditText
+        <TextView
             android:id="@+id/mod_poor_details_add"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:background="@null"
+            android:text="凯里市"
             android:gravity="center_vertical"
-            android:hint="联系地址"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
+
+        <Spinner
+            android:id="@+id/mod_poor_details_spinner_left"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:dropDownHorizontalOffset="50dp"
+            android:dropDownVerticalOffset="50dp"
+            android:spinnerMode="dropdown"/>
+
+        <Spinner
+            android:id="@+id/mod_poor_details_spinner_right"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:dropDownHorizontalOffset="50dp"
+            android:dropDownVerticalOffset="50dp"
+            android:spinnerMode="dropdown" />
     </com.zhy.android.percent.support.PercentLinearLayout>
 
 
