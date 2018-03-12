@@ -38,8 +38,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import permissions.dispatcher.NeedsPermission;
-
 public class SampleCameraActivity extends Activity implements ListImageDirPopupWindow.OnImageDirSelected {
     int totalCount = 0;
     private ProgressDialog mProgressDialog;
@@ -113,7 +111,6 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
                 mImageFloders, LayoutInflater.from(getApplicationContext())
                 .inflate(R.layout.view_cameralist_dir, null));
         mListImageDirPopupWindow.setOnDismissListener(new OnDismissListener() {
-
             @Override
             public void onDismiss() {
                 // 设置背景颜色变暗
@@ -124,7 +121,9 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
         });
         // 设置选择文件夹的回调
         mListImageDirPopupWindow.setOnImageDirSelected(this);
+
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +151,6 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
         mProgressDialog = ProgressDialog.show(this, null, "正在加载...");
         new Thread(new Runnable() {
             @Override
-            @NeedsPermission(MediaStore.Images.Media.MIME_TYPE)
             public void run() {
                 String firstImage = null;
                 Uri mImageUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
