@@ -1,6 +1,7 @@
 package com.yhzhcs.dispatchingsystemjzfp.activitys;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -43,8 +44,7 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
     private TextView titleName;
     private ImageView titleImgR;
 
-    private EditText poorName, poorNum, poorOne, poorTow, poorPho;
-    private TextView poorAdd;
+    private EditText poorName, poorNum, poorOne, poorTow, poorPho,poorAdd;//poorTown,poorChild;
     private Spinner childsSpi, townSpi;
     private String PorName, PorNum, PorOne, PorTow, PorPho, PorAdd, StrChilds, StrTown,TownId,ChildsId;
 
@@ -55,6 +55,8 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
 
     private List<TownBean> townBeans;
     List<Childs> childs;
+    //onCreate
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,7 +85,9 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
         poorOne = (EditText) findViewById(R.id.mod_poor_details_one);
         poorTow = (EditText) findViewById(R.id.mod_poor_details_two);
         poorPho = (EditText) findViewById(R.id.mod_poor_details_pho);
-        poorAdd = (TextView) findViewById(R.id.mod_poor_details_add);
+        poorAdd = (EditText) findViewById(R.id.mod_poor_details_add);
+//        poorTown = (EditText) findViewById(R.id.mod_poor_details_town);
+//        poorChild = (EditText) findViewById(R.id.mod_poor_details_childs);
         townSpi = (Spinner) findViewById(R.id.mod_poor_details_spinner_left);
         childsSpi = (Spinner) findViewById(R.id.mod_poor_details_spinner_right);
 
@@ -93,6 +97,8 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
         poorTow.setText(poorDetailsBean.getPoor().getPoorProperty());
         poorPho.setText(poorDetailsBean.getPoor().getPhone());
         poorAdd.setText(poorDetailsBean.getPoor().getCounty());
+//        poorTown.setText(poorDetailsBean.getPoor().getTown());
+//        poorChild.setText(poorDetailsBean.getPoor().getVillage());
         LogUtil.v("djsfoiasafds", (data.get(0).getData().size()) + "");
 
         townBeans = new ArrayList<>();
@@ -170,7 +176,7 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
         params.addBodyParameter("poorProperty", PorTow);
         params.addBodyParameter("phone", PorPho);
         params.addBodyParameter("city", poorDetailsBean.getPoor().getCity());
-        params.addBodyParameter("county", "凯里市");
+        params.addBodyParameter("county", PorAdd);
         params.addBodyParameter("town", StrTown);
         params.addBodyParameter("townId", TownId);
         params.addBodyParameter("village", StrChilds);

@@ -123,4 +123,10 @@ public class Constant {
      * */
     public static final String URL_POOR_ADD = URL_TITLE + "findAreaByParentId";
 
+    /**
+     * 保存家庭成员信息
+     * POST提交 根据身份证提交界面信息
+     * */
+    public static final String URL_MODIFY_FAMILY = URL_TITLE + "saveFimaly";
+
 }

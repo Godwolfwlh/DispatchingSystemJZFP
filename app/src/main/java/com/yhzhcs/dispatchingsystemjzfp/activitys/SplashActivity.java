@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -21,7 +22,7 @@ import java.util.Random;
 /**
  * 启动页，app刚打开时的activity
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final int GO_HOME = 0;//去主页
     private static final int GO_LOGIN = 1;//去登录页
@@ -68,6 +69,7 @@ public class SplashActivity extends AppCompatActivity {
         SplaText = (TextView) findViewById(R.id.slap_text);
         mc = new MyCountDownTimer(5000, 1000);
         mc.start();
+        SplaText.setOnClickListener(this);
 
         TypedArray ar = getResources().obtainTypedArray(R.array.imgArray); //获取图片数组
         int len = ar.length();  //获取数组的长度
@@ -83,6 +85,20 @@ public class SplashActivity extends AppCompatActivity {
             mHandler.sendEmptyMessageDelayed(GO_HOME, 5000);
         } else {
             mHandler.sendEmptyMessageAtTime(GO_LOGIN, 5000);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.slap_text:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                //撤回自动跳转
+                mHandler.removeMessages(GO_HOME);
+                mHandler.removeMessages(GO_LOGIN);
+                finish();
+                break;
         }
     }
 

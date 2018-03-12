@@ -1,12 +1,15 @@
 package com.yhzhcs.dispatchingsystemjzfp.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Auto-generated: 2018-02-01 16:26:37
  *
  * @author aTool.org (i@aTool.org)
  * @website http://www.atool.org/json2javabean.php
  */
-public class Lastupdateddate {
+public class Lastupdateddate implements Parcelable {
 
     private int date;
     private int day;
@@ -18,6 +21,32 @@ public class Lastupdateddate {
     private long time;
     private int timezoneOffset;
     private int year;
+
+    protected Lastupdateddate(Parcel in) {
+        date = in.readInt();
+        day = in.readInt();
+        hours = in.readInt();
+        minutes = in.readInt();
+        month = in.readInt();
+        nanos = in.readInt();
+        seconds = in.readInt();
+        time = in.readLong();
+        timezoneOffset = in.readInt();
+        year = in.readInt();
+    }
+
+    public static final Creator<Lastupdateddate> CREATOR = new Creator<Lastupdateddate>() {
+        @Override
+        public Lastupdateddate createFromParcel(Parcel in) {
+            return new Lastupdateddate(in);
+        }
+
+        @Override
+        public Lastupdateddate[] newArray(int size) {
+            return new Lastupdateddate[size];
+        }
+    };
+
     public void setDate(int date) {
         this.date = date;
     }
@@ -88,4 +117,22 @@ public class Lastupdateddate {
         return year;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(date);
+        parcel.writeInt(day);
+        parcel.writeInt(hours);
+        parcel.writeInt(minutes);
+        parcel.writeInt(month);
+        parcel.writeInt(nanos);
+        parcel.writeInt(seconds);
+        parcel.writeLong(time);
+        parcel.writeInt(timezoneOffset);
+        parcel.writeInt(year);
+    }
 }

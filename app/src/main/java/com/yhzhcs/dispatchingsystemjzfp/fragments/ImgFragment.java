@@ -30,6 +30,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.yhzhcs.dispatchingsystemjzfp.R;
+import com.yhzhcs.dispatchingsystemjzfp.activitys.SampleCameraActivity;
 import com.yhzhcs.dispatchingsystemjzfp.adapters.PoorImageAdapter;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Inglists;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorImageBean;
@@ -143,8 +144,6 @@ public class ImgFragment extends Fragment implements View.OnClickListener {
         listDialog.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // which 下标从0开始
-                // ...To-do
                 switch (which){
                     case 0:
                         Toast.makeText(getActivity(),
@@ -156,7 +155,9 @@ public class ImgFragment extends Fragment implements View.OnClickListener {
                         Toast.makeText(getActivity(),
                                 "你点击了" + items[1],
                                 Toast.LENGTH_SHORT).show();
-                        getImageFromAlbum();
+                        Intent intent = new Intent(getActivity(), SampleCameraActivity.class);
+                        startActivity(intent);
+//                        getImageFromAlbum();
                         break;
                 }
             }

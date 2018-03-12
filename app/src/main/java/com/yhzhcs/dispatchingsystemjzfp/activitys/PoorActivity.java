@@ -77,12 +77,6 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_poor);
         sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         missionId = sp.getString("MISSION_ID", "");
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         initView();
     }
 

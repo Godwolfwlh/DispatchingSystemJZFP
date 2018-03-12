@@ -3,6 +3,7 @@ package com.yhzhcs.dispatchingsystemjzfp.fragments;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +53,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         v = inflater.inflate(R.layout.fragment_poor_base_situation, container, false);
         Bundle bundle = getArguments();
         poorHouseId = bundle.getString("poorHouseId");
-        getData();
+        getData();//向服务器发送请求
         return v;
     }
 
@@ -153,22 +154,23 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.poor_head_edit:
                 Intent intento = new Intent(getActivity(), ModifyPoorDetailsO.class);
-                if (bundle == null){
+                if (bundle == null) {
                     ToastUtil.showInfo(getActivity(), "您尚未登入，或者网络异常！");
-                }else {
+                } else {
                     intento.putExtras(bundle);
                     startActivity(intento);
                 }
                 break;
             case R.id.poor_details_edit:
                 Intent intentt = new Intent(getActivity(), ModifyPoorDetailsT.class);
-                if (bundle == null){
+                if (bundle == null) {
                     ToastUtil.showInfo(getActivity(), "您尚未登入，或者网络异常！");
-                }else {
+                } else {
                     intentt.putExtras(bundle);
                     startActivity(intentt);
                 }
                 break;
         }
     }
+
 }

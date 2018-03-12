@@ -198,7 +198,7 @@
             android:layout_height="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="8dp"
-            android:text="联系地址"
+            android:text="县/市"
             android:textSize="10pt" />
 
         <ImageView
@@ -208,17 +208,116 @@
             android:layout_marginRight="8dp"
             android:src="@mipmap/bg_line" />
 
-        <TextView
+        <EditText
             android:id="@+id/mod_poor_details_add"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="@null"
-            android:text="凯里市"
+            android:hint="县/市"
             android:gravity="center_vertical"
             android:textColor="@color/sliding_left_normal"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="10pt" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <!--<com.zhy.android.percent.support.PercentLinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_marginTop="1dp"-->
+        <!--android:background="@color/colorWil"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:text="乡镇"-->
+            <!--android:textSize="10pt" />-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="1px"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_marginLeft="4dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:src="@mipmap/bg_line" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/mod_poor_details_town"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@null"-->
+            <!--android:hint="乡镇"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:textColor="@color/sliding_left_normal"-->
+            <!--android:textColorHint="@android:color/darker_gray"-->
+            <!--android:textSize="10pt" />-->
+
+    <!--</com.zhy.android.percent.support.PercentLinearLayout>-->
+
+    <!--<com.zhy.android.percent.support.PercentLinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_marginTop="1dp"-->
+        <!--android:background="@color/colorWil"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:text="村/街道"-->
+            <!--android:textSize="10pt" />-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="1px"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_marginLeft="4dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:src="@mipmap/bg_line" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/mod_poor_details_childs"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@null"-->
+            <!--android:hint="村/街道"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:textColor="@color/sliding_left_normal"-->
+            <!--android:textColorHint="@android:color/darker_gray"-->
+            <!--android:textSize="10pt" />-->
+
+    <!--</com.zhy.android.percent.support.PercentLinearLayout>-->
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="乡镇"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
 
         <Spinner
             android:id="@+id/mod_poor_details_spinner_left"
@@ -227,7 +326,32 @@
             android:layout_weight="1"
             android:dropDownHorizontalOffset="50dp"
             android:dropDownVerticalOffset="50dp"
+            android:textColor="@color/sliding_left_normal"
             android:spinnerMode="dropdown"/>
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWil"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="8dp"
+            android:text="村/街道"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="20dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/bg_line" />
 
         <Spinner
             android:id="@+id/mod_poor_details_spinner_right"
@@ -236,7 +360,9 @@
             android:layout_weight="1"
             android:dropDownHorizontalOffset="50dp"
             android:dropDownVerticalOffset="50dp"
+            android:textColor="@color/sliding_left_normal"
             android:spinnerMode="dropdown" />
+
     </com.zhy.android.percent.support.PercentLinearLayout>
 
 

@@ -23,7 +23,7 @@ import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
  * Created by Administrator on 2018/3/6.
  */
 
-public class ModifyPoorDetailsT extends AppCompatActivity implements View.OnClickListener{
+public class ModifyPoorDetailsT extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView titleImgL;
     private TextView titleName;
@@ -41,11 +41,11 @@ public class ModifyPoorDetailsT extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_modify_poordetails_dw);
         Bundle bundle = getIntent().getExtras();
         poorDetailsBean = bundle.getParcelable("POOR_LIST_BUNDLE");
-        LogUtil.v("BDUSERINFO",poorDetailsBean.getLifeRequire().toString());
+        LogUtil.v("BDUSERINFO", poorDetailsBean.getLifeRequire().toString());
         intView();
     }
 
-    private void intView(){
+    private void intView() {
         titleImgL = (ImageView) findViewById(R.id.title_left);
         titleName = (TextView) findViewById(R.id.title_name);
         titleImgR = (ImageView) findViewById(R.id.title_right);//modify_poor_dd_fifteen
@@ -92,16 +92,18 @@ public class ModifyPoorDetailsT extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.title_left:
                 finish();
                 break;
             case R.id.title_right:
+                updatePoorAndLifeRequire();
+                finish();
                 break;
         }
     }
 
-    private void updatePoorAndLifeRequire(){
+    private void updatePoorAndLifeRequire() {
 
         One = situationOne.getText().toString().trim();
         Two = situationTwo.getText().toString().trim();
@@ -122,19 +124,33 @@ public class ModifyPoorDetailsT extends AppCompatActivity implements View.OnClic
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
         params.addBodyParameter("cradNumber", poorDetailsBean.getPoor().getCradNumber());
-        if (poorDetailsBean.getPoor().getCradNumber() != null && poorDetailsBean.getPoor().getCradNumber().equals("")) {
-            httpUtils.send(HttpMethod.POST, Constant.URL_MODIFY_LIFEREQUIRE, params, new RequestCallBack<String>() {
-                @Override
-                public void onSuccess(ResponseInfo<String> responseInfo) {
-                    LogUtil.v("MODIFYLIFEREQUIREDETAILSOHTTP", "onSuccess：" + responseInfo.result.toString());
-                }
+        params.addBodyParameter("poverty", Three);
+        params.addBodyParameter("isTeach",Eleven);
+        params.addBodyParameter("isCooperative",One);
+        params.addBodyParameter("isDrinkingWater",Four);
+        params.addBodyParameter("isElectricity",Five);
+        params.addBodyParameter("isDrinkingSafe",Six);
+        params.addBodyParameter("isHe",Seven);
+        params.addBodyParameter("isDilapidatedHouse",Eight);
+        params.addBodyParameter("isRelocatedHouse",Nine);
+        params.addBodyParameter("dangerouLevel",Ten);
+        params.addBodyParameter("isCommodityHouse",Twelve);
+        params.addBodyParameter("isCar",Thirteen);
+        params.addBodyParameter("isCivilServant",Fourteen);
+        params.addBodyParameter("isBusinessRegister",Fifteen);
+//        params.addBodyParameter("admin",Four);
+//        params.addBodyParameter("1",Four);
 
-                @Override
-                public void onFailure(HttpException e, String s) {
-                    LogUtil.v("MODIFYLIFEREQUIREDETAILSOHTTP", "onFailure：" + s.toString());
-                }
-            });
-        }
+        httpUtils.send(HttpMethod.POST, Constant.URL_MODIFY_LIFEREQUIRE, params, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                LogUtil.v("MODIFYLIFEREQUIREDETAILSOHTTP", "onSuccess：" + responseInfo.result.toString());
+            }
 
+            @Override
+            public void onFailure(HttpException e, String s) {
+                LogUtil.v("MODIFYLIFEREQUIREDETAILSOHTTP", "onFailure：" + s.toString());
+            }
+        });
     }
 }

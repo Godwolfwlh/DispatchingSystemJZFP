@@ -1,12 +1,15 @@
 package com.yhzhcs.dispatchingsystemjzfp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
@@ -16,24 +19,26 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.yhzhcs.dispatchingsystemjzfp.R;
+import com.yhzhcs.dispatchingsystemjzfp.activitys.ModifyPoorFamily;
 import com.yhzhcs.dispatchingsystemjzfp.adapters.PoorFamilyAdapter;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorFamilyBean;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Poorlist;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+import com.yhzhcs.dispatchingsystemjzfp.utils.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2018/1/24.
  */
 
-public class FamilyFragment extends Fragment {
+public class FamilyFragment extends Fragment implements View.OnClickListener,AdapterView.OnItemClickListener{
 
     private List<Poorlist> poorlists;
     private PoorFamilyAdapter familyAdapter;
     private ListView familyListView;
+    private TextView headEdit;
 
     private String poorHouseId;
 
@@ -48,6 +53,8 @@ public class FamilyFragment extends Fragment {
         poorHouseId = bundle.getString("poorHouseId");
         getData();
         familyListView = (ListView) v.findViewById(R.id.fragment_poor_family_list);
+        headEdit = (TextView) v.findViewById(R.id.poor_head_edit);
+        headEdit.setOnClickListener(this);
         return v;
     }
 
@@ -74,19 +81,20 @@ public class FamilyFragment extends Fragment {
         });
     }
 
-//    private void intData(){
-//        PoorFamilyBean familyBean = null;
-//        familyBeanList = new ArrayList<>();
-//        for (int i = 0; i < 3; i++){
-//            familyBean = new PoorFamilyBean();
-//            familyBean.setFamilyNum(i+1);
-//            familyBean.setFamilyName("尹秀菊");
-//            familyBean.setFamilySex("男");
-//            familyBean.setFamilyAge(45);
-//            familyBean.setFamilyNexus("户主");
-//            familyBean.setFamilyHealth("健康");
-//            familyBean.setFamilyPaper("522628199304040404");
-//            familyBeanList.add(familyBean);
-//        }
-//    }
+    @Override
+    public void onClick(View view) {
+        ToastUtil.showInfo(getActivity(),"请选择需要编辑的家庭成员");
+        familyListView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Poorlist poorlist = poorlists.get(i);
+        Intent intent = new Intent(getActivity(), ModifyPoorFamily.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("POOR_LIST",poorlist);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
 }
