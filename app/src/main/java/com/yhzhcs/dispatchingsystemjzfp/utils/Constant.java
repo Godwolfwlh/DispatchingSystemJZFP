@@ -65,7 +65,7 @@ public class Constant {
 
     /**
      * 查询贫困户帮扶图片
-     * POST提交 贫困户ID entityId = poorHouseId
+     * POST提交 贫困户ID entityId = poorHouseId entityType = ing
      */
     public static final String URL_POOR_IMG = URL_TITLE + "findPictureInfo";
 

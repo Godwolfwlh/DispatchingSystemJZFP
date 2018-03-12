@@ -26,9 +26,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.http.RequestParams;
 import com.yhzhcs.dispatchingsystemjzfp.R;
 import com.yhzhcs.dispatchingsystemjzfp.adapters.MyImageAdapter;
 import com.yhzhcs.dispatchingsystemjzfp.utils.ImageFloder;
+import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+import com.yhzhcs.dispatchingsystemjzfp.utils.TypeConverter;
 import com.yhzhcs.dispatchingsystemjzfp.view.ListImageDirPopupWindow;
 
 import java.io.File;
@@ -256,6 +260,15 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
                 getWindow().setAttributes(lp);
             }
         });
+        tv_samplecamera_confirm.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (int i = 0; i < MyImageAdapter.mSelectedImage.size(); i++) {
+                    String ji = TypeConverter.imageToBase64(MyImageAdapter.mSelectedImage.get(i));
+                    LogUtil.v("imagePath", "将图片转换成Base64编码的字符串：" + ji);
+                }
+            }
+        });
     }
 
     public void selected(ImageFloder floder) {
@@ -279,5 +292,17 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
         mImageCount.setText(floder.getCount() + "张");
         mChooseDir.setText(floder.getName());
         mListImageDirPopupWindow.dismiss();
+    }
+
+    private void upImage(){
+        HttpUtils httpUtils = new HttpUtils();
+        RequestParams params = new RequestParams();
+        for (int i = 0; i<MyImageAdapter.mSelectedImage.size(); i++){
+            //params.addBodyParameter
+            String basePath = TypeConverter.imageToBase64(MyImageAdapter.mSelectedImage.get(i));
+            params.addBodyParameter("file",new File(basePath));
+            params.addBodyParameter("id","poorHouseId");//贫困户id
+            params.addBodyParameter("entityType","ing");
+        }
     }
 }

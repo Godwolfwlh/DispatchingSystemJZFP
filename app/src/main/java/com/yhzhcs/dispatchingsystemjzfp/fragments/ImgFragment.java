@@ -1,18 +1,16 @@
 package com.yhzhcs.dispatchingsystemjzfp.fragments;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -38,13 +36,15 @@ import com.yhzhcs.dispatchingsystemjzfp.bean.Inglists;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorImageBean;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
-import com.yhzhcs.dispatchingsystemjzfp.utils.PhotoUtils;
-import com.yhzhcs.dispatchingsystemjzfp.utils.ToastUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
+import static com.umeng.socialize.utils.ContextUtil.getPackageName;
 
 /**
  * Created by Administrator on 2018/1/24.
@@ -62,13 +62,9 @@ public class ImgFragment extends Fragment implements View.OnClickListener {
 
     private TextView Upload, Delete;
 
-    private static final int CODE_CAMERA_REQUEST = 0xa1;
-    private static final int CODE_RESULT_REQUEST = 0xa2;
-    private static final int CAMERA_PERMISSIONS_REQUEST_CODE = 0x03;
-    private File fileUri = new File(Environment.getExternalStorageDirectory().getPath() + "/photo.jpg");
-    private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + "/crop_photo.jpg");
-    private Uri imageUri;
-    private Uri cropImageUri;
+    public final int TYPE_TAKE_PHOTO = 1;//Uri获取类型判断
+    public final int CODE_TAKE_PHOTO = 1;//相机RequestCode
+    public Uri photoUri;
 
     @Nullable
     @Override
@@ -86,6 +82,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener {
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
         params.addBodyParameter("entityId", entityId);
+        params.addBodyParameter("entityType","ing");
         httpUtils.send(HttpMethod.POST, Constant.URL_POOR_IMG, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -162,81 +159,97 @@ public class ImgFragment extends Fragment implements View.OnClickListener {
     }
 
     /**
-     * 自动获取相机权限
+     * 多版本适配调用系统相机
      */
     private void autoObtainCameraPermission() {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)) {
-                ToastUtils.showShort(getActivity(), "您已经拒绝过一次");
-            }
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, CAMERA_PERMISSIONS_REQUEST_CODE);
-        } else {//有权限直接调用系统相机拍照
-            if (hasSdcard()) {
-                imageUri = Uri.fromFile(fileUri);
-                //通过FileProvider创建一个content类型的Uri
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    imageUri = FileProvider.getUriForFile(getContext(), "com.zz.fileprovider", fileUri);
-                }
-                PhotoUtils.takePicture(getActivity(), imageUri, CODE_CAMERA_REQUEST);
-            } else {
-                ToastUtils.showShort(getContext(), "设备没有SD卡！");
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode) {
-            //调用系统相机申请拍照权限回调
-            case CAMERA_PERMISSIONS_REQUEST_CODE: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (hasSdcard()) {
-                        imageUri = Uri.fromFile(fileUri);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                            imageUri = FileProvider.getUriForFile(getContext(), "com.zz.fileprovider", fileUri);//通过FileProvider创建一个content类型的Uri
-                        PhotoUtils.takePicture(getActivity(), imageUri, CODE_CAMERA_REQUEST);
-                    } else {
-                        ToastUtils.showShort(getActivity(), "设备没有SD卡！");
-                    }
-                } else {
-
-                    ToastUtils.showShort(getActivity(), "请允许打开相机！！");
-                }
-                break;
-            }
-            default:
-        }
-    }
-
-    private static final int OUTPUT_X = 480;
-    private static final int OUTPUT_Y = 480;
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                //拍照完成回调
-                case CODE_CAMERA_REQUEST:
-                    cropImageUri = Uri.fromFile(fileCropUri);
-                    PhotoUtils.cropImageUri(getActivity(), imageUri, cropImageUri, 1, 1, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
-                    break;
-                default:
-            }
+        if (Build.VERSION.SDK_INT >= 24) {
+            Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            photoUri = get24MediaFileUri(TYPE_TAKE_PHOTO);
+            takeIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+            startActivityForResult(takeIntent, CODE_TAKE_PHOTO);
+        } else {
+            Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            photoUri = getMediaFileUri(TYPE_TAKE_PHOTO);
+            takeIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+            startActivityForResult(takeIntent, CODE_TAKE_PHOTO);
         }
     }
 
     /**
-     * 检查设备是否存在SDCard的工具方法
+     * 版本24以下
      */
-    public static boolean hasSdcard() {
-        String state = Environment.getExternalStorageState();
-        return state.equals(Environment.MEDIA_MOUNTED);
+    public Uri getMediaFileUri(int type) {
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "fpb_image");
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                return null;
+            }
+        }
+        //创建Media File
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File mediaFile;
+        if (type == TYPE_TAKE_PHOTO) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+        } else {
+            return null;
+        }
+        return Uri.fromFile(mediaFile);
     }
 
+    /**
+     * 版本24以上
+     */
+    public Uri get24MediaFileUri(int type) {
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "fpb_image");
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                return null;
+            }
+        }
+        //创建Media File
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File mediaFile;
+        if (type == TYPE_TAKE_PHOTO) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+        } else {
+            return null;
+        }
+        return FileProvider.getUriForFile(getContext(), getPackageName() + ".fileprovider", mediaFile);
+    }
+
+//    onActivityResult
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case CODE_TAKE_PHOTO:
+                if (resultCode == RESULT_OK) {
+                    if (data != null) {
+                        if (data.hasExtra("data")) {
+                            LogUtil.i("IMAGE_URI", "data is not null");
+                            Bitmap bitmap = data.getParcelableExtra("data");
+                            LogUtil.i("IMAGE_URI", photoUri.getPath());
+//                            imageView.setImageBitmap(bitmap);//imageView即为当前页面需要展示照片的控件，可替换
+                        }
+                    } else {
+                        if (Build.VERSION.SDK_INT >= 24){
+                            LogUtil.i("IMAGE_URI", "Data is SDK_INT Min is 24");
+                            Bitmap bitmap = null;
+                            try {
+                                bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(photoUri));
+                                LogUtil.i("IMAGE_URI", photoUri.getPath());
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        }else {
+                            LogUtil.i("IMAGE_URI", "Data is SDK_INT Max is 24");
+                            Bitmap bitmap = BitmapFactory.decodeFile(photoUri.getPath());
+                            LogUtil.i("IMAGE_URI", photoUri.getPath());
+                        }
+                    }
+                }
+                break;
+        }
+    }
 }
