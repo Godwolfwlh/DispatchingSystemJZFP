@@ -41,8 +41,13 @@ public class IncomeFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_poor_income, container, false);
         Bundle bundle = getArguments();
         poorHouseId = bundle.getString("poorHouseId");
-        getData();
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
     }
 
     private void getData() {

@@ -66,8 +66,13 @@ public class TaskFragment extends Fragment implements TaskOnScerllListener.Onloa
         sp = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         missionId = sp.getString("MISSION_ID", "");
         inView();
-        getData();
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
     }
 
     private void getData(){

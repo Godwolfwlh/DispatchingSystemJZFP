@@ -1,8 +1,10 @@
 package com.yhzhcs.dispatchingsystemjzfp.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +29,7 @@ import com.yhzhcs.dispatchingsystemjzfp.bean.Childs;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorAddBean;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorDetailsBean;
 import com.yhzhcs.dispatchingsystemjzfp.bean.TownBean;
+import com.yhzhcs.dispatchingsystemjzfp.fragments.DetailsFragment;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
 
@@ -156,6 +159,10 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.title_right:
                 updatePoor();
+//                Intent intent = new Intent("android.intent.action.CART_BROADCAST");
+//                intent.putExtra("DETAILS_CODE",DetailsFragment.DETAILS_CODE);
+//                LocalBroadcastManager.getInstance(ModifyPoorDetailsO.this).sendBroadcast(intent);
+//                sendBroadcast(intent);
                 finish();
                 break;
         }

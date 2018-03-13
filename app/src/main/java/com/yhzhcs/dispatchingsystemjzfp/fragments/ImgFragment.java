@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
@@ -36,6 +35,8 @@ import com.yhzhcs.dispatchingsystemjzfp.bean.Inglists;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorImageBean;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+import com.yhzhcs.dispatchingsystemjzfp.utils.ToastUtil;
+import com.yhzhcs.dispatchingsystemjzfp.utils.TypeConverter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,7 +45,6 @@ import java.util.Date;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
-import static com.umeng.socialize.utils.ContextUtil.getPackageName;
 
 /**
  * Created by Administrator on 2018/1/24.
@@ -73,16 +73,21 @@ public class ImgFragment extends Fragment implements View.OnClickListener {
         Bundle bundle = getArguments();
         entityId = bundle.getString("poorHouseId");
         LogUtil.i("entityId", entityId);
-        getData();
         iniView();
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
     }
 
     private void getData() {
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
         params.addBodyParameter("entityId", entityId);
-        params.addBodyParameter("entityType","ing");
+        params.addBodyParameter("entityType", "ing");
         httpUtils.send(HttpMethod.POST, Constant.URL_POOR_IMG, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -141,15 +146,12 @@ public class ImgFragment extends Fragment implements View.OnClickListener {
                 switch (which) {
                     case 0:
                         autoObtainCameraPermission();
-                        Toast.makeText(getActivity(),
-                                "你点击了" + items[0],
-                                Toast.LENGTH_SHORT).show();
                         break;
                     case 1:
-                        Toast.makeText(getActivity(),
-                                "你点击了" + items[1],
-                                Toast.LENGTH_SHORT).show();
+                        Bundle bundle = new Bundle();
                         Intent intent = new Intent(getActivity(), SampleCameraActivity.class);
+                        bundle.putString("entityId", entityId);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                         break;
                 }
@@ -214,10 +216,8 @@ public class ImgFragment extends Fragment implements View.OnClickListener {
         } else {
             return null;
         }
-        return FileProvider.getUriForFile(getContext(), getPackageName() + ".fileprovider", mediaFile);
+        return FileProvider.getUriForFile(getActivity(), "com.yhzhcs.dispatchingsystemjzfp.fileprovider", mediaFile);
     }
-
-//    onActivityResult
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -227,29 +227,48 @@ public class ImgFragment extends Fragment implements View.OnClickListener {
                 if (resultCode == RESULT_OK) {
                     if (data != null) {
                         if (data.hasExtra("data")) {
-                            LogUtil.i("IMAGE_URI", "data is not null");
                             Bitmap bitmap = data.getParcelableExtra("data");
-                            LogUtil.i("IMAGE_URI", photoUri.getPath());
-//                            imageView.setImageBitmap(bitmap);//imageView即为当前页面需要展示照片的控件，可替换
+                            upImage(bitmap);
                         }
                     } else {
-                        if (Build.VERSION.SDK_INT >= 24){
-                            LogUtil.i("IMAGE_URI", "Data is SDK_INT Min is 24");
+                        if (Build.VERSION.SDK_INT >= 24) {
                             Bitmap bitmap = null;
                             try {
                                 bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(photoUri));
-                                LogUtil.i("IMAGE_URI", photoUri.getPath());
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
                             }
-                        }else {
-                            LogUtil.i("IMAGE_URI", "Data is SDK_INT Max is 24");
+                            upImage(bitmap);
+                        } else {
                             Bitmap bitmap = BitmapFactory.decodeFile(photoUri.getPath());
-                            LogUtil.i("IMAGE_URI", photoUri.getPath());
+                            upImage(bitmap);
                         }
                     }
                 }
                 break;
         }
     }
+
+    private void upImage(Bitmap bitmap) {
+        HttpUtils httpUtils = new HttpUtils();
+        RequestParams params = new RequestParams();
+        String basePath = TypeConverter.bitmapToBase64(bitmap);
+        params.addBodyParameter("file", basePath);
+        params.addBodyParameter("id", entityId);//贫困户id
+        params.addBodyParameter("entityType", "ing");
+        httpUtils.send(HttpMethod.POST, Constant.URL_SAVE_PHOTO, params, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                LogUtil.v("SAMPLE_CAMERA_HTTP", "onSuccess：" + responseInfo.result.toString());
+                ToastUtil.showInfo(getActivity(),"上传成功！");
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+                LogUtil.v("SAMPLE_CAMERA_HTTP", "onFailure：" + s);
+                ToastUtil.showInfo(getActivity(),"上传失败！");
+            }
+        });
+    }
+
 }

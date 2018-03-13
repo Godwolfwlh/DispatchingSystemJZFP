@@ -51,11 +51,16 @@ public class FamilyFragment extends Fragment implements View.OnClickListener,Ada
         v = inflater.inflate(R.layout.fragment_poor_family,container,false);
         Bundle bundle = getArguments();
         poorHouseId = bundle.getString("poorHouseId");
-        getData();
         familyListView = (ListView) v.findViewById(R.id.fragment_poor_family_list);
         headEdit = (TextView) v.findViewById(R.id.poor_head_edit);
         headEdit.setOnClickListener(this);
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
     }
 
     private void getData(){

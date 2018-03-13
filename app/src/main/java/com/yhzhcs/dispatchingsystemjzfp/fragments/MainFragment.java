@@ -127,13 +127,18 @@ public class MainFragment extends Fragment implements MainOnScerllListener.Onloa
         produce.setOnClickListener(this);
         forum.setOnClickListener(this);
 
-        getContent();
         //自定义的滚动监听事件
         onScrollListener = new MainOnScerllListener(footer);
         //设置接口回调
         onScrollListener.setOnLoadDataListener(this);
         inView();
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getContent();
     }
 
     private void getContent() {

@@ -129,4 +129,10 @@ public class Constant {
      * */
     public static final String URL_MODIFY_FAMILY = URL_TITLE + "saveFimaly";
 
+    /**
+     * 上传并保存图片
+     * POST提交 图片文件file  贫困户ID entityId  状态entityType = ing 进行中
+     * */
+    public static final String URL_SAVE_PHOTO = URL_TITLE + "savePhotoRetId";
+
 }

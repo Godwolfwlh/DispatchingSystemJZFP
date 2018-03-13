@@ -50,10 +50,14 @@ public class PolicyFragment extends Fragment implements PolicyOnScerllListenner.
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.information_fragment_policy, container, false);
-//        inData();
-        getDatas();
         inView();
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDatas();
     }
 
     private void getDatas() {

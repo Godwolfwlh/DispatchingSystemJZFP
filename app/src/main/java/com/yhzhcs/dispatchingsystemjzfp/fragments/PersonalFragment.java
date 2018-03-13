@@ -66,9 +66,14 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
         v = inflater.inflate(R.layout.personal_fragment, null);
         sp = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         missionId = sp.getString("MISSION_ID", "");
-        getData();
         ininview();
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
     }
 
     private void ininview() {

@@ -27,9 +27,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.yhzhcs.dispatchingsystemjzfp.R;
 import com.yhzhcs.dispatchingsystemjzfp.adapters.MyImageAdapter;
+import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.ImageFloder;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
 import com.yhzhcs.dispatchingsystemjzfp.utils.TypeConverter;
@@ -85,6 +90,8 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
     private TextView tv_samplecamera_confirm;
     private TextView tv_return;
 
+    private String entityId;
+
 
     /**
      * 为View绑定数据
@@ -133,6 +140,9 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_camera);
+        Bundle bundle = getIntent().getExtras();
+        entityId = bundle.getString("entityId");
+        LogUtil.i("entityId", entityId);
         DisplayMetrics outMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
         mScreenHeight = outMetrics.heightPixels;
@@ -263,10 +273,8 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
         tv_samplecamera_confirm.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (int i = 0; i < MyImageAdapter.mSelectedImage.size(); i++) {
-                    String ji = TypeConverter.imageToBase64(MyImageAdapter.mSelectedImage.get(i));
-                    LogUtil.v("imagePath", "将图片转换成Base64编码的字符串：" + ji);
-                }
+                upImage();
+                finish();
             }
         });
     }
@@ -300,9 +308,20 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
         for (int i = 0; i<MyImageAdapter.mSelectedImage.size(); i++){
             //params.addBodyParameter
             String basePath = TypeConverter.imageToBase64(MyImageAdapter.mSelectedImage.get(i));
-            params.addBodyParameter("file",new File(basePath));
-            params.addBodyParameter("id","poorHouseId");//贫困户id
+            params.addBodyParameter("file",basePath);
+            params.addBodyParameter("id",entityId);//贫困户id
             params.addBodyParameter("entityType","ing");
         }
+        httpUtils.send(HttpMethod.POST, Constant.URL_SAVE_PHOTO, params, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                LogUtil.v("SAMPLE_CAMERA_HTTP","onSuccess：" + responseInfo.result.toString());
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+                LogUtil.v("SAMPLE_CAMERA_HTTP","onFailure：" + s);
+            }
+        });
     }
 }
