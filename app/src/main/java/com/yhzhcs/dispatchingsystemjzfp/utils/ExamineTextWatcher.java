@@ -54,14 +54,14 @@ public class ExamineTextWatcher implements TextWatcher {
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         // 输入前的文本
         beforeText = s.toString();
-        Log.d(TAG, "beforeText =>>>" + beforeText);
+        Log.v(TAG, "beforeText =>>>" + beforeText);
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         // 输入后的文本
         String afterText = s.toString();
-        Log.d(TAG, "afterText =>>>" + afterText);
+        Log.v(TAG, "afterText =>>>" + afterText);
 
         boolean isValid = true;
         if (!TextUtils.isEmpty(afterText)) {
