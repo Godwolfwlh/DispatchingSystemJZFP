@@ -135,4 +135,10 @@ public class Constant {
      * */
     public static final String URL_SAVE_PHOTO = URL_TITLE + "savePhotoRetId";
 
+    /**
+     * 修改密码
+     * POST提交 用户名tel=手机号 原密码password 新密码newpassword
+     * */
+    public static final String URL_SAVE_PASSWORD = URL_TITLE + "savePassword";
+
 }
