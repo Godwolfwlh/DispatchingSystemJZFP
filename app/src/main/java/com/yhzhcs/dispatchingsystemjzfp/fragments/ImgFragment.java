@@ -79,6 +79,8 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
     private boolean isState;
     private PoorImageAdapter adapter;
 
+    private String annentId, annexPathDown;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -93,6 +95,11 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
     @Override
     public void onResume() {
         super.onResume();
+        if (selectItems != null) {
+            selectItems.clear();
+            adapter.setIsState(false);
+            setState(false);
+        }
         getData();
     }
 
@@ -168,6 +175,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                 setSelectAll(false);
                 break;
             case R.id.btn_del:
+                delSelections();
                 break;
         }
 
@@ -278,12 +286,38 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                         setState(false);
                         return;
                     }
+                    deletePhoto();
                 }
             });
             builder.setNegativeButton("取消", null);
             builder.create().show();
         }
 
+    }
+
+    //删除服务器文件
+    private void deletePhoto() {
+        HttpUtils httpUtils = new HttpUtils();
+        RequestParams params = new RequestParams();
+        for (int i = 0; i < selectItems.size(); i++) {
+            annentId = listBean.get(i).getAnnentid();
+            annexPathDown = listBean.get(i).getAnnexPathDown();
+            LogUtil.v("DELETEPHOTOHTTP", "annentId：" + annentId);
+            LogUtil.v("DELETEPHOTOHTTP", "annexPathDown：" + annexPathDown);
+            params.addBodyParameter("annentId", annentId);
+            params.addBodyParameter("annexPathDown", annexPathDown);
+        }
+        httpUtils.send(HttpMethod.POST, Constant.URL_DELETE_PHOTO, params, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                LogUtil.v("DELETEPHOTOHTTP", "onSuccess：" + responseInfo.result);
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+                LogUtil.v("DELETEPHOTOHTTP", "onFailure：" + s);
+            }
+        });
     }
 
     private void showListDialog() {
@@ -493,6 +527,8 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                 if (selectItems.size() != 0) {
                     LogUtil.v("selectItemssssssssss", "selectItems==3==" + selectItems.get(position).toString());
                     viewHolder.checkBox.setChecked(selectItems.get(position));
+                } else {
+                    ToastUtil.showInfo(getActivity(), "没有选择文件！");
                 }
             }
             return convertView;

@@ -8,6 +8,13 @@ public class Constant {
 
     public static final String LOG_TAG = "logTag";
 
+    public static final String IMG_LIST = "img_list"; //第几张图片
+    public static final String POSITION = "position"; //第几张图片
+    public static final String PIC_PATH = "pic_path"; //图片路径
+    public static final int MAX_SELECT_PIC_NUM = 300; // 最多上传5张图片
+    public static final int REQUEST_CODE_MAIN = 10; //请求码
+    public static final int RESULT_CODE_VIEW_IMG = 11; //查看大图页面的结果码
+
     public static final String URL_TITLE = "http://192.168.1.189:8080/cathy/appController/";
 
     /**
@@ -136,9 +143,16 @@ public class Constant {
     public static final String URL_SAVE_PHOTO = URL_TITLE + "savePhotoRetId";
 
     /**
+     * 删除图片
+     * POST提交 图片ID annentId 服务器本地图片文件路径 annexPathDown
+     * */
+    public static final String  URL_DELETE_PHOTO = URL_TITLE + "deletePhoto";
+
+    /**
      * 修改密码
      * POST提交 用户名tel=手机号 原密码password 新密码newpassword
      * */
     public static final String URL_SAVE_PASSWORD = URL_TITLE + "savePassword";
+
 
 }

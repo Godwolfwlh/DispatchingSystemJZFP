@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorWil"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="产品详情"
+            android:textSize="12pt" />
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="1dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="产品名称"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/release_pro_one"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="产品类型"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/release_pro_two"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="产品品种"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/release_pro_three"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="产品数量"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/release_pro_four"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="价格"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/release_pro_five"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorWil"
+        android:orientation="vertical">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="1dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="发布人"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="联系电话"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="地址"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorWil"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="添加图片"
+            android:textSize="12pt" />
+
+        <GridView
+            android:id="@+id/release_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:columnWidth="60dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="auto_fit"
+            android:verticalSpacing="10dp" />
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

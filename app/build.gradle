@@ -49,4 +49,5 @@ dependencies {
 
     compile "com.github.hotchemi:permissionsdispatcher:2.1.2"
     annotationProcessor 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.1'
 }

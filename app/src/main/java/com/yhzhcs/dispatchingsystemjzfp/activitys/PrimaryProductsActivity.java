@@ -138,6 +138,8 @@ public class PrimaryProductsActivity extends AppCompatActivity implements View.O
                 finish();
                 break;
             case R.id.pro_title_right:
+                Intent intent = new Intent(PrimaryProductsActivity.this,ReleaseProductsActivity.class);
+                startActivity(intent);
                 break;
         }
 
