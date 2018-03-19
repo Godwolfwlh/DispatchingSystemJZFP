@@ -54,10 +54,8 @@ public class ModifyPassActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_password);
         userInfo = (UserInfo) getIntent().getSerializableExtra("USER_INFO");
-        LogUtil.v("BDUSERINFO", userInfo.toString());
         sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         password = sp.getString("PASSWORD", "");
-        LogUtil.v("USERPASSWORD", password.toString());
         intView();
     }
 
@@ -79,8 +77,8 @@ public class ModifyPassActivity extends AppCompatActivity implements View.OnClic
         titleImgL.setOnClickListener(this);
         titleImgR.setOnClickListener(this);
         okBut.setOnClickListener(this);
-
         initListener();
+
     }
 
     @Override
@@ -91,28 +89,33 @@ public class ModifyPassActivity extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.modify_pass_ok_but:
-                if (!oldPassStr.equals(password)){
-                    ToastUtil.showInfo(this,"您输入的旧密码不正确，请重新输入！");
-                }else if (newPassStr.equals("")){
-                    ToastUtil.showInfo(this,"您输入的新密码为空，请重新输入！");
-                }else if (okNewPassStr.equals("")) {
+                oldPassStr = oldPass.getText().toString().trim();
+                newPassStr = newPass.getText().toString().trim();
+                okNewPassStr = okNewPass.getText().toString().trim();
+                if (!MD5Util.getMD5Str(oldPassStr).equals(password)) {
+                    ToastUtil.showInfo(this, "您输入的旧密码不正确，请重新输入！");
+                } else if (newPassStr.equals("")) {
+                    ToastUtil.showInfo(this, "您输入的新密码为空，请重新输入！");
+                } else if (okNewPassStr.equals("")) {
                     ToastUtil.showInfo(this, "您输入的确认密码为空，请重新输入！");
-                }else if (!newPassStr.equals(okNewPassStr)){
-                    ToastUtil.showInfo(this,"您输入的确认密码与新密码不同，请重新输入！");
+                } else if (!newPassStr.equals(okNewPassStr)) {
+                    ToastUtil.showInfo(this, "您输入的确认密码与新密码不同，请重新输入！");
+                } else {
+                    upPassword(oldPassStr,newPassStr);
+                    finish();
+
                 }
-//                upPassword();
-//                finish();
                 break;
         }
 
     }
 
-    private void upPassword() {
+    private void upPassword(String oldPassword,String newPassword) {
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
         params.addBodyParameter("tel", userInfo.getTel());
-        params.addBodyParameter("password", oldPassStr);
-        params.addBodyParameter("newpassword", newPassStr);
+        params.addBodyParameter("password", oldPassword);
+        params.addBodyParameter("newpassword", newPassword);
         httpUtils.send(HttpMethod.POST, Constant.URL_SAVE_PASSWORD, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -143,7 +146,7 @@ public class ModifyPassActivity extends AppCompatActivity implements View.OnClic
         oldPass.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                oldPassStr = MD5Util.getMD5Str(oldPass.getText().toString().trim());
+                oldPassStr = oldPass.getText().toString().trim();
                 if (!b) {
                     // 此处为失去焦点时的处理内容
                     if (oldPassStr.length() < 6) {

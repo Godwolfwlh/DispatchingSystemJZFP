@@ -15,6 +15,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.yhzhcs.dispatchingsystemjzfp.R;
 import com.yhzhcs.dispatchingsystemjzfp.adapters.ReleaseProductsAdapter;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
+import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
 import com.yhzhcs.dispatchingsystemjzfp.utils.PictureSelectorConfig;
 import com.yhzhcs.dispatchingsystemjzfp.view.BottomScrollView;
 
@@ -128,6 +129,7 @@ public class ReleaseProductsActivity extends AppCompatActivity implements Bottom
                 String compressPath = localMedia.getCompressPath(); //压缩后的图片路径
                 mPicList.add(compressPath); //把图片添加到将要上传的图片数组中
                 releaseProductsAdapter.notifyDataSetChanged();
+                LogUtil.v("MPICLIST",mPicList.toString());
             }
         }
     }

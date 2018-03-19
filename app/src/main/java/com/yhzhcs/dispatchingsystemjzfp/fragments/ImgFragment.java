@@ -302,8 +302,6 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
         for (int i = 0; i < selectItems.size(); i++) {
             annentId = listBean.get(i).getAnnentid();
             annexPathDown = listBean.get(i).getAnnexPathDown();
-            LogUtil.v("DELETEPHOTOHTTP", "annentId：" + annentId);
-            LogUtil.v("DELETEPHOTOHTTP", "annexPathDown：" + annexPathDown);
             params.addBodyParameter("annentId", annentId);
             params.addBodyParameter("annexPathDown", annexPathDown);
         }
