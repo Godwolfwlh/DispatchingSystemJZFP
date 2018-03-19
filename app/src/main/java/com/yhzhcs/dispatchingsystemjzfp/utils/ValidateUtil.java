@@ -45,7 +45,7 @@ public class ValidateUtil {
      * @return true=符合 false=不符合
      */
     public static boolean isPassWord(String money) {
-        String regex = "^(?=.*[0-9])(?=.*[a-zA-Z])(.{6,})$";
+        String regex = "[a-zA-Z0-9]{0,18}";
         return isMatches(money, regex);
     }
 

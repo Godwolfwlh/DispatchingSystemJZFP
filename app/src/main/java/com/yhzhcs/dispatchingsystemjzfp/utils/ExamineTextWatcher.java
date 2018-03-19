@@ -1,5 +1,6 @@
 package com.yhzhcs.dispatchingsystemjzfp.utils;
 
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -39,13 +40,17 @@ public class ExamineTextWatcher implements TextWatcher {
      */
     private String beforeText;
 
+    private Context context;
+
     /**
      * 构造器
      *
      * @param type     验证类型
      * @param editText 输入框
+     * @param context
      */
-    public ExamineTextWatcher(int type, EditText editText) {
+    public ExamineTextWatcher(Context context, int type, EditText editText) {
+        this.context = context;
         this.examineType = type;
         this.mEditText = editText;
     }
@@ -68,9 +73,21 @@ public class ExamineTextWatcher implements TextWatcher {
             switch (examineType) {
                 case TYPE_ACCOUNT:
                     isValid = ValidateUtil.isAccount(afterText);
+                    if (beforeText.length() > 20){
+                        ToastUtil.showInfo(context,"账号为20位账号！");
+                    }
+                    else if (!isValid){
+                        ToastUtil.showInfo(context,"只能输入英文字母和数字！");
+                    }
                     break;
                 case TYPE_PASSWORD:
                     isValid = ValidateUtil.isPassWord(afterText);
+                    if (beforeText.length() > 18){
+                        ToastUtil.showInfo(context,"密码为18位密码！");
+                    }
+                    else if (!isValid){
+                        ToastUtil.showInfo(context,"只能输入英文字母和数字！");
+                    }
                     break;
             }
             if (!isValid) {
@@ -85,7 +102,5 @@ public class ExamineTextWatcher implements TextWatcher {
     }
 
     @Override
-    public void afterTextChanged(Editable s) {
-
-    }
+    public void afterTextChanged(Editable s) {}
 }

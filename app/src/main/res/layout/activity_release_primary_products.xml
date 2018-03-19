@@ -8,15 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ScrollView
+    <com.yhzhcs.dispatchingsystemjzfp.view.BottomScrollView
+        android:id="@+id/release_scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="fill_parent">
 
         <include
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/release_primary_products"/>
 
-    </ScrollView>
+    </com.yhzhcs.dispatchingsystemjzfp.view.BottomScrollView>
 
 </LinearLayout>

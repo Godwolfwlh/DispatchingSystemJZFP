@@ -57,4 +57,5 @@ public class BottomScrollView extends ScrollView {
         void onScrollToBottom();
         void onNotScrollToBottom();
     }
+
 }

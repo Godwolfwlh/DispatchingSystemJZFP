@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -15,6 +16,7 @@ import com.yhzhcs.dispatchingsystemjzfp.R;
 import com.yhzhcs.dispatchingsystemjzfp.adapters.ReleaseProductsAdapter;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.PictureSelectorConfig;
+import com.yhzhcs.dispatchingsystemjzfp.view.BottomScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +25,20 @@ import java.util.List;
  * Created by Administrator on 2018/3/15 0015.
  */
 
-public class ReleaseProductsActivity extends AppCompatActivity {
+public class ReleaseProductsActivity extends AppCompatActivity implements BottomScrollView.OnScrollToBottomListener {
     private Context mContext;
     private GridView gridView;
     private ArrayList<String> mPicList = new ArrayList<>(); //上传的图片凭证的数据源
     private ReleaseProductsAdapter releaseProductsAdapter; //展示上传的图片的适配器
+    private BottomScrollView scrollView;
+    private boolean isSvToBottom = false;
+
+    private float mLastY;
+
+    /**
+     * gridView竖向滑动的阈值
+     */
+    private static final int THRESHOLD_Y_LIST_VIEW = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +46,43 @@ public class ReleaseProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_release_primary_products);
 
         mContext = this;
+        scrollView = (BottomScrollView) findViewById(R.id.release_scroll);
+        scrollView.smoothScrollTo(0, 0);
+        scrollView.setScrollToBottomListener(this);
         gridView = (GridView) findViewById(R.id.release_grid_view);
         initGridView();
     }
+
 
     //初始化展示上传图片的GridView
     private void initGridView() {
         releaseProductsAdapter = new ReleaseProductsAdapter(mContext, mPicList);
         gridView.setAdapter(releaseProductsAdapter);
+        gridView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                int action = motionEvent.getAction();
+
+                if(action == MotionEvent.ACTION_DOWN) {
+                    mLastY = motionEvent.getY();
+                }
+                if(action == MotionEvent.ACTION_MOVE) {
+                    int top = gridView.getChildAt(0).getTop();
+                    float nowY = motionEvent.getY();
+                    if(!isSvToBottom) {
+                        // 允许scrollview拦截点击事件, scrollView滑动
+                        scrollView.requestDisallowInterceptTouchEvent(false);
+                    } else if(top == 0 && nowY - mLastY > THRESHOLD_Y_LIST_VIEW) {
+                        // 允许scrollview拦截点击事件, scrollView滑动
+                        scrollView.requestDisallowInterceptTouchEvent(false);
+                    } else {
+                        // 不允许scrollview拦截点击事件， listView滑动
+                        scrollView.requestDisallowInterceptTouchEvent(true);
+                    }
+                }
+                return false;
+            }
+        });
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -72,7 +112,7 @@ public class ReleaseProductsActivity extends AppCompatActivity {
     }
 
     /**
-     * 打开相册或者照相机选择凭证图片，最多5张
+     * 打开相册或者照相机选择凭证图片，最多300张
      *
      * @param maxTotal 最多选择的图片的数量
      */
@@ -115,5 +155,15 @@ public class ReleaseProductsActivity extends AppCompatActivity {
             mPicList.addAll(toDeletePicList);
             releaseProductsAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onScrollToBottom() {
+        isSvToBottom = true;
+    }
+
+    @Override
+    public void onNotScrollToBottom() {
+        isSvToBottom = false;
     }
 }
