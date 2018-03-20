@@ -69,16 +69,22 @@ public class PrimaryProductsAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        holder.ProName.setText(datas.getTitle());
         holder.ProPrice.setText(datas.getPrice()+"");
 
         bitmapUtils = new BitmapUtils(context);    //创建BitmapUtils对象，通过xUtils框架获取
         bitmapUtils.configDefaultBitmapConfig(Bitmap.Config.RGB_565);   //设置图片清晰度
         bitmapUtils.display(holder.ProImage, datas.getImgPath());
 
+        holder.ProFarmer.setText(datas.getCreatedBy());
+        holder.ProPhone.setText(datas.getPhone());
+        holder.ProLabel.setText(datas.getProduceType());
+
         Date dateTime = new Date(datas.getCreatedDate().getTime());
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String ProTime = dateFormat.format(dateTime);
         holder.ProTime.setText(ProTime);
+        holder.ProAdd.setText(datas.getPlace());
 
         return convertView;
     }

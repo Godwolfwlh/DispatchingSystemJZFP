@@ -35,19 +35,43 @@ public class IncomeFragment extends Fragment {
     private List<Personalincome> listBean;
     private TextView situationOne, situationTwo, situationThree, situationFour, situationFive, situationSix, situationSeven, situationEight, situationNine;
 
+    /** Fragment当前状态是否可见 */
+    protected boolean isVisible;
+    private boolean mHasLoadedOnce = false;
+    private boolean isPrepared = false;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_poor_income, container, false);
         Bundle bundle = getArguments();
         poorHouseId = bundle.getString("poorHouseId");
+        getData();
         return v;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        getData();
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
+        }
+    }
+
+    private void lazyLoad() {
+        if (mHasLoadedOnce || !isPrepared)
+            return;
+        mHasLoadedOnce = true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHasLoadedOnce = false;
+        isPrepared = false;
     }
 
     private void getData() {

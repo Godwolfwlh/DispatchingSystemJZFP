@@ -60,20 +60,44 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
     private BitmapUtils bitmapUtils;
     private Bundle bundle;
 
+    /** Fragment当前状态是否可见 */
+    protected boolean isVisible;
+    private boolean mHasLoadedOnce = false;
+    private boolean isPrepared = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.personal_fragment, null);
         sp = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         missionId = sp.getString("MISSION_ID", "");
+        getData();
         ininview();
         return v;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        getData();
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
+        }
+    }
+
+    private void lazyLoad() {
+        if (mHasLoadedOnce || !isPrepared)
+            return;
+        mHasLoadedOnce = true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHasLoadedOnce = false;
+        isPrepared = false;
     }
 
     private void ininview() {

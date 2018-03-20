@@ -48,6 +48,11 @@ public class InformationFragment extends Fragment implements View.OnClickListene
     //fragment的集合，对应每个子页面
     private ArrayList<Fragment> fragments;
 
+    /** Fragment当前状态是否可见 */
+    protected boolean isVisible;
+    private boolean mHasLoadedOnce = false;
+    private boolean isPrepared = false;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,6 +61,30 @@ public class InformationFragment extends Fragment implements View.OnClickListene
         initView();
         initEvent();                        //调用初始化事件
         return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
+        }
+    }
+
+    private void lazyLoad() {
+        if (mHasLoadedOnce || !isPrepared)
+            return;
+        mHasLoadedOnce = true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHasLoadedOnce = false;
+        isPrepared = false;
     }
 
     /**

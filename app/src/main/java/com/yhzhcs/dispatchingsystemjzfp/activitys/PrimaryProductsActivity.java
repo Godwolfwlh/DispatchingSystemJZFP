@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
@@ -31,6 +33,7 @@ import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,12 +66,17 @@ public class PrimaryProductsActivity extends AppCompatActivity implements View.O
         footer.setVisibility(View.GONE);
         //加入到ListView
         listView.addFooterView(footer);
-        getData();
         //自定义的滚动监听事件
         onScrollListener = new ProOnScerllListener(footer);
         //设置接口回调
         onScrollListener.setOnLoadDataListener(this);
         intView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
     }
 
     private void getData() {
@@ -119,12 +127,65 @@ public class PrimaryProductsActivity extends AppCompatActivity implements View.O
         }
     }
 
-    private void showListView(List<Datas> data) {
+    private void showListView(final List<Datas> data) {
         if (proAdapter == null) {
             proAdapter = new PrimaryProductsAdapter(this, data);
             listView.setAdapter(proAdapter);
             mShowView.showByType(CommonShowView.TYPE_CONTENT);
             listView.setOnItemClickListener(this);
+            mProSearch.setSubmitButtonEnabled(false);
+            mProSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    if (TextUtils.isEmpty(s)){
+                        listView.setAdapter(proAdapter);
+                    }else {
+                        for (int i = 0; i < data.size(); i++){
+                            Datas datas = data.get(i);
+                            if (datas.getTitle().equals(s)){
+                                data.clear();
+                                data.add(datas);
+                                break;
+                            }
+                        }
+                        if(data.size() == 0)
+                        {
+                            Toast.makeText(PrimaryProductsActivity.this, "查找的商品不在列表中", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(PrimaryProductsActivity.this, "查找成功", Toast.LENGTH_SHORT).show();
+                            proAdapter = new PrimaryProductsAdapter(PrimaryProductsActivity.this, data);
+                            listView.setAdapter(proAdapter);
+                        }
+                    }
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    if(TextUtils.isEmpty(s))
+                    {
+                        listView.setAdapter(proAdapter);
+                    }
+                    else
+                    {
+                        for(int i = 0; i < data.size(); i++)
+                        {
+                            Datas datas = data.get(i);
+                            if(datas.getTitle().contains(s))
+                            {
+                                data.clear();
+                                data.add(datas);
+                            }
+                        }
+                        proAdapter = new PrimaryProductsAdapter(PrimaryProductsActivity.this, data);
+                        proAdapter.notifyDataSetChanged();
+                        listView.setAdapter(proAdapter);
+                    }
+                    return true;
+                }
+            });
         } else {
             this.listData.addAll(data);
             proAdapter.notifyDataSetChanged();

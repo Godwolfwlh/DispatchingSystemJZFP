@@ -16,7 +16,6 @@ import com.yhzhcs.dispatchingsystemjzfp.fragments.DetailsFragment;
 import com.yhzhcs.dispatchingsystemjzfp.fragments.FamilyFragment;
 import com.yhzhcs.dispatchingsystemjzfp.fragments.ImgFragment;
 import com.yhzhcs.dispatchingsystemjzfp.fragments.IncomeFragment;
-import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
 
 import java.util.ArrayList;
 

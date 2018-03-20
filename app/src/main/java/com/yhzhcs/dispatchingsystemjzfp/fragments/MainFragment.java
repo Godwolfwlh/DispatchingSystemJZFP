@@ -16,7 +16,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -92,13 +91,17 @@ public class MainFragment extends Fragment implements MainOnScerllListener.Onloa
     private BottomScrollView sv;
     private CommonShowView mShowView;
     private boolean isSvToBottom = false;
-    private float mLastX;
     private float mLastY;
 
     /**
      * listview竖向滑动的阈值
      */
     private static final int THRESHOLD_Y_LIST_VIEW = 20;
+
+    /** Fragment当前状态是否可见 */
+    protected boolean isVisible;
+    private boolean mHasLoadedOnce = false;
+    private boolean isPrepared = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -131,14 +134,33 @@ public class MainFragment extends Fragment implements MainOnScerllListener.Onloa
         onScrollListener = new MainOnScerllListener(footer);
         //设置接口回调
         onScrollListener.setOnLoadDataListener(this);
+        getContent();
         inView();
         return v;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        getContent();
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
+        }
+    }
+
+    private void lazyLoad() {
+        if (mHasLoadedOnce || !isPrepared)
+            return;
+        mHasLoadedOnce = true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHasLoadedOnce = false;
+        isPrepared = false;
     }
 
     private void getContent() {

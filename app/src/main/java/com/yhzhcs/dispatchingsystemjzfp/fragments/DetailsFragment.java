@@ -1,15 +1,9 @@
 package com.yhzhcs.dispatchingsystemjzfp.fragments;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +45,11 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
     private String Is = "否";
     private Bundle bundle;
     private PoorDetailsBean poorDetailsBean;
-    public static final String DETAILS_CODE = "0x0001";
+
+    /** Fragment当前状态是否可见 */
+    protected boolean isVisible;
+    private boolean mHasLoadedOnce = false;
+    private boolean isPrepared = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,31 +57,21 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         v = inflater.inflate(R.layout.fragment_poor_base_situation, container, false);
         Bundle bundle = getArguments();
         poorHouseId = bundle.getString("poorHouseId");
+        getData();
+        isPrepared = true;
         return v;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        getData();
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
+        }
     }
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
-//        IntentFilter intentFilter = new IntentFilter();
-//        intentFilter.addAction("android.intent.action.CART_BROADCAST");
-//        BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent){
-//                String msg = intent.getStringExtra("DETAILS_CODE");
-//                if(DETAILS_CODE.equals(msg)){
-//                    getData();
-//                }
-//            }
-//        };
-//        broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
-//    }
 
     private void getData() {
         HttpUtils httpUtils = new HttpUtils();
@@ -201,4 +189,16 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void lazyLoad() {
+        if (mHasLoadedOnce || !isPrepared)
+            return;
+        mHasLoadedOnce = true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHasLoadedOnce = false;
+        isPrepared = false;
+    }
 }

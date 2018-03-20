@@ -44,6 +44,11 @@ public class FamilyFragment extends Fragment implements View.OnClickListener,Ada
 
     private View v;
 
+    /** Fragment当前状态是否可见 */
+    protected boolean isVisible;
+    private boolean mHasLoadedOnce = false;
+    private boolean isPrepared = false;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,13 +59,32 @@ public class FamilyFragment extends Fragment implements View.OnClickListener,Ada
         familyListView = (ListView) v.findViewById(R.id.fragment_poor_family_list);
         headEdit = (TextView) v.findViewById(R.id.poor_head_edit);
         headEdit.setOnClickListener(this);
+        getData();
         return v;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        getData();
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
+        }
+    }
+
+    private void lazyLoad() {
+        if (mHasLoadedOnce || !isPrepared)
+            return;
+        mHasLoadedOnce = true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mHasLoadedOnce = false;
+        isPrepared = false;
     }
 
     private void getData(){
