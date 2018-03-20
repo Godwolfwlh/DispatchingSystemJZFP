@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -86,6 +87,8 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
     private boolean mHasLoadedOnce = false;
     private boolean isPrepared = false;
 
+    private boolean isGetData = false;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -93,9 +96,37 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
         Bundle bundle = getArguments();
         entityId = bundle.getString("poorHouseId");
         LogUtil.i("entityId", entityId);
-        getData();
         iniView();
         return v;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        //   进入当前Fragment
+        if (enter && !isGetData) {
+            isGetData = true;
+            //   这里可以做网络请求或者需要的数据刷新操作
+            getData();
+        } else {
+            isGetData = false;
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!isGetData) {
+            //   这里可以做网络请求或者需要的数据刷新操作
+            getData();
+            isGetData = true;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isGetData = false;
     }
 
     @Override

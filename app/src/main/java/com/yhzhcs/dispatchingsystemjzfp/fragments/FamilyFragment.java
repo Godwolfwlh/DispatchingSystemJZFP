@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -49,6 +50,8 @@ public class FamilyFragment extends Fragment implements View.OnClickListener,Ada
     private boolean mHasLoadedOnce = false;
     private boolean isPrepared = false;
 
+    private boolean isGetData = false;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,8 +62,36 @@ public class FamilyFragment extends Fragment implements View.OnClickListener,Ada
         familyListView = (ListView) v.findViewById(R.id.fragment_poor_family_list);
         headEdit = (TextView) v.findViewById(R.id.poor_head_edit);
         headEdit.setOnClickListener(this);
-        getData();
         return v;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        //   进入当前Fragment
+        if (enter && !isGetData) {
+            isGetData = true;
+            //   这里可以做网络请求或者需要的数据刷新操作
+            getData();
+        } else {
+            isGetData = false;
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!isGetData) {
+            //   这里可以做网络请求或者需要的数据刷新操作
+            getData();
+            isGetData = true;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isGetData = false;
     }
 
     @Override

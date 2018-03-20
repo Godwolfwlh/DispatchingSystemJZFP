@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,15 +52,45 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
     private boolean mHasLoadedOnce = false;
     private boolean isPrepared = false;
 
+    private boolean isGetData = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         v = inflater.inflate(R.layout.fragment_poor_base_situation, container, false);
         Bundle bundle = getArguments();
         poorHouseId = bundle.getString("poorHouseId");
-        getData();
         isPrepared = true;
         return v;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        //   进入当前Fragment
+        if (enter && !isGetData) {
+            isGetData = true;
+            //   这里可以做网络请求或者需要的数据刷新操作
+            getData();
+        } else {
+            isGetData = false;
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!isGetData) {
+            //   这里可以做网络请求或者需要的数据刷新操作
+            getData();
+            isGetData = true;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isGetData = false;
     }
 
     @Override
