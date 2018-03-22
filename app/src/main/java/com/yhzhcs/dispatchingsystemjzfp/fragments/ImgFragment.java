@@ -1,8 +1,10 @@
 package com.yhzhcs.dispatchingsystemjzfp.fragments;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -10,7 +12,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
@@ -27,6 +31,7 @@ import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
@@ -74,6 +79,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
 
     public final int TYPE_TAKE_PHOTO = 1;//Uri获取类型判断
     public final int CODE_TAKE_PHOTO = 1;//相机RequestCode
+    private static final int CODE_CAMERA_REQUEST = 0xa1;
     public Uri photoUri;
 
     private ArrayList<Boolean> selectItems; //用于存储已选中项目的位置
@@ -82,7 +88,9 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
 
     private String annentId, annexPathDown;
 
-    /** Fragment当前状态是否可见 */
+    /**
+     * Fragment当前状态是否可见
+     */
     protected boolean isVisible;
     private boolean mHasLoadedOnce = false;
     private boolean isPrepared = false;
@@ -132,7 +140,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(getUserVisibleHint()) {
+        if (getUserVisibleHint()) {
             isVisible = true;
             lazyLoad();
         } else {
@@ -318,6 +326,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                 public void onClick(DialogInterface dialog, int which) {
                     for (int i = 0; i < listBean.size(); i++) {
                         if (selectItems.get(i)) {
+                            deletePhoto(listBean);
                             listBean.set(i, null);
                         }
                     }
@@ -336,7 +345,6 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                         setState(false);
                         return;
                     }
-                    deletePhoto();
                 }
             });
             builder.setNegativeButton("取消", null);
@@ -346,10 +354,10 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
     }
 
     //删除服务器文件
-    private void deletePhoto() {
+    private void deletePhoto(List<Inglists> data) {
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
-        for (int i = 0; i < selectItems.size(); i++) {
+        for (int i = 0; i < data.size(); i++) {
             annentId = listBean.get(i).getAnnentid();
             annexPathDown = listBean.get(i).getAnnexPathDown();
             params.addBodyParameter("annentId", annentId);
@@ -377,7 +385,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        autoObtainCameraPermission();
+                        accessToCameraRights();
                         break;
                     case 1:
                         Bundle bundle = new Bundle();
@@ -390,6 +398,51 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
             }
         });
         listDialog.show();
+    }
+
+    private void accessToCameraRights() {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            //权限发生了改变 true  //  false 小米
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)) {
+                new AlertDialog.Builder(getActivity()).setTitle("title")
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 请求授权
+                                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 1);
+                            }
+                        }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).create().show();
+            } else {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 1);
+            }
+        } else {
+            autoObtainCameraPermission();
+        }
+    }
+
+    /**
+     * @param requestCode
+     * @param permissions  请求的权限
+     * @param grantResults 请求权限返回的结果
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            // camear 权限回调
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 表示用户授权
+                Toast.makeText(getActivity(), " user Permission", Toast.LENGTH_SHORT).show();
+                autoObtainCameraPermission();
+            } else {
+                //用户拒绝权限
+                Toast.makeText(getActivity(), " no Permission", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     /**
@@ -503,6 +556,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
         });
     }
 
+
     public class PoorImageAdapter extends BaseAdapter {
         private Context context;
 
@@ -575,8 +629,6 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                 if (selectItems.size() != 0) {
                     LogUtil.v("selectItemssssssssss", "selectItems==3==" + selectItems.get(position).toString());
                     viewHolder.checkBox.setChecked(selectItems.get(position));
-                } else {
-                    ToastUtil.showInfo(getActivity(), "没有选择文件！");
                 }
             }
             return convertView;

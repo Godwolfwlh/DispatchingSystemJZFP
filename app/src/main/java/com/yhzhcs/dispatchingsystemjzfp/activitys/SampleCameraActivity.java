@@ -306,8 +306,8 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
         for (int i = 0; i<MyImageAdapter.mSelectedImage.size(); i++){
-            //params.addBodyParameter
             String basePath = TypeConverter.imageToBase64(MyImageAdapter.mSelectedImage.get(i));
+            LogUtil.v("cheshicheshi",MyImageAdapter.mSelectedImage.get(i).toString());
             params.addBodyParameter("file",basePath);
             params.addBodyParameter("id",entityId);//贫困户id
             params.addBodyParameter("entityType","ing");
