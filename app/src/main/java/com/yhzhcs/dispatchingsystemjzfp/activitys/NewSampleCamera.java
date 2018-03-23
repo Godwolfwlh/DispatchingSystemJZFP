@@ -144,6 +144,7 @@ public class NewSampleCamera extends AppCompatActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.title_right:
+                //
                 break;
         }
     }
