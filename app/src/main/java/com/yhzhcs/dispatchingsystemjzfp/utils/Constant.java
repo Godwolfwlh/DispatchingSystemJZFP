@@ -101,7 +101,7 @@ public class Constant {
 
     /**
      * 讨论区
-     * GET提交
+     * GET提交 id = 227  pageIndex = 1
      */
     public static final String URL_FORUM = URL_TITLE + "getTopicJson";
 
@@ -125,7 +125,7 @@ public class Constant {
 
     /**
      * 查询贫困户联系地址信息（选择乡镇、街道（村））
-     * GET提交
+     * GET提交 areaPId = 0101000000
      * */
     public static final String URL_POOR_ADD = URL_TITLE + "findAreaByParentId";
 

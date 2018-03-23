@@ -37,6 +37,7 @@ import com.yhzhcs.dispatchingsystemjzfp.adapters.MyImageAdapter;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.ImageFloder;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+import com.yhzhcs.dispatchingsystemjzfp.utils.ToastUtil;
 import com.yhzhcs.dispatchingsystemjzfp.utils.TypeConverter;
 import com.yhzhcs.dispatchingsystemjzfp.view.ListImageDirPopupWindow;
 
@@ -274,7 +275,6 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
             @Override
             public void onClick(View view) {
                 upImage();
-                finish();
             }
         });
     }
@@ -302,26 +302,36 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
         mListImageDirPopupWindow.dismiss();
     }
 
-    private void upImage(){
+    private void upImage() {
+        String[] imagePatj = new String[MyImageAdapter.mSelectedImage.size()];
+        String[] basePath = new String[MyImageAdapter.mSelectedImage.size()];
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
-        for (int i = 0; i<MyImageAdapter.mSelectedImage.size(); i++){
-            String basePath = TypeConverter.imageToBase64(MyImageAdapter.mSelectedImage.get(i));
-            LogUtil.v("cheshicheshi",MyImageAdapter.mSelectedImage.get(i).toString());
-            params.addBodyParameter("file",basePath);
-            params.addBodyParameter("id",entityId);//贫困户id
-            params.addBodyParameter("entityType","ing");
+        LogUtil.v("cheshicheshi", basePath.length + "");
+        for (int i = 0; i < MyImageAdapter.mSelectedImage.size(); i++) {
+            imagePatj[i] = MyImageAdapter.mSelectedImage.get(i);
+            basePath[i] = TypeConverter.imageToBase64(imagePatj[i]);
+            LogUtil.v("cheshicheshi", MyImageAdapter.mSelectedImage.get(i) + "");
         }
-        httpUtils.send(HttpMethod.POST, Constant.URL_SAVE_PHOTO, params, new RequestCallBack<String>() {
-            @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
-                LogUtil.v("SAMPLE_CAMERA_HTTP","onSuccess：" + responseInfo.result.toString());
-            }
+        for (int i = 0; i < basePath.length; i++) {
+            params.addBodyParameter("file", basePath[i]);
+            LogUtil.v("cheshicheshi", "=========>>>" + basePath[i]);
+            params.addBodyParameter("id", entityId);//贫困户id
+            params.addBodyParameter("entityType", "ing");
+            httpUtils.send(HttpMethod.POST, Constant.URL_SAVE_PHOTO, params, new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(ResponseInfo<String> responseInfo) {
+                    LogUtil.v("SAMPLE_CAMERA_HTTP", "onSuccess：" + responseInfo.result.toString());
+                    ToastUtil.showInfo(SampleCameraActivity.this, "上传成功！");
+//                    finish();
+                }
 
-            @Override
-            public void onFailure(HttpException e, String s) {
-                LogUtil.v("SAMPLE_CAMERA_HTTP","onFailure：" + s);
-            }
-        });
+                @Override
+                public void onFailure(HttpException e, String s) {
+                    LogUtil.v("SAMPLE_CAMERA_HTTP", "onFailure：" + s);
+                    ToastUtil.showInfo(SampleCameraActivity.this, "上传失败！");
+                }
+            });
+        }
     }
 }

@@ -42,6 +42,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.yhzhcs.dispatchingsystemjzfp.R;
+import com.yhzhcs.dispatchingsystemjzfp.activitys.NewSampleCamera;
 import com.yhzhcs.dispatchingsystemjzfp.activitys.SampleCameraActivity;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Inglists;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorImageBean;
@@ -389,7 +390,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                         break;
                     case 1:
                         Bundle bundle = new Bundle();
-                        Intent intent = new Intent(getActivity(), SampleCameraActivity.class);
+                        Intent intent = new Intent(getActivity(), NewSampleCamera.class);
                         bundle.putString("entityId", entityId);
                         intent.putExtras(bundle);
                         startActivity(intent);

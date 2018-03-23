@@ -55,6 +55,7 @@
         <activity android:name=".activitys.SampleCameraActivity"/>
         <activity android:name=".activitys.ReleaseProductsActivity"/>
         <activity android:name=".activitys.PlusImageActivity"/>
+        <activity android:name=".activitys.NewSampleCamera"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

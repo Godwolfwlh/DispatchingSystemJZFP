@@ -30,7 +30,7 @@ public class PictureSelectorConfig {
                 .previewImage(true)// 是否可预览图片 true or false
                 .previewVideo(false)// 是否可预览视频 true or false
                 .enablePreviewAudio(false) // 是否可播放音频 true or false
-                .isCamera(true)// 是否显示拍照按钮 true or false
+                .isCamera(false)// 是否显示拍照按钮 true or false
 //                .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
 //                .sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
 //                .setOutputCameraPath("/CustomPath")// 自定义拍照保存路径,可不填
