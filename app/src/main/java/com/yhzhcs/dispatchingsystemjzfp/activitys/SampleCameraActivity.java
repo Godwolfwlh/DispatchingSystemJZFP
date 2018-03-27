@@ -7,7 +7,9 @@ package com.yhzhcs.dispatchingsystemjzfp.activitys;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,6 +23,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,7 +36,8 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.yhzhcs.dispatchingsystemjzfp.R;
-import com.yhzhcs.dispatchingsystemjzfp.adapters.MyImageAdapter;
+import com.yhzhcs.dispatchingsystemjzfp.adapters.CommonAdapter;
+import com.yhzhcs.dispatchingsystemjzfp.adapters.ViewHolder;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.ImageFloder;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
@@ -93,6 +97,11 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
 
     private String entityId;
 
+    /**
+     * 用户选择的图片，存储为图片的完整路径
+     */
+    private ArrayList<String> mSelectedImage = new ArrayList<String>();
+    private ArrayList<ImageView> SelectedImageViews = new ArrayList<ImageView>();
 
     /**
      * 为View绑定数据
@@ -147,7 +156,6 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
         DisplayMetrics outMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
         mScreenHeight = outMetrics.heightPixels;
-//        getActionBar().hide();
         initView();
         getImages();
         initEvent();
@@ -303,27 +311,22 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
     }
 
     private void upImage() {
-        String[] imagePatj = new String[MyImageAdapter.mSelectedImage.size()];
-        String[] basePath = new String[MyImageAdapter.mSelectedImage.size()];
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
-        LogUtil.v("cheshicheshi", basePath.length + "");
-        for (int i = 0; i < MyImageAdapter.mSelectedImage.size(); i++) {
-            imagePatj[i] = MyImageAdapter.mSelectedImage.get(i);
-            basePath[i] = TypeConverter.imageToBase64(imagePatj[i]);
-            LogUtil.v("cheshicheshi", MyImageAdapter.mSelectedImage.get(i) + "");
-        }
-        for (int i = 0; i < basePath.length; i++) {
-            params.addBodyParameter("file", basePath[i]);
-            LogUtil.v("cheshicheshi", "=========>>>" + basePath[i]);
-            params.addBodyParameter("id", entityId);//贫困户id
+        LogUtil.i("ttttttttttt", "LIST:" + mSelectedImage.toString());
+        for (int i = 0; i < mSelectedImage.size(); i++) {
+            String iii = mSelectedImage.get(i);
+            LogUtil.i("iiiiiiiiiii",iii);
+            String past = TypeConverter.imageToBase64(iii);
+            params.addBodyParameter("file", past);
+            params.addBodyParameter("id", entityId);
             params.addBodyParameter("entityType", "ing");
+            LogUtil.v("mmmmmmmmm", "past:" + past);
             httpUtils.send(HttpMethod.POST, Constant.URL_SAVE_PHOTO, params, new RequestCallBack<String>() {
                 @Override
                 public void onSuccess(ResponseInfo<String> responseInfo) {
                     LogUtil.v("SAMPLE_CAMERA_HTTP", "onSuccess：" + responseInfo.result.toString());
                     ToastUtil.showInfo(SampleCameraActivity.this, "上传成功！");
-//                    finish();
                 }
 
                 @Override
@@ -334,4 +337,74 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
             });
         }
     }
+
+    public class MyImageAdapter extends CommonAdapter<String> {
+
+        /**
+         * 文件夹路径
+         */
+        private String mDirPath;
+
+        public MyImageAdapter(Context context, List<String> mDatas, int itemLayoutId,
+                              String dirPath) {
+            super(context, mDatas, itemLayoutId);
+            this.mDirPath = dirPath;
+        }
+
+        public ArrayList<String> getImageList() {
+            return mSelectedImage;
+        }
+
+        public void setIamgeNull() {
+            for (ImageView imageView : SelectedImageViews) {
+                imageView.setImageResource(R.mipmap.picture_unselected);
+            }
+            mSelectedImage.removeAll(mSelectedImage);
+        }
+
+        @Override
+        public void convert(ViewHolder helper, final String item) {
+            // 设置no_pic
+            helper.setImageResource(R.id.id_item_image, R.mipmap.pictures_no);
+            // 设置no_selected
+            helper.setImageResource(R.id.id_item_select, R.mipmap.picture_unselected);
+            // 设置图片
+            helper.setImageByUrl(R.id.id_item_image, mDirPath + "/" + item);
+
+            final ImageView mImageView = helper.getView(R.id.id_item_image);
+            final ImageView mSelect = helper.getView(R.id.id_item_select);
+            mImageView.setColorFilter(null);
+            // 设置ImageView的点击事件
+            mImageView.setOnClickListener(new OnClickListener() {
+                // 选择，则将图片变暗，反之则反之
+                @Override
+                public void onClick(View v) {
+
+                    // 已经选择过该图片
+                    if (mSelectedImage.contains(mDirPath + "/" + item)) {
+                        mSelectedImage.remove(mDirPath + "/" + item);
+                        mSelect.setImageResource(R.mipmap.picture_unselected);
+                        SelectedImageViews.remove(mSelect);
+                        mImageView.setColorFilter(null);
+                    } else
+                    // 未选择该图片
+                    {
+                        SelectedImageViews.add(mSelect);
+                        mSelectedImage.add(mDirPath + "/" + item);
+                        mSelect.setImageResource(R.mipmap.pictures_selected);
+                        mImageView.setColorFilter(Color.parseColor("#77000000"));
+                    }
+                }
+            });
+
+            /**
+             * 已经选择过的图片，显示出选择过的效果
+             */
+            if (mSelectedImage.contains(mDirPath + "/" + item)) {
+                mSelect.setImageResource(R.mipmap.pictures_selected);
+                mImageView.setColorFilter(Color.parseColor("#77000000"));
+            }
+        }
+    }
+
 }

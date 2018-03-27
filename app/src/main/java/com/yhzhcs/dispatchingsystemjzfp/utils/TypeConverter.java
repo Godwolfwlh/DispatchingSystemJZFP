@@ -38,7 +38,7 @@ public class TypeConverter {
             //写入数组
             is.read(data);
             //用默认的编码格式进行编码
-            result = Base64.encodeToString(data, Base64.DEFAULT);
+            result = Base64.encodeToString(data, Base64.NO_WRAP);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -71,7 +71,7 @@ public class TypeConverter {
                 baos.flush();
                 baos.close();
                 byte[] bitmapBytes = baos.toByteArray();
-                result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);
+                result = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,7 +95,7 @@ public class TypeConverter {
      * @return
      */
     public static Bitmap base64ToBitmap(String base64Data) {
-        byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);
+        byte[] bytes = Base64.decode(base64Data, Base64.NO_WRAP);
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
@@ -107,7 +107,7 @@ public class TypeConverter {
      * @return 是否成功
      */
     public static boolean base64ToFile(String base64Str, String path) {
-        byte[] data = Base64.decode(base64Str, Base64.DEFAULT);
+        byte[] data = Base64.decode(base64Str, Base64.NO_WRAP);
         for (int i = 0; i < data.length; i++) {
             if (data[i] < 0) {
                 //调整异常数据
@@ -135,6 +135,6 @@ public class TypeConverter {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bit.compress(Bitmap.CompressFormat.JPEG, 40, bos);//参数100表示不压缩
         byte[] bytes = bos.toByteArray();
-        return Base64.encodeToString(bytes, Base64.DEFAULT);
+        return Base64.encodeToString(bytes, Base64.NO_WRAP);
     }
 }

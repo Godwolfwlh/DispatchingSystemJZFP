@@ -390,7 +390,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                         break;
                     case 1:
                         Bundle bundle = new Bundle();
-                        Intent intent = new Intent(getActivity(), NewSampleCamera.class);
+                        Intent intent = new Intent(getActivity(), SampleCameraActivity.class);
                         bundle.putString("entityId", entityId);
                         intent.putExtras(bundle);
                         startActivity(intent);
