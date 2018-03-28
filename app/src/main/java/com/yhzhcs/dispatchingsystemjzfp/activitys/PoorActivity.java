@@ -216,8 +216,10 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         Bundle bundle = new Bundle();
         String poorHouseId = info.getId();
         String poorName = info.getName();
+        String poorCardNumber = info.getCradNumber();
         bundle.putString("poorHouseId", poorHouseId);
         bundle.putString("poorName", poorName);
+        bundle.putString("poorCardNumber",poorCardNumber);
         intent.putExtras(bundle);
         startActivity(intent);
     }

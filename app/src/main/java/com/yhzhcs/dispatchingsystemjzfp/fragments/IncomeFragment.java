@@ -21,6 +21,7 @@ import com.yhzhcs.dispatchingsystemjzfp.bean.Personalincome;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorIncomeBean;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+import com.yhzhcs.dispatchingsystemjzfp.utils.ToastUtil;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ import java.util.List;
 
 public class IncomeFragment extends Fragment {
 
-    private String poorHouseId;
+    private String poorHouseId,poorCardNumber;
     private View v;
 
     private List<Personalincome> listBean;
@@ -49,6 +50,7 @@ public class IncomeFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_poor_income, container, false);
         Bundle bundle = getArguments();
         poorHouseId = bundle.getString("poorHouseId");
+        poorCardNumber = bundle.getString("poorCardNumber");
         return v;
     }
 
@@ -109,6 +111,7 @@ public class IncomeFragment extends Fragment {
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
         params.addBodyParameter("poorHouseId", poorHouseId);
+        params.addBodyParameter("cardNumber",poorCardNumber);
         httpUtils.send(HttpMethod.POST, Constant.URL_POOR_INCOME, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -140,14 +143,18 @@ public class IncomeFragment extends Fragment {
         situationNine = (TextView) v.findViewById(R.id.situation_td_fifteen_ok_i);
         String Is = "0";
 
-//        situationOne.setText((personalincomes.get(0).getSalary().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getSalary());
-//        situationTwo.setText((personalincomes.get(0).getYearIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getYearIncome());
-//        situationThree.setText((personalincomes.get(0).getProduction().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProduction());
-//        situationFour.setText((personalincomes.get(0).getProductbility().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProductbility());
-//        situationFive.setText((personalincomes.get(0).getTransfer().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getTransfer());
-//        situationSix.setText((personalincomes.get(0).getNetIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getNetIncome());
-//        situationSeven.setText((personalincomes.get(0).getProperty().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProperty());
-//        situationEight.setText((personalincomes.get(0).getAverageIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getAverageIncome());
-//        situationNine.setText((String.valueOf(personalincomes.get(0).getPovertyMoney()).equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getAverageIncome());
+        if ( null == personalincomes || personalincomes.size() == 0){
+            ToastUtil.showInfo(getActivity(), "該用戶無收入！");
+        }else {
+            situationOne.setText((personalincomes.get(0).getSalary().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getSalary());
+            situationTwo.setText((personalincomes.get(0).getYearIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getYearIncome());
+            situationThree.setText((personalincomes.get(0).getProduction().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProduction());
+            situationFour.setText((personalincomes.get(0).getProductbility().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProductbility());
+            situationFive.setText((personalincomes.get(0).getTransfer().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getTransfer());
+            situationSix.setText((personalincomes.get(0).getNetIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getNetIncome());
+            situationSeven.setText((personalincomes.get(0).getProperty().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProperty());
+            situationEight.setText((personalincomes.get(0).getAverageIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getAverageIncome());
+            situationNine.setText((String.valueOf(personalincomes.get(0).getPovertyMoney()).equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getAverageIncome());
+        }
     }
 }

@@ -45,6 +45,7 @@ public class PoorDetailsActivity extends FragmentActivity implements View.OnClic
 
     private String poorHouseId;
     private String poorName;
+    private String poorCardNumber;
     private DetailsFragment detailsFragment;
     private FamilyFragment familyFragment;
     private IncomeFragment incomeFragment;
@@ -62,6 +63,7 @@ public class PoorDetailsActivity extends FragmentActivity implements View.OnClic
         Bundle bundle = getIntent().getExtras();
         poorHouseId = bundle.getString("poorHouseId");
         poorName = bundle.getString("poorName");
+        poorCardNumber = bundle.getString("poorCardNumber");
     }
 
     //初始化布局
@@ -100,6 +102,7 @@ public class PoorDetailsActivity extends FragmentActivity implements View.OnClic
         imgFragment = new ImgFragment();
         Bundle bun = new Bundle();
         bun.putString("poorHouseId",poorHouseId);
+        bun.putString("poorCardNumber",poorCardNumber);
         detailsFragment.setArguments(bun);
         familyFragment.setArguments(bun);
         incomeFragment.setArguments(bun);

@@ -70,7 +70,7 @@ public class Constant {
 
     /**
      * 查询贫困户收入信息
-     * 提交 贫困户ID poorHouseId  贫困户身份证号 poorHouseId
+     * 提交 贫困户ID poorHouseId  贫困户身份证号 cardNumber
      */
     public static final String URL_POOR_INCOME = URL_TITLE + "findPersonalIncome";
 
@@ -148,7 +148,7 @@ public class Constant {
 
     /**
      * 上传并保存图片
-     * POST提交 图片文件file  贫困户ID entityId  状态entityType = ing 进行中
+     * POST提交 图片文件file  贫困户ID entityId  状态entityType = ing 进行中  内容content = ""
      * */
     public static final String URL_SAVE_PHOTOS = URL_TITLE + "upFileForRetEntityId";
 
