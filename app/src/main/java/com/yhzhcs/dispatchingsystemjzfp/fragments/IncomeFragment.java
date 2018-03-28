@@ -140,14 +140,14 @@ public class IncomeFragment extends Fragment {
         situationNine = (TextView) v.findViewById(R.id.situation_td_fifteen_ok_i);
         String Is = "0";
 
-        situationOne.setText((personalincomes.get(0).getSalary().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getSalary());
-        situationTwo.setText((personalincomes.get(0).getYearIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getYearIncome());
-        situationThree.setText((personalincomes.get(0).getProduction().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProduction());
-        situationFour.setText((personalincomes.get(0).getProductbility().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProductbility());
-        situationFive.setText((personalincomes.get(0).getTransfer().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getTransfer());
-        situationSix.setText((personalincomes.get(0).getNetIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getNetIncome());
-        situationSeven.setText((personalincomes.get(0).getProperty().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProperty());
-        situationEight.setText((personalincomes.get(0).getAverageIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getAverageIncome());
-        situationNine.setText((String.valueOf(personalincomes.get(0).getPovertyMoney()).equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getAverageIncome());
+//        situationOne.setText((personalincomes.get(0).getSalary().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getSalary());
+//        situationTwo.setText((personalincomes.get(0).getYearIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getYearIncome());
+//        situationThree.setText((personalincomes.get(0).getProduction().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProduction());
+//        situationFour.setText((personalincomes.get(0).getProductbility().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProductbility());
+//        situationFive.setText((personalincomes.get(0).getTransfer().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getTransfer());
+//        situationSix.setText((personalincomes.get(0).getNetIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getNetIncome());
+//        situationSeven.setText((personalincomes.get(0).getProperty().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProperty());
+//        situationEight.setText((personalincomes.get(0).getAverageIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getAverageIncome());
+//        situationNine.setText((String.valueOf(personalincomes.get(0).getPovertyMoney()).equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getAverageIncome());
     }
 }

@@ -63,6 +63,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
 
     private SharedPreferences sp;
     private String missionId;
+    private int userId;
 
     private CommonShowView mShowView;
 
@@ -77,6 +78,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_poor);
         sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         missionId = sp.getString("MISSION_ID", "");
+        userId = sp.getInt("USER_ID",0);
         initView();
     }
 
@@ -150,7 +152,10 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         LogUtil.v("missionId", "missionId====" + missionId);
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
+        params.addBodyParameter("pageNow","1");
+        params.addBodyParameter("pageSize", "10");
         params.addBodyParameter("missionId", missionId);
+        params.addBodyParameter("userId",String.valueOf(userId));
         httpUtils.send(HttpMethod.POST, Constant.URL_POOR_LIST, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -219,21 +224,18 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
 
     private void querConditionalPoorBean(List<Poorhouses> pData) {
         for (int i = 0; i < pData.size() - 1; i++) {
-            Long PoorTime = pData.get(i).getCreatedDate().getTime();
-            Date dateTime = new Date(PoorTime);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
-            Time = dateFormat.format(dateTime);
+            Time = pData.get(i).getYear();
             Poverty = pData.get(i).getPoverty();
             Map<String, List<Poorhouses>> lp = new HashMap<String, List<Poorhouses>>();//时间查询Map
             Map<String, List<Poorhouses>> jp = new HashMap<String, List<Poorhouses>>();//计划查询Map
 
             for (Poorhouses p : pData) {
-                List<Poorhouses> t = lp.get(p.getCreatedDate().getTime());//时间查询结果
+                List<Poorhouses> t = lp.get(p.getYear());//时间查询结果
                 List<Poorhouses> j = jp.get(p.getPoverty());//计划查询结果
                 if (t == null) {
                     t = new ArrayList<Poorhouses>();
                     t.add(p);
-                    lp.put(String.valueOf(p.getCreatedDate().getTime()), t);
+                    lp.put(String.valueOf(p.getYear()), t);
                 } else if (t != null) {
                     t.add(p);
                 } else if (j == null) {
@@ -251,7 +253,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
             } else if (querStrTime.equals(Time) && querStrPoverty.equals("全部")) {
                 LogUtil.v("spinner_left", "========时间=======全部==========");
                 for (String keyTime : lp.keySet()) {
-                    keyTime = String.valueOf(PoorTime);
+                    keyTime = String.valueOf(Time);
                     pData = lp.get(keyTime);
                     showListView(pData);
                 }
@@ -267,7 +269,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
             } else if (querStrTime.equals(Time) && querStrPoverty.equals(Poverty)) {
                 LogUtil.v("spinner_left", "========时间=======计划==========");
                 for (String keyTime : lp.keySet()) {
-                    keyTime = String.valueOf(PoorTime);
+                    keyTime = String.valueOf(Time);
                     pData = lp.get(keyTime);
                     querPovertytoTime(pData);
                 }

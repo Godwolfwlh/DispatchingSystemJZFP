@@ -14,7 +14,12 @@ public class Constant {
     public static final int REQUEST_CODE_MAIN = 10; //请求码
     public static final int RESULT_CODE_VIEW_IMG = 11; //查看大图页面的结果码
 
-    public static final String URL_TITLE = "http://192.168.1.189:8080/cathy/appController/";
+    //本地调试数据接口
+    public static final String URL_TITLE = "http://192.168.1.189:8080/cathy_fpb/appController/";
+    //pan
+//    public static final String URL_TITLE = "http://192.168.1.252:8080/cathy_fpb/appController/";
+    //服务器数据接口
+//    public static final String URL_TITLE = "http://39.108.193.47/appController/";
 
     /**
      * 查询新闻动态、政策数据
@@ -35,7 +40,7 @@ public class Constant {
 
     /**
      * 查询帮扶任务
-     * POST提交 帮扶责任人ID missionId
+     * POST提交 帮扶责任人ID missionId  用户ID userId
      */
     public static final String URL_TASK = URL_TITLE + "findMissTaskByMissId";
 
@@ -47,7 +52,7 @@ public class Constant {
 
     /**
      * 查询贫困户列表
-     * POST提交 帮扶责任人ID missionId
+     * POST提交 帮扶责任人ID missionId  用户ID userId
      */
     public static final String URL_POOR_LIST = URL_TITLE + "findPoorHouseByMissId";
 
@@ -65,7 +70,7 @@ public class Constant {
 
     /**
      * 查询贫困户收入信息
-     * 提交 贫困户ID poorHouseId
+     * 提交 贫困户ID poorHouseId  贫困户身份证号 poorHouseId
      */
     public static final String URL_POOR_INCOME = URL_TITLE + "findPersonalIncome";
 
@@ -137,9 +142,15 @@ public class Constant {
 
     /**
      * 上传并保存图片
-     * POST提交 图片文件file  贫困户ID entityId  状态entityType = ing 进行中
+     * POST提交 图片文件file转base64  贫困户ID entityId  状态entityType = ing 进行中
      * */
     public static final String URL_SAVE_PHOTO = URL_TITLE + "savePhotoRetId";
+
+    /**
+     * 上传并保存图片
+     * POST提交 图片文件file  贫困户ID entityId  状态entityType = ing 进行中
+     * */
+    public static final String URL_SAVE_PHOTOS = URL_TITLE + "upFileForRetEntityId";
 
     /**
      * 删除图片

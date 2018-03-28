@@ -109,9 +109,9 @@ public class TaskFragment extends Fragment implements TaskOnScerllListener.Onloa
                 LogUtil.v("TASK_HTTP","onSuccess"+responseInfo.result.toString());
                 String body = responseInfo.result;
                 Gson gson = new Gson();
-                TaskBeans taskBeans = gson.fromJson(body,TaskBeans.class);
-                taskBeanList = taskBeans.getTaskLists();
-                showListView(taskBeanList);
+//                TaskBeans taskBeans = gson.fromJson(body,TaskBeans.class);
+//                taskBeanList = taskBeans.getTaskLists();
+//                showListView(taskBeanList);
             }
 
             @Override

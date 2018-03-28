@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:dropDownHorizontalOffset="50dp"
         android:dropDownVerticalOffset="50dp"
-        android:entries="@+array/poor_date"
+        android:entries="@array/poor_date"
         android:spinnerMode="dropdown"
         app:layout_heightPercent="15%w"
         app:layout_widthPercent="50%w" />
@@ -22,7 +22,7 @@
         android:layout_height="0dp"
         android:dropDownHorizontalOffset="50dp"
         android:dropDownVerticalOffset="50dp"
-        android:entries="@+array/poor_plans"
+        android:entries="@array/poor_plans"
         android:spinnerMode="dropdown"
         app:layout_heightPercent="15%w"
         app:layout_widthPercent="50%w" />

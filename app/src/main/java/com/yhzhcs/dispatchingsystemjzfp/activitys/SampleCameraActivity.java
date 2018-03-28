@@ -282,7 +282,7 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
         tv_samplecamera_confirm.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                upImage();
+                serImage();
             }
         });
     }
@@ -310,18 +310,56 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
         mListImageDirPopupWindow.dismiss();
     }
 
+    private String path = null;
+    private String imagePath = null;
+
+    private void serImage() {
+        HttpUtils httpUtils = new HttpUtils();
+        RequestParams params = new RequestParams();
+        for (int i = 0; i < mSelectedImage.size(); i++) {
+            params.addBodyParameter("file", new File(mSelectedImage.get(i)));
+            params.addBodyParameter("entityId ", entityId);
+            params.addBodyParameter("entityType", "ing");
+            params.addBodyParameter("content", "");
+
+            httpUtils.send(HttpMethod.POST, Constant.URL_SAVE_PHOTOS, params, new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(ResponseInfo<String> responseInfo) {
+                    LogUtil.v("SAMPLE_CAMERA_HTTP", "onSuccess：" + responseInfo.result);
+                    if (!"".equals(responseInfo.result) && !"error".equals(responseInfo.result)){
+                        ToastUtil.showInfo(SampleCameraActivity.this, "上传成功！");
+                    }else{
+                        ToastUtil.showInfo(SampleCameraActivity.this, "失败！");
+                    }
+
+                }
+
+                @Override
+                public void onFailure(HttpException e, String s) {
+                    LogUtil.v("SAMPLE_CAMERA_HTTP", "onFailure：" + s);
+                    ToastUtil.showInfo(SampleCameraActivity.this, "上传失败！");
+                }
+            });
+        }
+    }
+
     private void upImage() {
+
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
         LogUtil.i("ttttttttttt", "LIST:" + mSelectedImage.toString());
         for (int i = 0; i < mSelectedImage.size(); i++) {
-            String iii = mSelectedImage.get(i);
-            LogUtil.i("iiiiiiiiiii",iii);
-            String past = TypeConverter.imageToBase64(iii);
-            params.addBodyParameter("file", past);
+            String image = mSelectedImage.get(i);
+            imagePath = image;
+            LogUtil.i("iiiiiiiiiii", imagePath);
+            String paths = TypeConverter.imageToBase64(imagePath);
+            path = paths;
+            params.addBodyParameter("file", path);
             params.addBodyParameter("id", entityId);
             params.addBodyParameter("entityType", "ing");
-            LogUtil.v("mmmmmmmmm", "past:" + past);
+            LogUtil.v("mmmmmmmmm", "past:" + path);
+            path = "";
+            imagePath = "";
             httpUtils.send(HttpMethod.POST, Constant.URL_SAVE_PHOTO, params, new RequestCallBack<String>() {
                 @Override
                 public void onSuccess(ResponseInfo<String> responseInfo) {
