@@ -22,6 +22,7 @@ import com.yhzhcs.dispatchingsystemjzfp.bean.PoorIncomeBean;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
 import com.yhzhcs.dispatchingsystemjzfp.utils.ToastUtil;
+import com.zhy.android.percent.support.PercentLinearLayout;
 
 import java.util.List;
 
@@ -29,13 +30,15 @@ import java.util.List;
  * Created by Administrator on 2018/1/24.
  */
 
-public class IncomeFragment extends Fragment {
+public class IncomeFragment extends Fragment implements View.OnClickListener{
 
     private String poorHouseId,poorCardNumber;
     private View v;
 
     private List<Personalincome> listBean;
     private TextView situationOne, situationTwo, situationThree, situationFour, situationFive, situationSix, situationSeven, situationEight, situationNine;
+    private PercentLinearLayout incomeSub;
+    private PercentLinearLayout incomeSubOne,incomeSubTwo,incomeSubThree,incomeSubFour,incomeSubFive,incomeSubSix,incomeSubSeven,incomeSubEight;
 
     /** Fragment当前状态是否可见 */
     protected boolean isVisible;
@@ -132,6 +135,17 @@ public class IncomeFragment extends Fragment {
     }
 
     private void intView(List<Personalincome> personalincomes) {
+        incomeSub = (PercentLinearLayout) v.findViewById(R.id.income_sub);
+        incomeSub.setVisibility(View.GONE);
+        incomeSubOne = (PercentLinearLayout) v.findViewById(R.id.income_tr_one);
+        incomeSubTwo = (PercentLinearLayout) v.findViewById(R.id.income_tr_two);
+        incomeSubThree = (PercentLinearLayout) v.findViewById(R.id.income_tr_three);
+        incomeSubFour = (PercentLinearLayout) v.findViewById(R.id.income_tr_four);
+        incomeSubFive = (PercentLinearLayout) v.findViewById(R.id.income_tr_five);
+        incomeSubSix = (PercentLinearLayout) v.findViewById(R.id.income_tr_six);
+        incomeSubSeven = (PercentLinearLayout) v.findViewById(R.id.income_tr_seven);
+        incomeSubEight = (PercentLinearLayout) v.findViewById(R.id.income_tr_eight);
+
         situationOne = (TextView) v.findViewById(R.id.situation_td_one_ok_i);
         situationTwo = (TextView) v.findViewById(R.id.situation_td_two_ok_i);
         situationThree = (TextView) v.findViewById(R.id.situation_td_nine_ok_i);
@@ -141,6 +155,12 @@ public class IncomeFragment extends Fragment {
         situationSeven = (TextView) v.findViewById(R.id.situation_td_eleven_ok_i);
         situationEight = (TextView) v.findViewById(R.id.situation_td_twelve_ok_i);
         situationNine = (TextView) v.findViewById(R.id.situation_td_fifteen_ok_i);
+
+        situationOne.setOnClickListener(this);
+        situationThree.setOnClickListener(this);
+        situationFive.setOnClickListener(this);
+        situationSeven.setOnClickListener(this);
+        situationNine.setOnClickListener(this);
         String Is = "0";
 
         if ( null == personalincomes || personalincomes.size() == 0){
@@ -155,6 +175,54 @@ public class IncomeFragment extends Fragment {
             situationSeven.setText((personalincomes.get(0).getProperty().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProperty());
             situationEight.setText((personalincomes.get(0).getAverageIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getAverageIncome());
             situationNine.setText((String.valueOf(personalincomes.get(0).getPovertyMoney()).equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getAverageIncome());
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.situation_td_one_ok_i:
+                incomeSub.setVisibility(View.VISIBLE);
+                incomeSubTwo.setVisibility(View.GONE);
+                incomeSubThree.setVisibility(View.GONE);
+                incomeSubFour.setVisibility(View.GONE);
+                incomeSubFive.setVisibility(View.GONE);
+                incomeSubSix.setVisibility(View.GONE);
+                incomeSubSeven.setVisibility(View.GONE);
+                incomeSubEight.setVisibility(View.GONE);
+                break;
+            case R.id.situation_td_nine_ok_i:
+                incomeSub.setVisibility(View.VISIBLE);
+                incomeSubTwo.setVisibility(View.GONE);
+                incomeSubThree.setVisibility(View.GONE);
+                incomeSubFour.setVisibility(View.GONE);
+                incomeSubFive.setVisibility(View.GONE);
+                incomeSubSix.setVisibility(View.GONE);
+                incomeSubSeven.setVisibility(View.GONE);
+                incomeSubEight.setVisibility(View.GONE);
+                break;
+            case R.id.situation_td_thirteen_ok_i:
+                incomeSub.setVisibility(View.VISIBLE);
+                break;
+            case R.id.situation_td_eleven_ok_i:
+                incomeSub.setVisibility(View.VISIBLE);
+                incomeSubThree.setVisibility(View.GONE);
+                incomeSubFour.setVisibility(View.GONE);
+                incomeSubFive.setVisibility(View.GONE);
+                incomeSubSix.setVisibility(View.GONE);
+                incomeSubSeven.setVisibility(View.GONE);
+                incomeSubEight.setVisibility(View.GONE);
+                break;
+            case R.id.situation_td_fifteen_ok_i:
+                incomeSub.setVisibility(View.VISIBLE);
+                incomeSubTwo.setVisibility(View.GONE);
+                incomeSubThree.setVisibility(View.GONE);
+                incomeSubFour.setVisibility(View.GONE);
+                incomeSubFive.setVisibility(View.GONE);
+                incomeSubSix.setVisibility(View.GONE);
+                incomeSubSeven.setVisibility(View.GONE);
+                incomeSubEight.setVisibility(View.GONE);
+                break;
         }
     }
 }

@@ -63,10 +63,11 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
         editWithNelation = (EditText) findViewById(R.id.mod_poor_family_withnelation);
         editHealth = (EditText) findViewById(R.id.mod_poor_family_health);
 
+
         editName.setText(poorlist.getName());
         editSex.setText(poorlist.getSex());
         editAge.setText(poorlist.getAge()+"");
-        editWithNelation.setText(poorlist.getWithNelation());
+        editWithNelation.setVisibility(View.GONE);
         editHealth.setText(poorlist.getHealth());
     }
 
@@ -74,7 +75,7 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
         strName = editName.getText().toString().trim();
         strSex = editSex.getText().toString().trim();
         strAge = editAge.getText().toString().trim();
-        strWithNelation = editWithNelation.getText().toString().trim();
+        strWithNelation = poorlist.getWithNelation();
         strHealth = editHealth.getText().toString().trim();
 
         HttpUtils httpUtils = new HttpUtils();

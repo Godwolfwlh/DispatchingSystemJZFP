@@ -46,8 +46,16 @@ dependencies {
     implementation files('libs/xUtils-2.6.14.jar')
     implementation files('libs/BASE64Encoder.jar')
     implementation 'com.lovedise:permissiongen:0.0.6'
-
-    implementation "com.github.hotchemi:permissionsdispatcher:2.1.2"
+    implementation 'com.github.hotchemi:permissionsdispatcher:2.1.2'
     annotationProcessor 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.1'
+    //友盟分享
+    implementation files('libs/SharePlugin.jar')
+    implementation files('libs/SocialSDK_QQ_Simplify.jar')
+    implementation files('libs/SocialSDK_Sina_Simplify.jar')
+    implementation files('libs/SocialSDK_WeChat_Simplify.jar')
+    implementation files('libs/umeng_social_api.jar')
+    implementation files('libs/umeng_social_net.jar')
+    implementation files('libs/umeng_social_shareview.jar')
+    implementation files('libs/umeng_social_tool.jar')
 }
