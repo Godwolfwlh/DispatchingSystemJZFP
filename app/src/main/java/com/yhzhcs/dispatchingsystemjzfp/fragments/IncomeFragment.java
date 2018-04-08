@@ -24,23 +24,29 @@ import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
 import com.yhzhcs.dispatchingsystemjzfp.utils.ToastUtil;
 import com.zhy.android.percent.support.PercentLinearLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2018/1/24.
  */
 
-public class IncomeFragment extends Fragment implements View.OnClickListener{
+public class IncomeFragment extends Fragment implements View.OnClickListener {
 
-    private String poorHouseId,poorCardNumber;
+    private String poorHouseId, poorCardNumber;
     private View v;
+    private String Is = "0";
 
     private List<Personalincome> listBean;
     private TextView situationOne, situationTwo, situationThree, situationFour, situationFive, situationSix, situationSeven, situationEight, situationNine;
+    private TextView subTitle, subOne, subTwo, subThree, subFour, subFive, subSix, subSeven, subEight, subNine, subTen, subEleven, subTwelve, subThirteen, subFourteen, subFifteen, subSixteen;
+    private TextView subTextOne,subTextTwo,subTextThree,subTextFour;
     private PercentLinearLayout incomeSub;
-    private PercentLinearLayout incomeSubOne,incomeSubTwo,incomeSubThree,incomeSubFour,incomeSubFive,incomeSubSix,incomeSubSeven,incomeSubEight;
+    private PercentLinearLayout incomeSubOne, incomeSubTwo, incomeSubThree, incomeSubFour, incomeSubFive, incomeSubSix, incomeSubSeven, incomeSubEight;
 
-    /** Fragment当前状态是否可见 */
+    /**
+     * Fragment当前状态是否可见
+     */
     protected boolean isVisible;
     private boolean mHasLoadedOnce = false;
     private boolean isPrepared = false;
@@ -89,7 +95,7 @@ public class IncomeFragment extends Fragment implements View.OnClickListener{
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(getUserVisibleHint()) {
+        if (getUserVisibleHint()) {
             isVisible = true;
             lazyLoad();
         } else {
@@ -114,11 +120,11 @@ public class IncomeFragment extends Fragment implements View.OnClickListener{
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
         params.addBodyParameter("poorHouseId", poorHouseId);
-        params.addBodyParameter("cardNumber",poorCardNumber);
+        params.addBodyParameter("cardNumber", poorCardNumber);
         httpUtils.send(HttpMethod.POST, Constant.URL_POOR_INCOME, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                LogUtil.v("Income_Http", "onSuccess===>>>" + responseInfo.result.toString());
+                LogUtil.logJson("Income_Http", "onSuccess===>>>" + responseInfo.result.toString());
                 String body = responseInfo.result;
                 Gson gson = new Gson();
                 PoorIncomeBean poorIncomeBean = gson.fromJson(body, PoorIncomeBean.class);
@@ -135,6 +141,8 @@ public class IncomeFragment extends Fragment implements View.OnClickListener{
     }
 
     private void intView(List<Personalincome> personalincomes) {
+        listBean = new ArrayList<>();
+        listBean = personalincomes;
         incomeSub = (PercentLinearLayout) v.findViewById(R.id.income_sub);
         incomeSub.setVisibility(View.GONE);
         incomeSubOne = (PercentLinearLayout) v.findViewById(R.id.income_tr_one);
@@ -156,16 +164,39 @@ public class IncomeFragment extends Fragment implements View.OnClickListener{
         situationEight = (TextView) v.findViewById(R.id.situation_td_twelve_ok_i);
         situationNine = (TextView) v.findViewById(R.id.situation_td_fifteen_ok_i);
 
+        subTitle = (TextView) v.findViewById(R.id.income_title_sub);
+        subOne = (TextView) v.findViewById(R.id.income_td_one_ok);
+        subTwo = (TextView) v.findViewById(R.id.income_td_two_ok);
+        subThree = (TextView) v.findViewById(R.id.income_td_three_ok);
+        subFour = (TextView) v.findViewById(R.id.income_td_four_ok);
+        subFive = (TextView) v.findViewById(R.id.income_td_five_ok);
+        subSix = (TextView) v.findViewById(R.id.income_td_six_ok);
+        subSeven = (TextView) v.findViewById(R.id.income_td_seven_ok);
+        subEight = (TextView) v.findViewById(R.id.income_td_eight_ok);
+        subNine = (TextView) v.findViewById(R.id.income_td_nine_ok);
+        subTen = (TextView) v.findViewById(R.id.income_td_ten_ok);
+        subEleven = (TextView) v.findViewById(R.id.income_td_eleven_ok);
+        subTwelve = (TextView) v.findViewById(R.id.income_td_twelve_ok);
+        subThirteen = (TextView) v.findViewById(R.id.income_td_thirteen_ok);
+        subFourteen = (TextView) v.findViewById(R.id.income_td_fourteen_ok);
+        subFifteen = (TextView) v.findViewById(R.id.income_td_fifteen_ok);
+        subSixteen = (TextView) v.findViewById(R.id.income_td_sixteen_ok);
+
+        subTextOne = (TextView) v.findViewById(R.id.income_td_one);
+        subTextTwo = (TextView) v.findViewById(R.id.income_td_two);
+        subTextThree = (TextView) v.findViewById(R.id.income_td_three);
+        subTextFour = (TextView) v.findViewById(R.id.income_td_four);
+
         situationOne.setOnClickListener(this);
         situationThree.setOnClickListener(this);
+        situationFour.setOnClickListener(this);
         situationFive.setOnClickListener(this);
         situationSeven.setOnClickListener(this);
         situationNine.setOnClickListener(this);
-        String Is = "0";
 
-        if ( null == personalincomes || personalincomes.size() == 0){
+        if (null == personalincomes || personalincomes.size() == 0) {
             ToastUtil.showInfo(getActivity(), "該用戶無收入！");
-        }else {
+        } else {
             situationOne.setText((personalincomes.get(0).getSalary().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getSalary());
             situationTwo.setText((personalincomes.get(0).getYearIncome().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getYearIncome());
             situationThree.setText((personalincomes.get(0).getProduction().equals("")) ? "￥" + Is : "￥" + personalincomes.get(0).getProduction());
@@ -180,49 +211,136 @@ public class IncomeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.situation_td_one_ok_i:
-                incomeSub.setVisibility(View.VISIBLE);
-                incomeSubTwo.setVisibility(View.GONE);
-                incomeSubThree.setVisibility(View.GONE);
-                incomeSubFour.setVisibility(View.GONE);
-                incomeSubFive.setVisibility(View.GONE);
-                incomeSubSix.setVisibility(View.GONE);
-                incomeSubSeven.setVisibility(View.GONE);
-                incomeSubEight.setVisibility(View.GONE);
+                showsituationOne();
                 break;
             case R.id.situation_td_nine_ok_i:
-                incomeSub.setVisibility(View.VISIBLE);
-                incomeSubTwo.setVisibility(View.GONE);
-                incomeSubThree.setVisibility(View.GONE);
-                incomeSubFour.setVisibility(View.GONE);
-                incomeSubFive.setVisibility(View.GONE);
-                incomeSubSix.setVisibility(View.GONE);
-                incomeSubSeven.setVisibility(View.GONE);
-                incomeSubEight.setVisibility(View.GONE);
+                showsituationThree();
+                break;
+            case R.id.situation_td_ten_ok_i:
+                showsituatonFour();
                 break;
             case R.id.situation_td_thirteen_ok_i:
-                incomeSub.setVisibility(View.VISIBLE);
+                showsituationFive();
                 break;
             case R.id.situation_td_eleven_ok_i:
-                incomeSub.setVisibility(View.VISIBLE);
-                incomeSubThree.setVisibility(View.GONE);
-                incomeSubFour.setVisibility(View.GONE);
-                incomeSubFive.setVisibility(View.GONE);
-                incomeSubSix.setVisibility(View.GONE);
-                incomeSubSeven.setVisibility(View.GONE);
-                incomeSubEight.setVisibility(View.GONE);
+                showsituationSeven();
                 break;
             case R.id.situation_td_fifteen_ok_i:
-                incomeSub.setVisibility(View.VISIBLE);
-                incomeSubTwo.setVisibility(View.GONE);
-                incomeSubThree.setVisibility(View.GONE);
-                incomeSubFour.setVisibility(View.GONE);
-                incomeSubFive.setVisibility(View.GONE);
-                incomeSubSix.setVisibility(View.GONE);
-                incomeSubSeven.setVisibility(View.GONE);
-                incomeSubEight.setVisibility(View.GONE);
+                showsituationNine();
                 break;
         }
     }
+
+    private void showsituationOne(){
+        incomeSub.setVisibility(View.VISIBLE);
+        incomeSubTwo.setVisibility(View.GONE);
+        incomeSubThree.setVisibility(View.GONE);
+        incomeSubFour.setVisibility(View.GONE);
+        incomeSubFive.setVisibility(View.GONE);
+        incomeSubSix.setVisibility(View.GONE);
+        incomeSubSeven.setVisibility(View.GONE);
+        incomeSubEight.setVisibility(View.GONE);
+        subTitle.setText("工资性收入");
+        subTextOne.setText("工资性收入：");
+        subTextTwo.setVisibility(View.GONE);
+        subOne.setText((listBean.get(0).getSalary().equals("")) ? "￥" + Is : "￥" + listBean.get(0).getSalary());
+    }
+    private void showsituationThree(){
+        incomeSub.setVisibility(View.VISIBLE);
+        incomeSubTwo.setVisibility(View.GONE);
+        incomeSubThree.setVisibility(View.GONE);
+        incomeSubFour.setVisibility(View.GONE);
+        incomeSubFive.setVisibility(View.GONE);
+        incomeSubSix.setVisibility(View.GONE);
+        incomeSubSeven.setVisibility(View.GONE);
+        incomeSubEight.setVisibility(View.GONE);
+        subTitle.setText("生产经营性收入");
+        subTextOne.setText("生产经营性收入：");
+        subTextTwo.setVisibility(View.GONE);
+        subOne.setText((listBean.get(0).getProduction().equals("")) ? "￥" + Is : "￥" + listBean.get(0).getProduction());
+    }
+
+    private void showsituatonFour(){
+        incomeSub.setVisibility(View.VISIBLE);
+        incomeSubTwo.setVisibility(View.GONE);
+        incomeSubThree.setVisibility(View.GONE);
+        incomeSubFour.setVisibility(View.GONE);
+        incomeSubFive.setVisibility(View.GONE);
+        incomeSubSix.setVisibility(View.GONE);
+        incomeSubSeven.setVisibility(View.GONE);
+        incomeSubEight.setVisibility(View.GONE);
+        subTitle.setText("生产经营性支出");
+        subTextOne.setText("生产经营性支出：");
+        subTextTwo.setVisibility(View.GONE);
+        subOne.setText((listBean.get(0).getProductbility().equals("")) ? "￥" + Is : "￥" + listBean.get(0).getProductbility());
+    }
+    private void showsituationFive(){
+        incomeSub.setVisibility(View.VISIBLE);
+        incomeSubTwo.setVisibility(View.VISIBLE);
+        incomeSubThree.setVisibility(View.VISIBLE);
+        incomeSubFour.setVisibility(View.VISIBLE);
+        incomeSubFive.setVisibility(View.VISIBLE);
+        incomeSubSix.setVisibility(View.VISIBLE);
+        incomeSubSeven.setVisibility(View.VISIBLE);
+        incomeSubEight.setVisibility(View.VISIBLE);
+        subTitle.setText("转移性收入子项详情");
+        subTextOne.setText("城低保：");
+        subTextTwo.setText("养老保险金：");
+        subTextThree.setText("生态补偿金：");
+        subTextFour.setText("教育补助：");
+        subTextTwo.setVisibility(View.VISIBLE);
+        subOne.setText((String.valueOf(listBean.get(0).getMzjCdbMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getMzjCdbMoney());
+        subTwo.setText((String.valueOf(listBean.get(0).getYlbxMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getYlbxMoney());
+        subThree.setText((listBean.get(0).getEcological().equals("")) ? "￥" + Is : "￥" + listBean.get(0).getEcological());
+        subFour.setText((String.valueOf(listBean.get(0).getEducationMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getEducationMoney());
+        subFive.setText((String.valueOf(listBean.get(0).getMzjGlbtMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getMzjGlbtMoney());
+        subSix.setText((String.valueOf(listBean.get(0).getMzjWbMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getMzjWbMoney());
+        subSeven.setText((String.valueOf(listBean.get(0).getMzjNdbMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getMzjNdbMoney());
+        subEight.setText((String.valueOf(listBean.get(0).getMzjSjbtMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getMzjSjbtMoney());
+        subNine.setText((String.valueOf(listBean.get(0).getMzjFlybtMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getMzjFlybtMoney());
+        subTen.setText((String.valueOf(listBean.get(0).getWfgzMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getWfgzMoney());
+        subEleven.setText((String.valueOf(listBean.get(0).getSocialAssMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getSocialAssMoney());
+        subTwelve.setText((String.valueOf(listBean.get(0).getLandExpropMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getLandExpropMoney());
+        subThirteen.setText((String.valueOf(listBean.get(0).getAgMachineryMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getAgMachineryMoney());
+        subFourteen.setText((String.valueOf(listBean.get(0).getJsjJsbzMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getJsjJsbzMoney());
+        subFifteen.setText((String.valueOf(listBean.get(0).getComprehensiveMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getComprehensiveMoney());
+        subSixteen.setText((listBean.get(0).getOtherTransfer().equals("")) ? "￥" + Is : "￥" + listBean.get(0).getProductbility());
+    }
+    private void showsituationSeven(){
+        incomeSub.setVisibility(View.VISIBLE);
+        incomeSubTwo.setVisibility(View.VISIBLE);
+        incomeSubThree.setVisibility(View.GONE);
+        incomeSubFour.setVisibility(View.GONE);
+        incomeSubFive.setVisibility(View.GONE);
+        incomeSubSix.setVisibility(View.GONE);
+        incomeSubSeven.setVisibility(View.GONE);
+        incomeSubEight.setVisibility(View.GONE);
+        subTitle.setText("财产性收入");
+        subTextOne.setText("特惠贷分红：");
+        subTextTwo.setText("土地租金：");
+        subTextThree.setText("存款利息：");
+        subTextFour.setText("其它收入：");
+        subTextTwo.setVisibility(View.VISIBLE);
+        subOne.setText((String.valueOf(listBean.get(0).getFpjThdMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getFpjThdMoney());
+        subTwo.setText((String.valueOf(listBean.get(0).getLandRentMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getLandRentMoney());
+        subThree.setText((String.valueOf(listBean.get(0).getInterestDeposit()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getInterestDeposit());
+        subFour.setText((String.valueOf(listBean.get(0).getPropertyOther()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getPropertyOther());
+    }
+    private void showsituationNine(){
+        incomeSub.setVisibility(View.VISIBLE);
+        incomeSubTwo.setVisibility(View.GONE);
+        incomeSubThree.setVisibility(View.GONE);
+        incomeSubFour.setVisibility(View.GONE);
+        incomeSubFive.setVisibility(View.GONE);
+        incomeSubSix.setVisibility(View.GONE);
+        incomeSubSeven.setVisibility(View.GONE);
+        incomeSubEight.setVisibility(View.GONE);
+        subTitle.setText("精准扶贫收入");
+        subTextOne.setText("精准扶贫收入：");
+        subTextTwo.setVisibility(View.GONE);
+        subOne.setText((String.valueOf(listBean.get(0).getPovertyMoney()).equals("")) ? "￥" + Is : "￥" + listBean.get(0).getAverageIncome());
+    }
+
 }

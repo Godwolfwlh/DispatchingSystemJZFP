@@ -13,7 +13,7 @@
         app:layout_widthPercent="100%w">
 
         <TextView
-            android:id="@+id/income_title"
+            android:id="@+id/income_title_sub"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -21,17 +21,6 @@
             android:text="收入情况子项"
             android:textSize="18dp"
             app:layout_marginLeftPercent="3%w" />
-
-        <TextView
-            android:id="@+id/income_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="@string/poor_details_basic_edit"
-            android:textSize="18dp"
-            app:layout_marginRightPercent="3%w" />
 
     </com.zhy.android.percent.support.PercentLinearLayout>
 
