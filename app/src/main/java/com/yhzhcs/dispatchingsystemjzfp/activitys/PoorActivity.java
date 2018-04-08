@@ -110,7 +110,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         titleImgL.setOnClickListener(this);
         titleImgR.setOnClickListener(this);
 
-        PoorOnScerllListenner onScrollListener = new PoorOnScerllListenner(footer, missionId);
+        PoorOnScerllListenner onScrollListener = new PoorOnScerllListenner(footer, missionId, userId);
         onScrollListener.setOnLoadDataListener(this);
         poorList.setOnScrollListener(onScrollListener);
 

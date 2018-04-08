@@ -38,6 +38,8 @@ public class PoorOnScerllListenner implements AbsListView.OnScrollListener {
     //底部加载更多布局
     private View footer;
     private String missionId;
+    private int userId;
+    private int index = 1;
 
     //接口回调的实例
     private OnloadDataListener listener;
@@ -45,9 +47,10 @@ public class PoorOnScerllListenner implements AbsListView.OnScrollListener {
     //数据
     private List<Poorhouses> poorBeanList;
 
-    public PoorOnScerllListenner(View footer, String missionId) {
+    public PoorOnScerllListenner(View footer, String missionId, int userId) {
         this.footer = footer;
         this.missionId = missionId;
+        this.userId = userId;
     }
 
     //设置接口回调的实例
@@ -82,29 +85,31 @@ public class PoorOnScerllListenner implements AbsListView.OnScrollListener {
 
     }
 
-    /**
-     * 开始加载更多新数据，这里每次只更新三条数据
-     */
     private void loadMoreData() {
         isLoading = true;
-        LogUtil.v("missionId","missionId===="+missionId);
+        index++;
+        LogUtil.v("missionId", "missionId====" + missionId);
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
-        params.addBodyParameter("missionId",missionId);
+        params.addBodyParameter("pageNow", index + "");
+        LogUtil.v("hhhhhhhhhh","k=========>>>"+index);
+        params.addBodyParameter("pageSize", "10");
+        params.addBodyParameter("missionId", missionId);
+        params.addBodyParameter("userId", String.valueOf(userId));
         httpUtils.send(HttpMethod.POST, Constant.URL_POOR_LIST, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                LogUtil.v("POOR_HTTP","onSuccess"+responseInfo.result.toString());
+                LogUtil.v("POOR_HTTP", "onSuccess" + responseInfo.result.toString());
                 Gson gson = new Gson();
-                PoorListBean listBean = gson.fromJson(responseInfo.result,PoorListBean.class);
+                PoorListBean listBean = gson.fromJson(responseInfo.result, PoorListBean.class);
                 poorBeanList = listBean.getPoorhouses();
-                LogUtil.v("listBean","listBean==="+listBean.toString());
+                LogUtil.v("listBean", "listBean===" + listBean.toString());
 
             }
 
             @Override
             public void onFailure(HttpException e, String s) {
-                LogUtil.v("POOR_HTTP","onFailure"+s);
+                LogUtil.v("POOR_HTTP", "onFailure" + s);
 
             }
 
@@ -146,7 +151,7 @@ public class PoorOnScerllListenner implements AbsListView.OnScrollListener {
         this.totalItemCount = totalItemCount;
         if (firstVisibleItem >= lastItem) {
 //            spinner.setVisibility(View.VISIBLE);
-        } else{
+        } else {
 //            spinner.setVisibility(View.GONE);
         }
 
