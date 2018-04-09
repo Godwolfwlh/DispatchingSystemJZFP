@@ -30,14 +30,8 @@ import com.yhzhcs.dispatchingsystemjzfp.onscrolls.PoorOnScerllListenner;
 import com.yhzhcs.dispatchingsystemjzfp.utils.CommonShowView;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
-import com.yhzhcs.dispatchingsystemjzfp.utils.ToastUtil;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2018/1/18.
@@ -78,7 +72,8 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_poor);
         sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         missionId = sp.getString("MISSION_ID", "");
-        userId = sp.getInt("USER_ID",0);
+        userId = sp.getInt("USER_ID", 0);
+        LogUtil.v("cheshicheshi", "=========" + userId + "============" + missionId);
         initView();
     }
 
@@ -147,10 +142,10 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         LogUtil.v("missionId", "missionId====" + missionId);
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
-        params.addBodyParameter("pageNow","1");
+        params.addBodyParameter("pageNow", "1");
         params.addBodyParameter("pageSize", "10");
         params.addBodyParameter("missionId", missionId);
-        params.addBodyParameter("userId",String.valueOf(userId));
+        params.addBodyParameter("userId", String.valueOf(userId));
         httpUtils.send(HttpMethod.POST, Constant.URL_POOR_LIST, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -158,7 +153,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
                 Gson gson = new Gson();
                 PoorListBean listBean = gson.fromJson(responseInfo.result, PoorListBean.class);
                 poorListBean = listBean.getPoorhouses();
-                querConditionalPoorBean(poorListBean);
+                showListView(poorListBean);
             }
 
             @Override
@@ -173,10 +168,19 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showListView(List<Poorhouses> data) {
         if (data.size() != 0) {
-            poorListAdapter = new PoorListAdapter(this, data);
-            poorList.setAdapter(poorListAdapter);
-            mShowView.showByType(CommonShowView.TYPE_CONTENT);
-            poorList.setOnItemClickListener(this);
+            if (poorListAdapter == null) {
+                LogUtil.v("hhhhhhhhhhlist","==1==>>>>"+data.toString());
+                poorListAdapter = new PoorListAdapter(this, data);
+                poorList.setAdapter(poorListAdapter);
+                mShowView.showByType(CommonShowView.TYPE_CONTENT);
+                poorList.setOnItemClickListener(this);
+            }else {
+                LogUtil.v("hhhhhhhhhhlist","==2==>>>>"+data.toString());
+                //不为空，则刷新数据
+                poorListBean.addAll(data);
+                //提醒ListView重新更新数据
+                poorListAdapter.notifyDataSetChanged();
+            }
         } else {
             poorListAdapter.clear();
         }
@@ -214,90 +218,90 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         String poorCardNumber = info.getCradNumber();
         bundle.putString("poorHouseId", poorHouseId);
         bundle.putString("poorName", poorName);
-        bundle.putString("poorCardNumber",poorCardNumber);
+        bundle.putString("poorCardNumber", poorCardNumber);
         intent.putExtras(bundle);
         startActivity(intent);
     }
 
-    private void querConditionalPoorBean(List<Poorhouses> pData) {
-        for (int i = 0; i < pData.size() - 1; i++) {
-            Time = pData.get(i).getYear();
-            Poverty = pData.get(i).getPoverty();
-            Map<String, List<Poorhouses>> lp = new HashMap<String, List<Poorhouses>>();//时间查询Map
-            Map<String, List<Poorhouses>> jp = new HashMap<String, List<Poorhouses>>();//计划查询Map
-
-            for (Poorhouses p : pData) {
-                List<Poorhouses> t = lp.get(p.getYear());//时间查询结果
-                List<Poorhouses> j = jp.get(p.getPoverty());//计划查询结果
-                if (t == null) {
-                    t = new ArrayList<Poorhouses>();
-                    t.add(p);
-                    lp.put(String.valueOf(p.getYear()), t);
-                } else if (t != null) {
-                    t.add(p);
-                } else if (j == null) {
-                    j = new ArrayList<Poorhouses>();
-                    j.add(p);
-                    jp.put(p.getPoverty(), j);
-                } else if (j != null) {
-                    j.add(p);
-                }
-            }
-
-            if (querStrTime.equals("全部") && querStrPoverty.equals("全部")) {
-                showListView(pData);
-
-            } else if (querStrTime.equals(Time) && querStrPoverty.equals("全部")) {
-                LogUtil.v("spinner_left", "========时间=======全部==========");
-                for (String keyTime : lp.keySet()) {
-                    keyTime = String.valueOf(Time);
-                    pData = lp.get(keyTime);
-                    showListView(pData);
-                }
-
-            } else if (querStrTime.equals("全部") && querStrPoverty.equals(Poverty)) {
-                LogUtil.v("spinner_left", "========全部=======计划==========");
-                for (String keyPoverty : jp.keySet()) {
-                    keyPoverty = Poverty;
-                    pData = jp.get(keyPoverty);
-                    showListView(pData);
-                }
-
-            } else if (querStrTime.equals(Time) && querStrPoverty.equals(Poverty)) {
-                LogUtil.v("spinner_left", "========时间=======计划==========");
-                for (String keyTime : lp.keySet()) {
-                    keyTime = String.valueOf(Time);
-                    pData = lp.get(keyTime);
-                    querPovertytoTime(pData);
-                }
-            } else {
-                LogUtil.v("spinner_left", "=========占无数据=========");
-                ToastUtil.showInfo(PoorActivity.this, "占无数据");
-                pData = new ArrayList<Poorhouses>();
-                int size = pData.size();
-                showListView(pData);
-            }
-        }
-
-    }
-
-    private void querPovertytoTime(List<Poorhouses> Data) {
-        Map<String, List<Poorhouses>> jp = new HashMap<String, List<Poorhouses>>();//计划查询Map
-        for (Poorhouses p : Data) {
-            List<Poorhouses> j = jp.get(p.getPoverty());//计划查询结果
-            if (j == null) {
-                j = new ArrayList<Poorhouses>();
-                j.add(p);
-                jp.put(p.getPoverty(), j);
-            } else {
-                j.add(p);
-            }
-        }
-        for (String keyPoverty : jp.keySet()) {
-            keyPoverty = Poverty;
-            Data = jp.get(keyPoverty);
-            showListView(Data);
-        }
-    }
+//    private void querConditionalPoorBean(List<Poorhouses> pData) {
+//        for (int i = 0; i < pData.size() - 1; i++) {
+//            Time = pData.get(i).getYear();
+//            Poverty = pData.get(i).getPoverty();
+//            Map<String, List<Poorhouses>> lp = new HashMap<String, List<Poorhouses>>();//时间查询Map
+//            Map<String, List<Poorhouses>> jp = new HashMap<String, List<Poorhouses>>();//计划查询Map
+//
+//            for (Poorhouses p : pData) {
+//                List<Poorhouses> t = lp.get(p.getYear());//时间查询结果
+//                List<Poorhouses> j = jp.get(p.getPoverty());//计划查询结果
+//                if (t == null) {
+//                    t = new ArrayList<Poorhouses>();
+//                    t.add(p);
+//                    lp.put(String.valueOf(p.getYear()), t);
+//                } else if (t != null) {
+//                    t.add(p);
+//                } else if (j == null) {
+//                    j = new ArrayList<Poorhouses>();
+//                    j.add(p);
+//                    jp.put(p.getPoverty(), j);
+//                } else if (j != null) {
+//                    j.add(p);
+//                }
+//            }
+//
+//            if (querStrTime.equals("全部") && querStrPoverty.equals("全部")) {
+//                showListView(pData);
+//
+//            } else if (querStrTime.equals(Time) && querStrPoverty.equals("全部")) {
+//                LogUtil.v("spinner_left", "========时间=======全部==========");
+//                for (String keyTime : lp.keySet()) {
+//                    keyTime = String.valueOf(Time);
+//                    pData = lp.get(keyTime);
+//                    showListView(pData);
+//                }
+//
+//            } else if (querStrTime.equals("全部") && querStrPoverty.equals(Poverty)) {
+//                LogUtil.v("spinner_left", "========全部=======计划==========");
+//                for (String keyPoverty : jp.keySet()) {
+//                    keyPoverty = Poverty;
+//                    pData = jp.get(keyPoverty);
+//                    showListView(pData);
+//                }
+//
+//            } else if (querStrTime.equals(Time) && querStrPoverty.equals(Poverty)) {
+//                LogUtil.v("spinner_left", "========时间=======计划==========");
+//                for (String keyTime : lp.keySet()) {
+//                    keyTime = String.valueOf(Time);
+//                    pData = lp.get(keyTime);
+//                    querPovertytoTime(pData);
+//                }
+//            } else {
+//                LogUtil.v("spinner_left", "=========占无数据=========");
+//                ToastUtil.showInfo(PoorActivity.this, "占无数据");
+//                pData = new ArrayList<Poorhouses>();
+//                int size = pData.size();
+//                showListView(pData);
+//            }
+//        }
+//
+//    }
+//
+//    private void querPovertytoTime(List<Poorhouses> Data) {
+//        Map<String, List<Poorhouses>> jp = new HashMap<String, List<Poorhouses>>();//计划查询Map
+//        for (Poorhouses p : Data) {
+//            List<Poorhouses> j = jp.get(p.getPoverty());//计划查询结果
+//            if (j == null) {
+//                j = new ArrayList<Poorhouses>();
+//                j.add(p);
+//                jp.put(p.getPoverty(), j);
+//            } else {
+//                j.add(p);
+//            }
+//        }
+//        for (String keyPoverty : jp.keySet()) {
+//            keyPoverty = Poverty;
+//            Data = jp.get(keyPoverty);
+//            showListView(Data);
+//        }
+//    }
 
 }

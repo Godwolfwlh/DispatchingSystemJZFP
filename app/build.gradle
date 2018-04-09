@@ -3,14 +3,22 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '27.0.3'
+//    buildToolsVersion '27.0.3'
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
+
     defaultConfig {
         applicationId "com.yhzhcs.dispatchingsystemjzfp"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
+        multiDexEnabled = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "default"
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "umeng"]
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -18,11 +26,46 @@ android {
             }
         }
     }
+
+    //签名配置
+    signingConfigs {
+        release {
+            storeFile file("E:/keys/jzfp_release.jks") //release证书
+            storePassword "jzfp123"                            //签名证书密码
+            keyAlias "jzfp_release_key"                                 //别名
+            keyPassword "jzfp123"                              //别名密码
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            buildConfigField "boolean", "LOG_ON", "false" //不显示Log
+
+            minifyEnabled false                               //开启混淆
+            zipAlignEnabled true                             //开启Zipalign优化
+            shrinkResources false                             //移除无用的resource文件，此项只有在开启混淆时才生效
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release             //使用release证书签名
         }
+    }
+
+    // 自定义输出配置，这里我们加上APK版本号1.0
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "jzfp_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+        }
+    }
+
+    productFlavors {
+        kuan {}
+        xiaomi {}
+        qh360 {}
+        baidu {}
+        wandoujia {}
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
     }
 }
 
@@ -31,8 +74,6 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'com.android.support:appcompat-v7:24.2.1'
-    implementation 'com.android.support:support-v4:24.2.1'
     testImplementation 'junit:junit:4.12'
     //okhttp3依赖包
     implementation 'com.squareup.okhttp3:okhttp:3.6.0'
@@ -58,4 +99,5 @@ dependencies {
     implementation files('libs/umeng_social_net.jar')
     implementation files('libs/umeng_social_shareview.jar')
     implementation files('libs/umeng_social_tool.jar')
+    implementation 'com.umeng.analytics:analytics:latest.integration'
 }

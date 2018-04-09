@@ -246,7 +246,7 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
         subTextOne.setText("工资性收入：");
         subTextTwo.setVisibility(View.GONE);
         subTwo.setVisibility(View.GONE);
-        if (null != listBean || listBean.size() != 0) {
+        if (listBean != null || listBean.size() != 0) {
             subOne.setText((listBean.get(0).getSalary().equals("")) ? "￥" + Is : "￥" + listBean.get(0).getSalary());
         }
     }

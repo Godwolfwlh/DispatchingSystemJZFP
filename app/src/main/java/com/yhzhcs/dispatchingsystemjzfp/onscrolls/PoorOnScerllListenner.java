@@ -48,6 +48,7 @@ public class PoorOnScerllListenner implements AbsListView.OnScrollListener {
     private List<Poorhouses> poorBeanList;
 
     public PoorOnScerllListenner(View footer, String missionId, int userId) {
+
         this.footer = footer;
         this.missionId = missionId;
         this.userId = userId;
@@ -104,7 +105,6 @@ public class PoorOnScerllListenner implements AbsListView.OnScrollListener {
                 PoorListBean listBean = gson.fromJson(responseInfo.result, PoorListBean.class);
                 poorBeanList = listBean.getPoorhouses();
                 LogUtil.v("listBean", "listBean===" + listBean.toString());
-
             }
 
             @Override
@@ -123,7 +123,7 @@ public class PoorOnScerllListenner implements AbsListView.OnScrollListener {
                     public void run() {
                         if (listener != null) {
                             //回调设置ListView的数据
-//                            listener.onLoadData(poorBeanList);
+                            listener.onLoadData(poorBeanList);
                             //加载完成后操作什么
                             loadComplete();
                         }
