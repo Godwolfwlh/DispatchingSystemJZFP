@@ -82,11 +82,6 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         initView();
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//    }
-
     private void initView() {
         titleImgL = (ImageView) findViewById(R.id.title_left);
         titleName = (TextView) findViewById(R.id.title_name);
