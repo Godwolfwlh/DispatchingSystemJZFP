@@ -16,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -42,7 +43,6 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.yhzhcs.dispatchingsystemjzfp.R;
-import com.yhzhcs.dispatchingsystemjzfp.activitys.NewSampleCamera;
 import com.yhzhcs.dispatchingsystemjzfp.activitys.SampleCameraActivity;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Inglists;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorImageBean;
@@ -80,7 +80,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
 
     public final int TYPE_TAKE_PHOTO = 1;//Uri获取类型判断
     public final int CODE_TAKE_PHOTO = 1;//相机RequestCode
-    private static final int CODE_CAMERA_REQUEST = 0xa1;
+    private static final int RESULT_PICK = 201;
     public Uri photoUri;
 
     private ArrayList<Boolean> selectItems; //用于存储已选中项目的位置
@@ -389,11 +389,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                         accessToCameraRights();
                         break;
                     case 1:
-                        Bundle bundle = new Bundle();
-                        Intent intent = new Intent(getActivity(), SampleCameraActivity.class);
-                        bundle.putString("entityId", entityId);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+                        accessToAlbumRights();
                         break;
                 }
             }
@@ -425,6 +421,15 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
         }
     }
 
+    private void accessToAlbumRights(){
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, RESULT_PICK);
+
+        } else {
+            autoObtainAlbumPermission();
+        }
+    }
+
     /**
      * @param requestCode
      * @param permissions  请求的权限
@@ -444,6 +449,14 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                 Toast.makeText(getActivity(), " no Permission", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void autoObtainAlbumPermission(){
+        Bundle bundle = new Bundle();
+        Intent intent = new Intent(getActivity(), SampleCameraActivity.class);
+        bundle.putString("entityId", entityId);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     /**

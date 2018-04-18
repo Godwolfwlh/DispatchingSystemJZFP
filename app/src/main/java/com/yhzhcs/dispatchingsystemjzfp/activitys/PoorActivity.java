@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -63,8 +62,9 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
 
     private String querStrTime;
     private String querStrPoverty;
-    private String Time;
-    private String Poverty;
+
+    private HttpUtils httpUtils;
+    private RequestParams params;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +74,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         missionId = sp.getString("MISSION_ID", "");
         userId = sp.getInt("USER_ID", 0);
         LogUtil.v("cheshicheshi", "=========" + userId + "============" + missionId);
+        getData();
         initView();
     }
 
@@ -111,7 +112,6 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
                 tv.setGravity(Gravity.CENTER);
                 querStrTime = parent.getItemAtPosition(position).toString();
                 LogUtil.v("spinner_left", "选择的元素是：" + "\n时间：" + querStrTime + "\n计划：" + querStrPoverty);
-                getData();
             }
 
             @Override
@@ -127,7 +127,6 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
                 tv.setGravity(Gravity.CENTER);
                 querStrPoverty = parent.getItemAtPosition(position).toString();
                 LogUtil.v("spinner_left", "选择的元素是：" + "\n时间：" + querStrTime + "\n计划：" + querStrPoverty);
-                getData();
             }
 
             @Override
@@ -139,14 +138,19 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getData() {
+
         LogUtil.v("missionId", "missionId====" + missionId);
-        HttpUtils httpUtils = new HttpUtils();
-        RequestParams params = new RequestParams();
+        httpUtils = new HttpUtils();
+        params = new RequestParams();
         params.addBodyParameter("pageNow", "1");
         params.addBodyParameter("pageSize", "10");
         params.addBodyParameter("missionId", missionId);
         params.addBodyParameter("userId", String.valueOf(userId));
-        httpUtils.send(HttpMethod.POST, Constant.URL_POOR_LIST, params, new RequestCallBack<String>() {
+        httpUtilsConnection(Constant.URL_POOR_LIST, params, HttpMethod.POST);
+    }
+
+    private void httpUtilsConnection(String url, RequestParams params, HttpMethod method) {
+        httpUtils.send(method, url, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 LogUtil.v("POOR_HTTP", "onSuccess" + responseInfo.result.toString());
