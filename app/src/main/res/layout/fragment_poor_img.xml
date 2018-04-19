@@ -34,6 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1" />
 
         <TextView
@@ -51,27 +52,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:src="@mipmap/line_gray_1"
-            android:visibility="gone"
             app:layout_marginRightPercent="3%w" />
 
         <TextView
-            android:id="@+id/img_title_select"
+            android:id="@+id/img_title_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="全选"
+            android:text="删除"
             android:textSize="10pt"
-            android:visibility="gone"
-            app:layout_marginRightPercent="3%w" />
-
-        <TextView
-            android:id="@+id/img_title_eliminate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="清除"
-            android:textSize="10pt"
-            android:visibility="gone"
             app:layout_marginRightPercent="3%w" />
 
     </com.zhy.android.percent.support.PercentLinearLayout>
@@ -90,16 +79,5 @@
         app:layout_marginRightPercent="5%w">
 
     </GridView>
-
-    <Button
-        android:id="@+id/btn_del"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/delete_gules_bg"
-        android:gravity="center"
-        android:text="删除"
-        android:visibility="gone"
-        app:layout_marginBottomPercent="3%w"/>
 
 </com.zhy.android.percent.support.PercentLinearLayout>

@@ -9,22 +9,23 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/image_grid_item"
             android:layout_width="fill_parent"
             android:layout_height="120dp"
             android:layout_gravity="center"
             android:scaleType="fitXY"
-            android:src="@mipmap/img_new"
-            android:id="@+id/image_grid_item"
-            />
-        <CheckBox
+            android:src="@mipmap/img_new" />
+
+        <ImageView
+            android:id="@+id/delete_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/check_box"
-            android:visibility="gone"
+            android:src="@mipmap/shanchu"
+            android:layout_alignEnd="@+id/image_grid_item"
             android:layout_alignParentTop="true"
-            android:descendantFocusability="blocksDescendants"
             android:layout_alignRight="@+id/image_grid_item"
-            android:layout_alignEnd="@+id/image_grid_item" />
+            android:descendantFocusability="blocksDescendants"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
