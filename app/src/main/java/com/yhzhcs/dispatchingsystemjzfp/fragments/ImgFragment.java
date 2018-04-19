@@ -240,7 +240,6 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                         annentId = listBean.get(position).getAnnentid();
                         annexPathDown = listBean.get(position).getAnnexPathDown();
                         deletePhoto(position, annentId, annexPathDown);
-//                        adapter.notifyDataSetChanged();
 
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -265,6 +264,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                 LogUtil.v("DELETEPHOTOHTTP", "onSuccess：" + responseInfo.result);
                 ToastUtil.showInfo(getActivity(), "删除成功！");
                 listBean.remove(position);
+                adapter.setData(listBean);
                 adapter.notifyDataSetChanged();
             }
 
