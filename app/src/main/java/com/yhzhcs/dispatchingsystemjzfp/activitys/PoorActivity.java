@@ -74,7 +74,6 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         missionId = sp.getString("MISSION_ID", "");
         userId = sp.getInt("USER_ID", 0);
         LogUtil.v("cheshicheshi", "=========" + userId + "============" + missionId);
-        getData();
         initView();
     }
 
@@ -111,7 +110,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
                 TextView tv = (TextView) view;
                 tv.setGravity(Gravity.CENTER);
                 querStrTime = parent.getItemAtPosition(position).toString();
-                LogUtil.v("spinner_left", "选择的元素是：" + "\n时间：" + querStrTime + "\n计划：" + querStrPoverty);
+                getData(querStrTime,querStrPoverty);
             }
 
             @Override
@@ -127,6 +126,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
                 tv.setGravity(Gravity.CENTER);
                 querStrPoverty = parent.getItemAtPosition(position).toString();
                 LogUtil.v("spinner_left", "选择的元素是：" + "\n时间：" + querStrTime + "\n计划：" + querStrPoverty);
+                getData(querStrTime,querStrPoverty);
             }
 
             @Override
@@ -134,10 +134,9 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
     }
 
-    private void getData() {
+    private void getData(String selectPoverty,String selectYear) {
 
         LogUtil.v("missionId", "missionId====" + missionId);
         httpUtils = new HttpUtils();
@@ -146,6 +145,8 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         params.addBodyParameter("pageSize", "10");
         params.addBodyParameter("missionId", missionId);
         params.addBodyParameter("userId", String.valueOf(userId));
+        params.addBodyParameter("selectPoverty",selectPoverty);
+        params.addBodyParameter("selectYear",selectYear);
         httpUtilsConnection(Constant.URL_POOR_LIST, params, HttpMethod.POST);
     }
 
@@ -153,7 +154,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         httpUtils.send(method, url, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                LogUtil.v("POOR_HTTP", "onSuccess" + responseInfo.result.toString());
+                LogUtil.logJson("POOR_HTTP", "onSuccess" + responseInfo.result.toString());
                 Gson gson = new Gson();
                 PoorListBean listBean = gson.fromJson(responseInfo.result, PoorListBean.class);
                 poorListBean = listBean.getPoorhouses();

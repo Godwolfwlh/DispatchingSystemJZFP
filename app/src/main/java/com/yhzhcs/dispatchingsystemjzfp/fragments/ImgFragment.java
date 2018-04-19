@@ -189,7 +189,6 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
         Upload.setOnClickListener(this);
         butDeleta.setOnClickListener(this);
         gridView.setOnItemLongClickListener(this);
-        gridView.setOnItemClickListener(this);
     }
 
     @Override
@@ -215,6 +214,12 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
     //是否在多选状态
     private void isMultiselect(boolean isShowDelete) {
         butDeleta.setText(isShowDelete ? "取消" : "删除");
+        if (isShowDelete){
+            gridView.setOnItemClickListener(this);
+            ToastUtil.showInfo(getActivity(),"请选择需要删除的图片！");
+        }else {
+            ToastUtil.showInfo(getActivity(),"退出删除图片模式！");
+        }
     }
 
     @Override
