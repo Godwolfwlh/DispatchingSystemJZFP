@@ -283,6 +283,7 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
             @Override
             public void onClick(View view) {
                 serImage();
+                finish();
             }
         });
     }
@@ -326,18 +327,18 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
                 @Override
                 public void onSuccess(ResponseInfo<String> responseInfo) {
                     LogUtil.v("SAMPLE_CAMERA_HTTP", "onSuccess：" + responseInfo.result);
-                    if (!"".equals(responseInfo.result) && !"error".equals(responseInfo.result)){
-                        ToastUtil.showInfo(SampleCameraActivity.this, "上传成功！");
-                    }else{
-                        ToastUtil.showInfo(SampleCameraActivity.this, "失败！");
-                    }
+//                    if (!"".equals(responseInfo.result) && !"error".equals(responseInfo.result)){
+//                        ToastUtil.showInfo(SampleCameraActivity.this, "上传成功！");
+//                    }else{
+//                        ToastUtil.showInfo(SampleCameraActivity.this, "失败！");
+//                    }
 
                 }
 
                 @Override
                 public void onFailure(HttpException e, String s) {
                     LogUtil.v("SAMPLE_CAMERA_HTTP", "onFailure：" + s);
-                    ToastUtil.showInfo(SampleCameraActivity.this, "上传失败！");
+//                    ToastUtil.showInfo(SampleCameraActivity.this, "上传失败！");
                 }
             });
         }

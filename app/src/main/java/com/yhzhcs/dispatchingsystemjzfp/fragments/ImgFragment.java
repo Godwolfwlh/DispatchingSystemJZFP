@@ -61,7 +61,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by Administrator on 2018/1/24.
  */
 
-public class ImgFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemLongClickListener {
+public class ImgFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener {
 
     private View v;
 
@@ -189,11 +189,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
         Upload.setOnClickListener(this);
         butDeleta.setOnClickListener(this);
         gridView.setOnItemLongClickListener(this);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+        gridView.setOnItemClickListener(this);
     }
 
     @Override
@@ -231,6 +227,53 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
         isMultiselect(isShowDelete);
         adapter.setIsState(isShowDelete);
         return true;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
+        LogUtil.v("00000111", "======================");
+        AlertDialog.Builder deleteDialog = new AlertDialog.Builder(getActivity());
+        deleteDialog.setMessage("你确定要删除这张图片吗？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        annentId = listBean.get(position).getAnnentid();
+                        annexPathDown = listBean.get(position).getAnnexPathDown();
+                        deletePhoto(position, annentId, annexPathDown);
+//                        adapter.notifyDataSetChanged();
+
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        deleteDialog.show();
+
+    }
+
+    //删除服务器文件
+    private void deletePhoto(final int position, String id, String path) {
+        HttpUtils httpUtils = new HttpUtils();
+        RequestParams params = new RequestParams();
+        params.addBodyParameter("annentId", id);
+        params.addBodyParameter("annexPathDown", path);
+        httpUtils.send(HttpMethod.POST, Constant.URL_DELETE_PHOTO, params, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                LogUtil.v("DELETEPHOTOHTTP", "onSuccess：" + responseInfo.result);
+                ToastUtil.showInfo(getActivity(), "删除成功！");
+                listBean.remove(position);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+                LogUtil.v("DELETEPHOTOHTTP", "onFailure：" + s);
+                ToastUtil.showInfo(getActivity(), "删除失败！");
+            }
+        });
     }
 
     private void showListDialog() {
@@ -490,31 +533,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
             bitmapUtils.display(viewHolder.image, inglists.getAnnexPath());
 
             viewHolder.delete.setVisibility(isState ? View.VISIBLE : View.GONE);
-
             return convertView;
-        }
-
-        //删除服务器文件
-        private void deletePhoto(List<Inglists> data) {
-            HttpUtils httpUtils = new HttpUtils();
-            RequestParams params = new RequestParams();
-            for (int i = 0; i < data.size(); i++) {
-                annentId = listBean.get(i).getAnnentid();
-                annexPathDown = listBean.get(i).getAnnexPathDown();
-                params.addBodyParameter("annentId", annentId);
-                params.addBodyParameter("annexPathDown", annexPathDown);
-            }
-            httpUtils.send(HttpMethod.POST, Constant.URL_DELETE_PHOTO, params, new RequestCallBack<String>() {
-                @Override
-                public void onSuccess(ResponseInfo<String> responseInfo) {
-                    LogUtil.v("DELETEPHOTOHTTP", "onSuccess：" + responseInfo.result);
-                }
-
-                @Override
-                public void onFailure(HttpException e, String s) {
-                    LogUtil.v("DELETEPHOTOHTTP", "onFailure：" + s);
-                }
-            });
         }
 
         class ViewHolder {
