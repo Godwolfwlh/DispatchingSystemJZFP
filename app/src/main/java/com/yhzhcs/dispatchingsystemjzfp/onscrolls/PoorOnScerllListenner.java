@@ -39,6 +39,8 @@ public class PoorOnScerllListenner implements AbsListView.OnScrollListener {
     private View footer;
     private String missionId;
     private int userId;
+    private String querStrYear;
+    private String querStrPoverty;
     private int index = 1;
 
     //接口回调的实例
@@ -47,11 +49,12 @@ public class PoorOnScerllListenner implements AbsListView.OnScrollListener {
     //数据
     private List<Poorhouses> poorBeanList;
 
-    public PoorOnScerllListenner(View footer, String missionId, int userId) {
-
+    public PoorOnScerllListenner(View footer, String missionId, int userId, String querStrYear, String querStrPoverty) {
         this.footer = footer;
         this.missionId = missionId;
         this.userId = userId;
+        this.querStrYear = querStrYear;
+        this.querStrPoverty = querStrPoverty;
     }
 
     //设置接口回调的实例
@@ -97,6 +100,8 @@ public class PoorOnScerllListenner implements AbsListView.OnScrollListener {
         params.addBodyParameter("pageSize", "10");
         params.addBodyParameter("missionId", missionId);
         params.addBodyParameter("userId", String.valueOf(userId));
+        params.addBodyParameter("selectPoverty",querStrPoverty);
+        params.addBodyParameter("selectYear",querStrYear);
         httpUtils.send(HttpMethod.POST, Constant.URL_POOR_LIST, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {

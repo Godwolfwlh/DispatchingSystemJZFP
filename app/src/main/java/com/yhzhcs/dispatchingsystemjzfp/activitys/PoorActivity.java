@@ -58,7 +58,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
 
     private CommonShowView mShowView;
 
-    private String querStrTime;
+    private String querStrYear;
     private String querStrPoverty;
 
     private HttpUtils httpUtils;
@@ -97,17 +97,12 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         titleImgL.setOnClickListener(this);
         titleImgR.setOnClickListener(this);
 
-        PoorOnScerllListenner onScrollListener = new PoorOnScerllListenner(footer, missionId, userId);
-        onScrollListener.setOnLoadDataListener(this);
-        poorList.setOnScrollListener(onScrollListener);
-
         poorLSpinner.setOnItemSelectedListener(this);
         poorRSpinner.setOnItemSelectedListener(this);
     }
 
     private void getData() {
 
-        LogUtil.v("querStrselect", "querStrTime====" + querStrTime+"=========querStrPoverty====" + querStrPoverty);
         httpUtils = new HttpUtils();
         params = new RequestParams();
         params.addBodyParameter("pageNow", "1");
@@ -115,8 +110,11 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         params.addBodyParameter("missionId", missionId);
         params.addBodyParameter("userId", String.valueOf(userId));
         params.addBodyParameter("selectPoverty",querStrPoverty);
-        params.addBodyParameter("selectYear",querStrTime);
+        params.addBodyParameter("selectYear",querStrYear);
         httpUtilsConnection(Constant.URL_POOR_LIST, params, HttpMethod.POST);
+        PoorOnScerllListenner onScrollListener = new PoorOnScerllListenner(footer, missionId, userId, querStrYear, querStrPoverty);
+        onScrollListener.setOnLoadDataListener(this);
+        poorList.setOnScrollListener(onScrollListener);
     }
 
     private void httpUtilsConnection(String url, RequestParams params, HttpMethod method) {
@@ -202,8 +200,8 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()){
             case R.id.spinner_left:
-                querStrTime = (String) parent.getSelectedItem();
-                LogUtil.v("querStr", "querStrTime====" + querStrTime);
+                querStrYear = (String) parent.getSelectedItem();
+                LogUtil.v("querStr", "querStrTime====" + querStrYear);
                 getData();
                 break;
             case R.id.spinner_right:
