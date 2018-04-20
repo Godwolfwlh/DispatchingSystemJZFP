@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -36,17 +35,16 @@ import java.util.List;
  * Created by Administrator on 2018/1/18.
  */
 
-public class PoorActivity extends AppCompatActivity implements View.OnClickListener, PoorOnScerllListenner.OnloadDataListener, AdapterView.OnItemClickListener {
+public class PoorActivity extends AppCompatActivity implements View.OnClickListener, PoorOnScerllListenner.OnloadDataListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
     private ImageView titleImgL;
     private TextView titleName;
     private ImageView titleImgR;
 
     private ListView poorList;
-    private Spinner poorLSpinner;
+    public Spinner poorLSpinner;
     private Spinner poorRSpinner;
 
-    private LinearLayout spinner;
     private List<Poorhouses> poorListBean;
 
     private PoorListAdapter poorListAdapter;
@@ -81,7 +79,6 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         titleImgL = (ImageView) findViewById(R.id.title_left);
         titleName = (TextView) findViewById(R.id.title_name);
         titleImgR = (ImageView) findViewById(R.id.title_right);
-        spinner = (LinearLayout) findViewById(R.id.spinner);
         poorLSpinner = (Spinner) findViewById(R.id.spinner_left);
         poorRSpinner = (Spinner) findViewById(R.id.spinner_right);
 
@@ -104,49 +101,21 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         onScrollListener.setOnLoadDataListener(this);
         poorList.setOnScrollListener(onScrollListener);
 
-        poorLSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                TextView tv = (TextView) view;
-                tv.setGravity(Gravity.CENTER);
-                querStrTime = parent.getItemAtPosition(position).toString();
-                getData(querStrTime,querStrPoverty);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        poorRSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                TextView tv = (TextView) view;
-                tv.setGravity(Gravity.CENTER);
-                querStrPoverty = parent.getItemAtPosition(position).toString();
-                LogUtil.v("spinner_left", "选择的元素是：" + "\n时间：" + querStrTime + "\n计划：" + querStrPoverty);
-                getData(querStrTime,querStrPoverty);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        poorLSpinner.setOnItemSelectedListener(this);
+        poorRSpinner.setOnItemSelectedListener(this);
     }
 
-    private void getData(String selectPoverty,String selectYear) {
+    private void getData() {
 
-        LogUtil.v("missionId", "missionId====" + missionId);
+        LogUtil.v("querStrselect", "querStrTime====" + querStrTime+"=========querStrPoverty====" + querStrPoverty);
         httpUtils = new HttpUtils();
         params = new RequestParams();
         params.addBodyParameter("pageNow", "1");
         params.addBodyParameter("pageSize", "10");
         params.addBodyParameter("missionId", missionId);
         params.addBodyParameter("userId", String.valueOf(userId));
-        params.addBodyParameter("selectPoverty",selectPoverty);
-        params.addBodyParameter("selectYear",selectYear);
+        params.addBodyParameter("selectPoverty",querStrPoverty);
+        params.addBodyParameter("selectYear",querStrTime);
         httpUtilsConnection(Constant.URL_POOR_LIST, params, HttpMethod.POST);
     }
 
@@ -183,6 +152,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
                 LogUtil.v("hhhhhhhhhhlist","==2==>>>>"+data.toString());
                 //不为空，则刷新数据
                 poorListBean.addAll(data);
+                poorListAdapter.setData(poorListBean);
                 //提醒ListView重新更新数据
                 poorListAdapter.notifyDataSetChanged();
             }
@@ -226,6 +196,27 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         bundle.putString("poorCardNumber", poorCardNumber);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()){
+            case R.id.spinner_left:
+                querStrTime = (String) parent.getSelectedItem();
+                LogUtil.v("querStr", "querStrTime====" + querStrTime);
+                getData();
+                break;
+            case R.id.spinner_right:
+                querStrPoverty = (String) parent.getSelectedItem();
+                LogUtil.v("querStr", "querStrPoverty====" + querStrPoverty);
+                getData();
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
 //    private void querConditionalPoorBean(List<Poorhouses> pData) {

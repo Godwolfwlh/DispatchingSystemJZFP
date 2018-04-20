@@ -43,6 +43,11 @@ public class PoorListAdapter extends BaseAdapter {
         this.listPoor = listPoor;
         inflater = LayoutInflater.from(context);
     }
+
+    public void setData(List<Poorhouses> listPoor) {
+        this.listPoor = listPoor;
+    }
+
     public void clear() {
         listPoor.clear();
         notifyDataSetChanged();
