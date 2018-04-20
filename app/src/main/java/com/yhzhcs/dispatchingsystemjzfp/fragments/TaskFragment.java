@@ -56,6 +56,7 @@ public class TaskFragment extends Fragment implements TaskOnScerllListener.Onloa
 
     private SharedPreferences sp;
     private String missionId;
+    private int userId;
 
     private CommonShowView mShowView;
 
@@ -70,6 +71,7 @@ public class TaskFragment extends Fragment implements TaskOnScerllListener.Onloa
         v = inflater.inflate(R.layout.task_fragment,null);
         sp = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         missionId = sp.getString("MISSION_ID", "");
+        userId = sp.getInt("USER_ID", 0);
         getData();
         inView();
         return v;
@@ -103,15 +105,16 @@ public class TaskFragment extends Fragment implements TaskOnScerllListener.Onloa
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
         params.addBodyParameter("missionId",missionId);
+        params.addBodyParameter("userId", String.valueOf(userId));
         httpUtils.send(HttpMethod.POST, Constant.URL_TASK, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 LogUtil.v("TASK_HTTP","onSuccess"+responseInfo.result.toString());
                 String body = responseInfo.result;
                 Gson gson = new Gson();
-//                TaskBeans taskBeans = gson.fromJson(body,TaskBeans.class);
-//                taskBeanList = taskBeans.getTaskLists();
-//                showListView(taskBeanList);
+                TaskBeans taskBeans = gson.fromJson(body,TaskBeans.class);
+                taskBeanList = taskBeans.getTaskLists();
+                showListView(taskBeanList);
             }
 
             @Override
