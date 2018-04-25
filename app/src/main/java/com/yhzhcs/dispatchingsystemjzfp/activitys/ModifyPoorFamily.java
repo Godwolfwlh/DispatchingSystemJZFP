@@ -19,6 +19,7 @@ import com.yhzhcs.dispatchingsystemjzfp.R;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Poorlist;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+import com.zhy.android.percent.support.PercentLinearLayout;
 
 /**
  * Created by Administrator on 2018/3/9 0009.
@@ -32,8 +33,11 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
 
     private Poorlist poorlist;
 
-    private EditText editName,editSex,editAge,editWithNelation,editHealth;
-    private String strName,strSex,strAge,strWithNelation,strHealth;
+    private EditText editName,editSex,editWithNelation,editHealth;
+//    private EditText editAge;
+    private String strName,strSex,strWithNelation,strHealth;
+//    private String strAge;
+    private PercentLinearLayout withPercentLinear;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,22 +63,28 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
 
         editName = (EditText) findViewById(R.id.mod_poor_family_name);
         editSex = (EditText) findViewById(R.id.mod_poor_family_sex);
-        editAge = (EditText) findViewById(R.id.mod_poor_family_age);
+//        editAge = (EditText) findViewById(R.id.mod_poor_family_age);
         editWithNelation = (EditText) findViewById(R.id.mod_poor_family_withnelation);
         editHealth = (EditText) findViewById(R.id.mod_poor_family_health);
+        withPercentLinear = (PercentLinearLayout) findViewById(R.id.mod_poor_family_withnelation_linear);
 
 
         editName.setText(poorlist.getName());
         editSex.setText(poorlist.getSex());
-        editAge.setText(poorlist.getAge()+"");
-        editWithNelation.setVisibility(View.GONE);
+//        editAge.setText(poorlist.getAge()+"");
         editHealth.setText(poorlist.getHealth());
+        if (poorlist.getWithNelation().equals("户主")){
+            withPercentLinear.setVisibility(View.GONE);
+        }else {
+            withPercentLinear.setVisibility(View.VISIBLE);
+            editWithNelation.setText(poorlist.getWithNelation());
+        }
     }
 
     private void updateFamily(){
         strName = editName.getText().toString().trim();
         strSex = editSex.getText().toString().trim();
-        strAge = editAge.getText().toString().trim();
+//        strAge = editAge.getText().toString().trim();
         strWithNelation = poorlist.getWithNelation();
         strHealth = editHealth.getText().toString().trim();
 
@@ -83,7 +93,7 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
         params.addBodyParameter("cradNumber",poorlist.getCradNumber());
         params.addBodyParameter("name",strName);
         params.addBodyParameter("sex",strSex);
-        params.addBodyParameter("age",strAge);
+//        params.addBodyParameter("age",strAge);
         params.addBodyParameter("withNelation",strWithNelation);
         params.addBodyParameter("health",strHealth);
         httpUtils.send(HttpMethod.POST, Constant.URL_MODIFY_FAMILY, params, new RequestCallBack<String>() {
