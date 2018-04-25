@@ -26,14 +26,12 @@ import com.yhzhcs.dispatchingsystemjzfp.R;
 import com.yhzhcs.dispatchingsystemjzfp.adapters.PrimaryProductsAdapter;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Datas;
 import com.yhzhcs.dispatchingsystemjzfp.bean.ProBean;
-import com.yhzhcs.dispatchingsystemjzfp.bean.Zclist;
 import com.yhzhcs.dispatchingsystemjzfp.onscrolls.ProOnScerllListener;
 import com.yhzhcs.dispatchingsystemjzfp.utils.CommonShowView;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -87,7 +85,7 @@ public class PrimaryProductsActivity extends AppCompatActivity implements View.O
         httpUtils.send(HttpMethod.POST, Constant.URL_PRIMARY_PRODUCTS, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                LogUtil.v("PROHTTPS", "onSuccess" + responseInfo.result.toString());
+                LogUtil.logJson("PROHTTPS", "onSuccess" + responseInfo.result.toString());
                 String body = responseInfo.result;
                 Gson gson = new Gson();
                 ProBean proBean = gson.fromJson(body, ProBean.class);
