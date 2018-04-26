@@ -51,6 +51,7 @@ public class FamilyFragment extends Fragment implements View.OnClickListener,Ada
     private boolean isPrepared = false;
 
     private boolean isGetData = false;
+    private boolean isEditingMode = false;
 
     @Nullable
     @Override
@@ -62,6 +63,7 @@ public class FamilyFragment extends Fragment implements View.OnClickListener,Ada
         familyListView = (ListView) v.findViewById(R.id.fragment_poor_family_list);
         headEdit = (TextView) v.findViewById(R.id.poor_head_edit);
         headEdit.setOnClickListener(this);
+        familyListView.setOnItemClickListener(this);
         return v;
     }
 
@@ -141,20 +143,31 @@ public class FamilyFragment extends Fragment implements View.OnClickListener,Ada
         });
     }
 
+    //是否在多选状态
+    private void isMultiselect(boolean isEditingMode) {
+        headEdit.setText(isEditingMode ? "请选择要编辑的成员" : "编辑");
+    }
+
     @Override
     public void onClick(View view) {
-        ToastUtil.showInfo(getActivity(),"请选择需要编辑的家庭成员");
-        familyListView.setOnItemClickListener(this);
+        if (isEditingMode) {
+            isEditingMode = false;
+        } else {
+            isEditingMode = true;
+        }
+        isMultiselect(isEditingMode);
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Poorlist poorlist = poorlists.get(i);
-        Intent intent = new Intent(getActivity(), ModifyPoorFamily.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("POOR_LIST",poorlist);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        if (isEditingMode == true){
+            Poorlist poorlist = poorlists.get(i);
+            Intent intent = new Intent(getActivity(), ModifyPoorFamily.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("POOR_LIST",poorlist);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
     }
 
 }
