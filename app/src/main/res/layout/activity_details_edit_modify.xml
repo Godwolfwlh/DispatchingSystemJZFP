@@ -1,0 +1,1210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWil"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="收入情况"
+            android:textSize="12pt" />
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="年收入"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_two"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="纯收入"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_six"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="工资性收入"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_one"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="转移性收入"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="财产性收入"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_seven"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="人均纯收入"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_eight"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="精准扶贫收入"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_nine"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="生产经营性收入"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_three"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="生产经营性支出"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_four"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWil"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="工资性收入子项详情"
+            android:textSize="12pt" />
+
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="工资性收入"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_one_inco"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWil"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="生产经营性收入子项详情"
+            android:textSize="12pt" />
+
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="生产经营性收入"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_three_inco"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorWil"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:text="转移性收入子项详情"
+            android:textSize="12pt" />
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="城低保"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_one"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="养老保险金"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_two"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="生态补偿金"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_three"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="教育补助"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_four"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="高龄补助"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_five"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="五保补助"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_six"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="农低保"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_seven"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="散居孤儿"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_eight"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="福利院"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_nine"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="危房改造"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_ten"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="社会救济"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_eleven"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="土地征收"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_twelve"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="农机具补助"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_thirteen"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="计划生育金"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_fourteen"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="综合直补"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_fifteen"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="其他"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_five_inco_sixteen"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorWil"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:text="财产性收入子项详情"
+            android:textSize="12pt" />
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="特惠贷分红"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_seven_inco_one"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="土地租金"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_seven_inco_two"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="存款利息"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_seven_inco_three"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="其它收入"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_seven_inco_four"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorWil"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:text="精准扶贫收入子项详情"
+            android:textSize="12pt" />
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/colorWil"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="8dp"
+                android:text="精准扶贫收入"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/bg_line" />
+
+            <EditText
+                android:id="@+id/modify_poor_details_nine_inco_one"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:textColor="@color/sliding_left_normal"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="10pt" />
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

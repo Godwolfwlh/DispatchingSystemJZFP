@@ -1,6 +1,8 @@
 package com.yhzhcs.dispatchingsystemjzfp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.yhzhcs.dispatchingsystemjzfp.R;
+import com.yhzhcs.dispatchingsystemjzfp.activitys.ModifyDetailsEdit;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Personalincome;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorIncomeBean;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
@@ -41,8 +44,11 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
     private TextView situationOne, situationTwo, situationThree, situationFour, situationFive, situationSix, situationSeven, situationEight, situationNine;
     private TextView subTitle, subOne, subTwo, subThree, subFour, subFive, subSix, subSeven, subEight, subNine, subTen, subEleven, subTwelve, subThirteen, subFourteen, subFifteen, subSixteen;
     private TextView subTextOne, subTextTwo, subTextThree, subTextFour;
+    private TextView detailsEdit;
     private PercentLinearLayout incomeSub;
-    private PercentLinearLayout incomeSubOne, incomeSubTwo, incomeSubThree, incomeSubFour, incomeSubFive, incomeSubSix, incomeSubSeven, incomeSubEight;
+    private PercentLinearLayout incomeSubTwo, incomeSubThree, incomeSubFour, incomeSubFive, incomeSubSix, incomeSubSeven, incomeSubEight;
+
+    private Bundle bundle;
 
     /**
      * Fragment当前状态是否可见
@@ -131,6 +137,9 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
                 listBean = poorIncomeBean.getPersonalIncome();
                 LogUtil.v("Income_listBean", "listBean===>>>" + listBean);
                 intView(listBean);
+
+                bundle = new Bundle();
+                bundle.putParcelableArrayList("POOR_INCOME_BUNDLE", (ArrayList<? extends Parcelable>) listBean);
             }
 
             @Override
@@ -143,9 +152,12 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
     private void intView(List<Personalincome> personalincomes) {
         listBean = new ArrayList<>();
         listBean = personalincomes;
+
+        detailsEdit = (TextView) v.findViewById(R.id.poor_details_edit);
+        detailsEdit.setOnClickListener(this);
+
         incomeSub = (PercentLinearLayout) v.findViewById(R.id.income_sub);
         incomeSub.setVisibility(View.GONE);
-        incomeSubOne = (PercentLinearLayout) v.findViewById(R.id.income_tr_one);
         incomeSubTwo = (PercentLinearLayout) v.findViewById(R.id.income_tr_two);
         incomeSubThree = (PercentLinearLayout) v.findViewById(R.id.income_tr_three);
         incomeSubFour = (PercentLinearLayout) v.findViewById(R.id.income_tr_four);
@@ -212,6 +224,15 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.poor_details_edit:
+                Intent intent = new Intent(getActivity(), ModifyDetailsEdit.class);
+                if (bundle == null) {
+                    ToastUtil.showInfo(getActivity(), "您尚未登入，或者网络异常！");
+                } else {
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+                break;
             case R.id.situation_td_one_ok_i:
                 showsituationOne();
                 break;

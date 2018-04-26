@@ -90,7 +90,6 @@
                 android:id="@+id/situation_td_one_ok_i"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="4dp"
                 android:gravity="center_vertical"

@@ -1,6 +1,7 @@
 package com.yhzhcs.dispatchingsystemjzfp.bean;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Auto-generated: 2018-02-08 11:47:22
@@ -8,7 +9,7 @@ import java.io.Serializable;
  * @author aTool.org (i@aTool.org)
  * @website http://www.atool.org/json2javabean.php
  */
-public class Personalincome implements Serializable {
+public class Personalincome implements Parcelable {
 
     private int agMachineryMoney;
     private int agricultureMoney;
@@ -54,6 +55,65 @@ public class Personalincome implements Serializable {
     private String year;
     private String yearIncome;
     private int ylbxMoney;
+
+    protected Personalincome(Parcel in) {
+        agMachineryMoney = in.readInt();
+        agricultureMoney = in.readInt();
+        animalMoney = in.readInt();
+        architectureMoney = in.readInt();
+        averageIncome = in.readString();
+        cardNumber = in.readString();
+        comprehensiveMoney = in.readInt();
+        ecological = in.readString();
+        educationMoney = in.readInt();
+        fisheriesMoney = in.readInt();
+        forestryMoney = in.readInt();
+        fpjThdMoney = in.readInt();
+        id = in.readString();
+        interestDeposit = in.readInt();
+        jsjJsbzMoney = in.readInt();
+        landExpropMoney = in.readInt();
+        landRentMoney = in.readInt();
+        lowGold = in.readString();
+        mzjCdbMoney = in.readInt();
+        mzjFlybtMoney = in.readInt();
+        mzjGlbtMoney = in.readInt();
+        mzjNdbMoney = in.readInt();
+        mzjSjbtMoney = in.readInt();
+        mzjWbMoney = in.readInt();
+        netIncome = in.readString();
+        otherTransfer = in.readString();
+        poorHouseId = in.readString();
+        povertyCondolence = in.readInt();
+        povertyEducation = in.readInt();
+        povertyMoney = in.readInt();
+        povertyOther = in.readInt();
+        productbility = in.readString();
+        production = in.readString();
+        productionOther = in.readInt();
+        productionThreeMoney = in.readInt();
+        property = in.readString();
+        propertyOther = in.readInt();
+        salary = in.readString();
+        socialAssMoney = in.readInt();
+        transfer = in.readString();
+        wfgzMoney = in.readInt();
+        year = in.readString();
+        yearIncome = in.readString();
+        ylbxMoney = in.readInt();
+    }
+
+    public static final Creator<Personalincome> CREATOR = new Creator<Personalincome>() {
+        @Override
+        public Personalincome createFromParcel(Parcel in) {
+            return new Personalincome(in);
+        }
+
+        @Override
+        public Personalincome[] newArray(int size) {
+            return new Personalincome[size];
+        }
+    };
 
     public int getAgMachineryMoney() {
         return agMachineryMoney;
@@ -455,5 +515,58 @@ public class Personalincome implements Serializable {
                 ", yearIncome='" + yearIncome + '\'' +
                 ", ylbxMoney=" + ylbxMoney +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(agMachineryMoney);
+        parcel.writeInt(agricultureMoney);
+        parcel.writeInt(animalMoney);
+        parcel.writeInt(architectureMoney);
+        parcel.writeString(averageIncome);
+        parcel.writeString(cardNumber);
+        parcel.writeInt(comprehensiveMoney);
+        parcel.writeString(ecological);
+        parcel.writeInt(educationMoney);
+        parcel.writeInt(fisheriesMoney);
+        parcel.writeInt(forestryMoney);
+        parcel.writeInt(fpjThdMoney);
+        parcel.writeString(id);
+        parcel.writeInt(interestDeposit);
+        parcel.writeInt(jsjJsbzMoney);
+        parcel.writeInt(landExpropMoney);
+        parcel.writeInt(landRentMoney);
+        parcel.writeString(lowGold);
+        parcel.writeInt(mzjCdbMoney);
+        parcel.writeInt(mzjFlybtMoney);
+        parcel.writeInt(mzjGlbtMoney);
+        parcel.writeInt(mzjNdbMoney);
+        parcel.writeInt(mzjSjbtMoney);
+        parcel.writeInt(mzjWbMoney);
+        parcel.writeString(netIncome);
+        parcel.writeString(otherTransfer);
+        parcel.writeString(poorHouseId);
+        parcel.writeInt(povertyCondolence);
+        parcel.writeInt(povertyEducation);
+        parcel.writeInt(povertyMoney);
+        parcel.writeInt(povertyOther);
+        parcel.writeString(productbility);
+        parcel.writeString(production);
+        parcel.writeInt(productionOther);
+        parcel.writeInt(productionThreeMoney);
+        parcel.writeString(property);
+        parcel.writeInt(propertyOther);
+        parcel.writeString(salary);
+        parcel.writeInt(socialAssMoney);
+        parcel.writeString(transfer);
+        parcel.writeInt(wfgzMoney);
+        parcel.writeString(year);
+        parcel.writeString(yearIncome);
+        parcel.writeInt(ylbxMoney);
     }
 }
