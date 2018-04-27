@@ -225,12 +225,16 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.poor_details_edit:
-                Intent intent = new Intent(getActivity(), ModifyDetailsEdit.class);
-                if (bundle == null) {
-                    ToastUtil.showInfo(getActivity(), "您尚未登入，或者网络异常！");
-                } else {
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                if (listBean.size() != 0) {
+                    Intent intent = new Intent(getActivity(), ModifyDetailsEdit.class);
+                    if (bundle == null) {
+                        ToastUtil.showInfo(getActivity(), "您尚未登入，或者网络异常！");
+                    } else {
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                }else{
+                    ToastUtil.showInfo(getActivity(), "该贫困户无收入信息！");
                 }
                 break;
             case R.id.situation_td_one_ok_i:
