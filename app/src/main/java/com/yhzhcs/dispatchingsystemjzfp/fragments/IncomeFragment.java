@@ -135,7 +135,7 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
                 Gson gson = new Gson();
                 PoorIncomeBean poorIncomeBean = gson.fromJson(body, PoorIncomeBean.class);
                 listBean = poorIncomeBean.getPersonalIncome();
-                LogUtil.v("Income_listBean", "listBean===>>>" + listBean);
+                LogUtil.v("Income_listBean", "listBean===>>>" + listBean.size());
                 intView(listBean);
 
                 bundle = new Bundle();
@@ -227,7 +227,9 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.poor_details_edit:
-                if (listBean.size() != 0 || listBean != null) {
+                if (null == listBean || listBean.size() == 0) {
+                    ToastUtil.showInfo(getActivity(), "该贫困户无收入信息！");
+                }else{
                     Intent intent = new Intent(getActivity(), ModifyDetailsEdit.class);
                     if (bundle == null) {
                         ToastUtil.showInfo(getActivity(), "您尚未登入，或者网络异常！");
@@ -235,8 +237,6 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
-                }else{
-                    ToastUtil.showInfo(getActivity(), "该贫困户无收入信息！");
                 }
                 break;
             case R.id.situation_td_one_ok_i:
