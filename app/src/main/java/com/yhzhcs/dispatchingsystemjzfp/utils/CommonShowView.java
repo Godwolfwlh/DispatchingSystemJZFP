@@ -133,9 +133,6 @@ public class CommonShowView {
 
     /**
      * 根据类型进行对应展示
-     *
-     * @description：
-     * @date 2016-2-19 下午3:02:20
      */
     public void showByType(int mType) {
         hideAllViews();

@@ -34,11 +34,11 @@ import com.yhzhcs.dispatchingsystemjzfp.adapters.MainListAdapter;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Datas;
 import com.yhzhcs.dispatchingsystemjzfp.bean.MainData;
 import com.yhzhcs.dispatchingsystemjzfp.onscrolls.MainOnScerllListener;
+import com.yhzhcs.dispatchingsystemjzfp.utils.NetUtil;
 import com.yhzhcs.dispatchingsystemjzfp.view.BottomScrollView;
-import com.yhzhcs.dispatchingsystemjzfp.utils.CommonShowView;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
-import com.yhzhcs.dispatchingsystemjzfp.utils.ToastUtil;
+import com.yhzhcs.dispatchingsystemjzfp.view.LoadStatusView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +89,7 @@ public class MainFragment extends Fragment implements MainOnScerllListener.Onloa
     private HttpUtils httpUtils;
     private MainOnScerllListener onScrollListener;
     private BottomScrollView sv;
-    private CommonShowView mShowView;
+//    private CommonShowView mShowView;
     private boolean isSvToBottom = false;
     private float mLastY;
 
@@ -98,10 +98,13 @@ public class MainFragment extends Fragment implements MainOnScerllListener.Onloa
      */
     private static final int THRESHOLD_Y_LIST_VIEW = 20;
 
-    /** Fragment当前状态是否可见 */
+    /**
+     * Fragment当前状态是否可见
+     */
     protected boolean isVisible;
     private boolean mHasLoadedOnce = false;
     private boolean isPrepared = false;
+    private LoadStatusView mLoadStatusView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -111,10 +114,19 @@ public class MainFragment extends Fragment implements MainOnScerllListener.Onloa
         sv.smoothScrollTo(0, 0);
         sv.setScrollToBottomListener(this);
 
+        mLoadStatusView = (LoadStatusView) v.findViewById(R.id.lsv_load_status);
+        mLoadStatusView.setOnRefreshListener(new LoadStatusView.OnRefreshListener() {
+            @Override
+            public void onRefreshListener() {
+                //重新加载操作在这里
+                getContent();
+            }
+        });
+
         //查到View控件
         mainListView = (ListView) v.findViewById(R.id.main_list_view);
-        mShowView = new CommonShowView(getActivity(), mainListView);
-        mShowView.showByType(CommonShowView.TYPE_EMPTY);
+//        mShowView = new CommonShowView(getActivity(), mainListView);
+//        mShowView.showByType(CommonShowView.TYPE_EMPTY);
         //将底部加载一个加载更多的布局
         footer = LinearLayout.inflate(getActivity(), R.layout.foot_boot, null);
 
@@ -142,7 +154,7 @@ public class MainFragment extends Fragment implements MainOnScerllListener.Onloa
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(getUserVisibleHint()) {
+        if (getUserVisibleHint()) {
             isVisible = true;
             lazyLoad();
         } else {
@@ -164,12 +176,17 @@ public class MainFragment extends Fragment implements MainOnScerllListener.Onloa
     }
 
     private void getContent() {
-
-        httpUtils = new HttpUtils();
-        params = new RequestParams();
-        params.addBodyParameter("pageNow", "1");
-        params.addBodyParameter("pageSize", "5");
-        httpUtilsConnection(Constant.URL_NEWS, params, HttpMethod.POST);
+        if (NetUtil.isConnected(getActivity())){
+            //设置加载控件状态
+            mLoadStatusView.setLoading();
+            httpUtils = new HttpUtils();
+            params = new RequestParams();
+            params.addBodyParameter("pageNow", "1");
+            params.addBodyParameter("pageSize", "5");
+            httpUtilsConnection(Constant.URL_NEWS, params, HttpMethod.POST);
+        }else {
+            mLoadStatusView.setNoNet();
+        }
     }
 
     private void httpUtilsConnection(String url, RequestParams params, HttpMethod method) {
@@ -182,14 +199,14 @@ public class MainFragment extends Fragment implements MainOnScerllListener.Onloa
                 Gson gosn = new Gson();
                 MainData mainData = gosn.fromJson(body, MainData.class);
                 listData = mainData.getDatas();
+                mLoadStatusView.setHide();
                 showListView(listData);
             }
 
             @Override
             public void onFailure(HttpException e, String s) {
                 LogUtil.v("CESHITAG", "onFailure===>>>" + s);
-                ToastUtil.showInfo(getActivity(), "提示：您的网络有异常，请检查您的网络");
-                mShowView.showByType(CommonShowView.TYPE_ERROR);
+                mLoadStatusView.setFailRefresh();
             }
 
             @Override
@@ -282,23 +299,23 @@ public class MainFragment extends Fragment implements MainOnScerllListener.Onloa
             adapter = new MainListAdapter(getActivity(), data);
             //设置adapter
             mainListView.setAdapter(adapter);
-            mShowView.showByType(CommonShowView.TYPE_CONTENT);
+//            mShowView.showByType(CommonShowView.TYPE_CONTENT);
             //设置ListView的滚动监听事件
             mainListView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     int action = event.getAction();
 
-                    if(action == MotionEvent.ACTION_DOWN) {
+                    if (action == MotionEvent.ACTION_DOWN) {
                         mLastY = event.getY();
                     }
-                    if(action == MotionEvent.ACTION_MOVE) {
+                    if (action == MotionEvent.ACTION_MOVE) {
                         int top = mainListView.getChildAt(0).getTop();
                         float nowY = event.getY();
-                        if(!isSvToBottom) {
+                        if (!isSvToBottom) {
                             // 允许scrollview拦截点击事件, scrollView滑动
                             sv.requestDisallowInterceptTouchEvent(false);
-                        } else if(top == 0 && nowY - mLastY > THRESHOLD_Y_LIST_VIEW) {
+                        } else if (top == 0 && nowY - mLastY > THRESHOLD_Y_LIST_VIEW) {
                             // 允许scrollview拦截点击事件, scrollView滑动
                             sv.requestDisallowInterceptTouchEvent(false);
                         } else {

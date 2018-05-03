@@ -21,4 +21,12 @@
             android:layout_height="wrap_content" />
     </com.yhzhcs.dispatchingsystemjzfp.view.BottomScrollView>
 
+    <com.yhzhcs.dispatchingsystemjzfp.view.LoadStatusView
+        android:id="@+id/lsv_load_status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/colorGray">
+    </com.yhzhcs.dispatchingsystemjzfp.view.LoadStatusView>
+
 </com.zhy.android.percent.support.PercentLinearLayout>
