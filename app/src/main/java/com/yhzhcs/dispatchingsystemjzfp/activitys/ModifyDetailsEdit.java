@@ -1,5 +1,6 @@
 package com.yhzhcs.dispatchingsystemjzfp.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,8 @@ public class ModifyDetailsEdit extends AppCompatActivity implements View.OnClick
 
     private List<Personalincome> listBean;
     private String Is = "0";
+    private String poorHouseId = null;
+    private Intent intent = null;
 
     private EditText situationOne, situationTwo, situationThree, situationFour, situationFive, situationSix,
             situationSeven, situationEight, situationNine;
@@ -47,6 +50,7 @@ public class ModifyDetailsEdit extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_details_edit);
         Bundle bundle = getIntent().getExtras();
         listBean = bundle.getParcelableArrayList("POOR_INCOME_BUNDLE");
+        poorHouseId = bundle.getString("poorHouseId");
         LogUtil.v("BDUSERINFO", listBean.toString());
         intView();
         updatePoorDetails();
@@ -194,9 +198,17 @@ public class ModifyDetailsEdit extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.title_left:
+                intent = new Intent(ModifyDetailsEdit.this,PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID",2);
+                intent.putExtra("poorHouseId",poorHouseId);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.title_right:
+                intent = new Intent(ModifyDetailsEdit.this,PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID",2);
+                intent.putExtra("poorHouseId",poorHouseId);
+                startActivity(intent);
                 finish();
                 break;
         }

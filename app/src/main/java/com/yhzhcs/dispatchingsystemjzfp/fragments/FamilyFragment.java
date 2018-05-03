@@ -165,6 +165,7 @@ public class FamilyFragment extends Fragment implements View.OnClickListener,Ada
             Intent intent = new Intent(getActivity(), ModifyPoorFamily.class);
             Bundle bundle = new Bundle();
             bundle.putParcelable("POOR_LIST",poorlist);
+            bundle.putString("poorHouseId",poorHouseId);
             intent.putExtras(bundle);
             startActivity(intent);
         }

@@ -1,5 +1,6 @@
 package com.yhzhcs.dispatchingsystemjzfp.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -38,6 +39,8 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
     private String strName,strSex,strWithNelation,strHealth;
 //    private String strAge;
     private PercentLinearLayout withPercentLinear;
+    private String poorHouseId = null;
+    private Intent intent = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_modify_poor_family);
         Bundle bundle = getIntent().getExtras();
         poorlist = bundle.getParcelable("POOR_LIST");
+        poorHouseId = bundle.getString("poorHouseId");
         LogUtil.v("POOR_LIST",poorlist.toString());
         intView();
     }
@@ -100,6 +104,11 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 LogUtil.v("MODIFY_FAMILY_HTTP","onSuccess：" + responseInfo.result.toString());
+                intent = new Intent(ModifyPoorFamily.this,PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID",1);
+                intent.putExtra("poorHouseId",poorHouseId);
+                startActivity(intent);
+                finish();
             }
 
             @Override
@@ -113,11 +122,14 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.title_left:
+                intent = new Intent(ModifyPoorFamily.this,PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID",1);
+                intent.putExtra("poorHouseId",poorHouseId);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.title_right:
                 updateFamily();
-                finish();
                 break;
         }
     }

@@ -140,6 +140,7 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
 
                 bundle = new Bundle();
                 bundle.putParcelableArrayList("POOR_INCOME_BUNDLE", (ArrayList<? extends Parcelable>) listBean);
+                bundle.putString("poorHouseId",poorHouseId);
             }
 
             @Override
