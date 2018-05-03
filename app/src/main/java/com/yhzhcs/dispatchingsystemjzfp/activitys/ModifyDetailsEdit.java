@@ -25,6 +25,7 @@ public class ModifyDetailsEdit extends AppCompatActivity implements View.OnClick
     private String Is = "0";
     private String poorHouseId = null;
     private Intent intent = null;
+    private String poorCardNumber = null;
 
     private EditText situationOne, situationTwo, situationThree, situationFour, situationFive, situationSix,
             situationSeven, situationEight, situationNine;
@@ -51,6 +52,7 @@ public class ModifyDetailsEdit extends AppCompatActivity implements View.OnClick
         Bundle bundle = getIntent().getExtras();
         listBean = bundle.getParcelableArrayList("POOR_INCOME_BUNDLE");
         poorHouseId = bundle.getString("poorHouseId");
+        poorCardNumber = bundle.getString("poorCardNumber");
         LogUtil.v("BDUSERINFO", listBean.toString());
         intView();
         updatePoorDetails();
@@ -201,6 +203,7 @@ public class ModifyDetailsEdit extends AppCompatActivity implements View.OnClick
                 intent = new Intent(ModifyDetailsEdit.this,PoorDetailsActivity.class);
                 intent.putExtra("FRAGMENT_ID",2);
                 intent.putExtra("poorHouseId",poorHouseId);
+                intent.putExtra("poorCardNumber",poorCardNumber);
                 startActivity(intent);
                 finish();
                 break;
@@ -208,6 +211,7 @@ public class ModifyDetailsEdit extends AppCompatActivity implements View.OnClick
                 intent = new Intent(ModifyDetailsEdit.this,PoorDetailsActivity.class);
                 intent.putExtra("FRAGMENT_ID",2);
                 intent.putExtra("poorHouseId",poorHouseId);
+                intent.putExtra("poorCardNumber",poorCardNumber);
                 startActivity(intent);
                 finish();
                 break;

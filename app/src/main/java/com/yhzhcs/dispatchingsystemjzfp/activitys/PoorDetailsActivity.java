@@ -66,6 +66,7 @@ public class PoorDetailsActivity extends FragmentActivity implements View.OnClic
     protected void onResume() {
         FRAGMENT_ID = getIntent().getIntExtra("FRAGMENT_ID",0);
         poorHouseId = getIntent().getStringExtra("poorHouseId");
+        poorCardNumber = getIntent().getStringExtra("poorCardNumber");
         myviewpager.setCurrentItem(FRAGMENT_ID);
         super.onResume();
     }

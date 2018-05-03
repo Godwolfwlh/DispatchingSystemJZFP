@@ -141,6 +141,7 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
                 bundle = new Bundle();
                 bundle.putParcelableArrayList("POOR_INCOME_BUNDLE", (ArrayList<? extends Parcelable>) listBean);
                 bundle.putString("poorHouseId",poorHouseId);
+                bundle.putString("poorCardNumber",poorCardNumber);
             }
 
             @Override
@@ -226,7 +227,7 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.poor_details_edit:
-                if (listBean.size() != 0) {
+                if (listBean.size() != 0 || listBean != null) {
                     Intent intent = new Intent(getActivity(), ModifyDetailsEdit.class);
                     if (bundle == null) {
                         ToastUtil.showInfo(getActivity(), "您尚未登入，或者网络异常！");
