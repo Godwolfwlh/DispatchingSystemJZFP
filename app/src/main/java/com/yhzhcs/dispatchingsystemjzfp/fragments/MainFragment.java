@@ -378,7 +378,7 @@ public class MainFragment extends Fragment implements MainOnScerllListener.Onloa
 
         @Override
         public boolean isViewFromObject(View arg0, Object arg1) {
-            return arg0 == arg1;//官方提示这样写
+            return arg0 == arg1;
         }
 
         @Override
