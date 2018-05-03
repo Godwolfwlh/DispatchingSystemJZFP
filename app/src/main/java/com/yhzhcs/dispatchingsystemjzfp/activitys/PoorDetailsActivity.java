@@ -1,5 +1,6 @@
 package com.yhzhcs.dispatchingsystemjzfp.activitys;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -50,6 +51,8 @@ public class PoorDetailsActivity extends FragmentActivity implements View.OnClic
     private FamilyFragment familyFragment;
     private IncomeFragment incomeFragment;
     private ImgFragment imgFragment;
+    private Intent intent = null;
+    private int FRAGMENT_ID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,14 @@ public class PoorDetailsActivity extends FragmentActivity implements View.OnClic
         setContentView(R.layout.activity_poor_details);
         getData();
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        FRAGMENT_ID = getIntent().getIntExtra("FRAGMENT_ID",0);
+        poorHouseId = getIntent().getStringExtra("poorHouseId");
+        myviewpager.setCurrentItem(FRAGMENT_ID);
+        super.onResume();
     }
 
     private void getData() {
@@ -141,6 +152,8 @@ public class PoorDetailsActivity extends FragmentActivity implements View.OnClic
 
         switch (v.getId()) {
             case R.id.title_left:
+                intent = new Intent(PoorDetailsActivity.this,PoorActivity.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.btn_first:

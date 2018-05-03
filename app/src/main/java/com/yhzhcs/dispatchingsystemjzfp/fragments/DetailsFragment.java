@@ -122,6 +122,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
 
                 bundle = new Bundle();
                 bundle.putParcelable("POOR_LIST_BUNDLE", poorDetailsBean);
+                bundle.putString("poorHouseId",poorHouseId);
 
             }
 

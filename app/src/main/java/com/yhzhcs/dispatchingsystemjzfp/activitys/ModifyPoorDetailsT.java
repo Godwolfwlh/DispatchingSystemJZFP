@@ -1,5 +1,6 @@
 package com.yhzhcs.dispatchingsystemjzfp.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -35,12 +36,16 @@ public class ModifyPoorDetailsT extends AppCompatActivity implements View.OnClic
     private String One, Two, Three, Four, Five, Six,
             Seven, Eight, Nine, Ten, Eleven, Twelve, Thirteen, Fourteen, Fifteen;
 
+    private Intent intent = null;
+    private String poorHouseId = null;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_poordetails_dw);
         Bundle bundle = getIntent().getExtras();
         poorDetailsBean = bundle.getParcelable("POOR_LIST_BUNDLE");
+        poorHouseId = bundle.getString("poorHouseId");
         LogUtil.v("BDUSERINFO", poorDetailsBean.getLifeRequire().toString());
         intView();
     }
@@ -94,11 +99,14 @@ public class ModifyPoorDetailsT extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title_left:
+                intent = new Intent(ModifyPoorDetailsT.this,PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID",0);
+                intent.putExtra("poorHouseId",poorHouseId);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.title_right:
                 updatePoorAndLifeRequire();
-                finish();
                 break;
         }
     }
@@ -145,6 +153,11 @@ public class ModifyPoorDetailsT extends AppCompatActivity implements View.OnClic
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 LogUtil.v("MODIFYLIFEREQUIREDETAILSOHTTP", "onSuccess：" + responseInfo.result.toString());
+                intent = new Intent(ModifyPoorDetailsT.this,PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID",0);
+                intent.putExtra("poorHouseId",poorHouseId);
+                startActivity(intent);
+                finish();
             }
 
             @Override

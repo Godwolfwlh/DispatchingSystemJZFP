@@ -58,14 +58,15 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
 
     private List<TownBean> townBeans;
     List<Childs> childs;
-    //onCreate
-
+    private Intent intent = null;
+    private String poorHouseId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.modify_poor_details);
         Bundle bundle = getIntent().getExtras();
+        poorHouseId = bundle.getString("poorHouseId");
         poorDetailsBean = bundle.getParcelable("POOR_LIST_BUNDLE");
         LogUtil.v("BDUSERINFO", poorDetailsBean.getPoor().toString());
         getPoorAdd();
@@ -155,15 +156,14 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title_left:
+                intent = new Intent(ModifyPoorDetailsO.this,PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID",0);
+                intent.putExtra("poorHouseId",poorHouseId);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.title_right:
                 updatePoor();
-//                Intent intent = new Intent("android.intent.action.CART_BROADCAST");
-//                intent.putExtra("DETAILS_CODE",DetailsFragment.DETAILS_CODE);
-//                LocalBroadcastManager.getInstance(ModifyPoorDetailsO.this).sendBroadcast(intent);
-//                sendBroadcast(intent);
-                finish();
                 break;
         }
     }
@@ -192,6 +192,11 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 LogUtil.v("MODIFYPOORDETAILSOHTTP", "onSuccess：" + responseInfo.result.toString());
+                intent = new Intent(ModifyPoorDetailsO.this,PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID",0);
+                intent.putExtra("poorHouseId",poorHouseId);
+                startActivity(intent);
+                finish();
             }
 
             @Override
