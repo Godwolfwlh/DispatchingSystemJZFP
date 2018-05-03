@@ -20,17 +20,14 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.yhzhcs.dispatchingsystemjzfp.R;
 import com.yhzhcs.dispatchingsystemjzfp.activitys.HotDetailsActivity;
 import com.yhzhcs.dispatchingsystemjzfp.adapters.DynamicAdapter;
-import com.yhzhcs.dispatchingsystemjzfp.adapters.PolicyAdapter;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Dtlist;
 import com.yhzhcs.dispatchingsystemjzfp.bean.InformationBean;
-import com.yhzhcs.dispatchingsystemjzfp.bean.Zclist;
 import com.yhzhcs.dispatchingsystemjzfp.onscrolls.DynamicOnScerllListener;
-import com.yhzhcs.dispatchingsystemjzfp.onscrolls.PolicyOnScerllListenner;
-import com.yhzhcs.dispatchingsystemjzfp.utils.CommonShowView;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+import com.yhzhcs.dispatchingsystemjzfp.utils.NetUtil;
+import com.yhzhcs.dispatchingsystemjzfp.view.LoadStatusView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,11 +43,11 @@ public class DynamicFragment extends Fragment implements DynamicOnScerllListener
     private View footer;
 
     private ListView dynListView;
-
     private DynamicAdapter adapter;
-    private CommonShowView mShowView;
-
-    /** Fragment当前状态是否可见 */
+    private LoadStatusView mLoadStatusView;
+    /**
+     * Fragment当前状态是否可见
+     */
     protected boolean isVisible;
     private boolean mHasLoadedOnce = false;
     private boolean isPrepared = false;
@@ -58,16 +55,16 @@ public class DynamicFragment extends Fragment implements DynamicOnScerllListener
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.information_fragment_dynamic,container,false);
-        getDatas();
+        v = inflater.inflate(R.layout.information_fragment_dynamic, container, false);
         inView();
+        getData();
         return v;
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(getUserVisibleHint()) {
+        if (getUserVisibleHint()) {
             isVisible = true;
             lazyLoad();
         } else {
@@ -88,32 +85,44 @@ public class DynamicFragment extends Fragment implements DynamicOnScerllListener
         isPrepared = false;
     }
 
-    private void getDatas() {
-        HttpUtils httpUtils = new HttpUtils();
-        LogUtil.v("ssssssssss", "==================getDatas=====================");
-        httpUtils.send(HttpMethod.GET, Constant.URL_NEWS_INFORMATION, new RequestCallBack<String>() {
-            @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
-                LogUtil.i("RequestCallBack", "onSuccess==>>>" + responseInfo.result.toString());
-                String body = responseInfo.result;
-                Gson gson = new Gson();
-                InformationBean informationBean = gson.fromJson(body,InformationBean.class);
-                dtlists = informationBean.getDtList();
-                showListView(dtlists);
-            }
+    private void getData() {
+        if (NetUtil.isConnected(getActivity())) {
+            mLoadStatusView.setLoading();
+            HttpUtils httpUtils = new HttpUtils();
+            LogUtil.v("ssssssssss", "==================getDatas=====================");
+            httpUtils.send(HttpMethod.GET, Constant.URL_NEWS_INFORMATION, new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(ResponseInfo<String> responseInfo) {
+                    LogUtil.i("RequestCallBack", "onSuccess==>>>" + responseInfo.result.toString());
+                    String body = responseInfo.result;
+                    Gson gson = new Gson();
+                    InformationBean informationBean = gson.fromJson(body, InformationBean.class);
+                    dtlists = informationBean.getDtList();
+                    mLoadStatusView.setHide();
+                    showListView(dtlists);
+                }
 
-            @Override
-            public void onFailure(HttpException e, String s) {
-                LogUtil.i("RequestCallBack", "onFailure==>>>" + s.toString()+"==========="+e.toString());
-                mShowView.showByType(CommonShowView.TYPE_ERROR);
-            }
-        });
+                @Override
+                public void onFailure(HttpException e, String s) {
+                    LogUtil.i("RequestCallBack", "onFailure==>>>" + s.toString() + "===========" + e.toString());
+                    mLoadStatusView.setFailRefresh();
+                }
+            });
+        } else {
+            mLoadStatusView.setNoNet();
+        }
     }
 
-    private void inView(){
+    private void inView() {
         dynListView = (ListView) v.findViewById(R.id.dynamic_list_view);
-        mShowView = new CommonShowView(getActivity(), dynListView);
-        mShowView.showByType(CommonShowView.TYPE_EMPTY);
+        mLoadStatusView = (LoadStatusView) v.findViewById(R.id.lsv_load_status);
+        mLoadStatusView.setOnRefreshListener(new LoadStatusView.OnRefreshListener() {
+            @Override
+            public void onRefreshListener() {
+                //重新加载操作在这里
+                getData();
+            }
+        });
         footer = LinearLayout.inflate(getActivity(), R.layout.foot_boot, null);
         footer.setVisibility(View.GONE);
         dynListView.addFooterView(footer);
@@ -128,14 +137,13 @@ public class DynamicFragment extends Fragment implements DynamicOnScerllListener
      *
      * @param data
      */
-    private void showListView(List<Dtlist> data){
+    private void showListView(List<Dtlist> data) {
 
-        if (adapter == null){
-            adapter = new DynamicAdapter(getActivity(),data);
+        if (adapter == null) {
+            adapter = new DynamicAdapter(getActivity(), data);
             dynListView.setAdapter(adapter);
             dynListView.setOnItemClickListener(this);
-            mShowView.showByType(CommonShowView.TYPE_CONTENT);
-        }else {
+        } else {
             dtlists.addAll(data);
             adapter.notifyDataSetChanged();
         }
@@ -153,8 +161,8 @@ public class DynamicFragment extends Fragment implements DynamicOnScerllListener
         Bundle bundle = new Bundle();
         String ID = info.getId();
         String MassageType = info.getMassageType();
-        bundle.putString("ID",ID);
-        bundle.putString("MassageType",MassageType);
+        bundle.putString("ID", ID);
+        bundle.putString("MassageType", MassageType);
         intent.putExtras(bundle);
         startActivity(intent);
     }

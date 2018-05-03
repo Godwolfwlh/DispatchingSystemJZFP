@@ -25,9 +25,10 @@ import com.yhzhcs.dispatchingsystemjzfp.adapters.TaskAdapter;
 import com.yhzhcs.dispatchingsystemjzfp.bean.TaskBeans;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Tasklists;
 import com.yhzhcs.dispatchingsystemjzfp.onscrolls.TaskOnScerllListener;
-import com.yhzhcs.dispatchingsystemjzfp.utils.CommonShowView;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+import com.yhzhcs.dispatchingsystemjzfp.utils.NetUtil;
+import com.yhzhcs.dispatchingsystemjzfp.view.LoadStatusView;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ import java.util.List;
  * author Luhuai Wu
  */
 
-public class TaskFragment extends Fragment implements TaskOnScerllListener.OnloadDataListener{
+public class TaskFragment extends Fragment implements TaskOnScerllListener.OnloadDataListener {
 
     private View v;
 
@@ -58,9 +59,10 @@ public class TaskFragment extends Fragment implements TaskOnScerllListener.Onloa
     private String missionId;
     private int userId;
 
-    private CommonShowView mShowView;
-
-    /** Fragment当前状态是否可见 */
+    private LoadStatusView mLoadStatusView;
+    /**
+     * Fragment当前状态是否可见
+     */
     protected boolean isVisible;
     private boolean mHasLoadedOnce = false;
     private boolean isPrepared = false;
@@ -68,19 +70,19 @@ public class TaskFragment extends Fragment implements TaskOnScerllListener.Onloa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.task_fragment,null);
+        v = inflater.inflate(R.layout.task_fragment, null);
         sp = getActivity().getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         missionId = sp.getString("MISSION_ID", "");
         userId = sp.getInt("USER_ID", 0);
-        getData();
         inView();
+        getData();
         return v;
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(getUserVisibleHint()) {
+        if (getUserVisibleHint()) {
             isVisible = true;
             lazyLoad();
         } else {
@@ -101,33 +103,39 @@ public class TaskFragment extends Fragment implements TaskOnScerllListener.Onloa
         isPrepared = false;
     }
 
-    private void getData(){
-        HttpUtils httpUtils = new HttpUtils();
-        RequestParams params = new RequestParams();
-        params.addBodyParameter("missionId",missionId);
-        params.addBodyParameter("userId", String.valueOf(userId));
-        httpUtils.send(HttpMethod.POST, Constant.URL_TASK, params, new RequestCallBack<String>() {
-            @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
-                LogUtil.v("TASK_HTTP","onSuccess"+responseInfo.result.toString());
-                String body = responseInfo.result;
-                if (!body.equals("")){
-                    Gson gson = new Gson();
-                    TaskBeans taskBeans = gson.fromJson(body,TaskBeans.class);
-                    taskBeanList = taskBeans.getTaskLists();
-                    showListView(taskBeanList);
+    private void getData() {
+        if (NetUtil.isConnected(getActivity())) {
+            mLoadStatusView.setLoading();
+            HttpUtils httpUtils = new HttpUtils();
+            RequestParams params = new RequestParams();
+            params.addBodyParameter("missionId", missionId);
+            params.addBodyParameter("userId", String.valueOf(userId));
+            httpUtils.send(HttpMethod.POST, Constant.URL_TASK, params, new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(ResponseInfo<String> responseInfo) {
+                    LogUtil.v("TASK_HTTP", "onSuccess" + responseInfo.result.toString());
+                    String body = responseInfo.result;
+                    if (!body.equals("")) {
+                        Gson gson = new Gson();
+                        TaskBeans taskBeans = gson.fromJson(body, TaskBeans.class);
+                        taskBeanList = taskBeans.getTaskLists();
+                        mLoadStatusView.setHide();
+                        showListView(taskBeanList);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(HttpException e, String s) {
-                LogUtil.v("TASK_HTTP","onFailure"+s);
-                mShowView.showByType(CommonShowView.TYPE_ERROR);
-            }
-        });
+                @Override
+                public void onFailure(HttpException e, String s) {
+                    LogUtil.v("TASK_HTTP", "onFailure" + s);
+                    mLoadStatusView.setFailRefresh();
+                }
+            });
+        } else {
+            mLoadStatusView.setNoNet();
+        }
     }
 
-    private void inView(){
+    private void inView() {
         titleImgL = (ImageView) v.findViewById(R.id.title_left);
         titleName = (TextView) v.findViewById(R.id.title_name);
         titleImgR = (ImageView) v.findViewById(R.id.title_right);
@@ -135,15 +143,21 @@ public class TaskFragment extends Fragment implements TaskOnScerllListener.Onloa
 
         titleName.setText("任  务");
         titleImgR.setVisibility(View.GONE);
-        mShowView = new CommonShowView(getActivity(), taskListView);
-        mShowView.showByType(CommonShowView.TYPE_EMPTY);
+        mLoadStatusView = (LoadStatusView) v.findViewById(R.id.lsv_load_status);
+        mLoadStatusView.setOnRefreshListener(new LoadStatusView.OnRefreshListener() {
+            @Override
+            public void onRefreshListener() {
+                //重新加载操作在这里
+                getData();
+            }
+        });
 
         footer = LinearLayout.inflate(getActivity(), R.layout.foot_boot, null);
         footer.setVisibility(View.GONE);
         taskListView.addFooterView(footer);
 
 
-        TaskOnScerllListener onScerllListenner = new TaskOnScerllListener(footer,missionId);
+        TaskOnScerllListener onScerllListenner = new TaskOnScerllListener(footer, missionId);
         onScerllListenner.setOnLoadDataListener(this);
         taskListView.setOnScrollListener(onScerllListenner);
     }
@@ -153,13 +167,12 @@ public class TaskFragment extends Fragment implements TaskOnScerllListener.Onloa
      *
      * @param data
      */
-    private void showListView(List<Tasklists> data){
+    private void showListView(List<Tasklists> data) {
 
-        if (adapter == null){
-            adapter = new TaskAdapter(getActivity(),data);
+        if (adapter == null) {
+            adapter = new TaskAdapter(getActivity(), data);
             taskListView.setAdapter(adapter);
-            mShowView.showByType(CommonShowView.TYPE_CONTENT);
-        }else {
+        } else {
             taskBeanList.addAll(data);
             adapter.notifyDataSetChanged();
         }

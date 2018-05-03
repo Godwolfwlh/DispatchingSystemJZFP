@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -25,9 +26,10 @@ import com.yhzhcs.dispatchingsystemjzfp.adapters.PoorListAdapter;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorListBean;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Poorhouses;
 import com.yhzhcs.dispatchingsystemjzfp.onscrolls.PoorOnScerllListenner;
-import com.yhzhcs.dispatchingsystemjzfp.utils.CommonShowView;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+import com.yhzhcs.dispatchingsystemjzfp.utils.NetUtil;
+import com.yhzhcs.dispatchingsystemjzfp.view.LoadStatusView;
 
 import java.util.List;
 
@@ -55,14 +57,12 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences sp;
     private String missionId;
     private int userId;
-
-    private CommonShowView mShowView;
-
     private String querStrYear;
     private String querStrPoverty;
 
     private HttpUtils httpUtils;
     private RequestParams params;
+    private LoadStatusView mLoadStatusView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,8 +83,14 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         poorRSpinner = (Spinner) findViewById(R.id.spinner_right);
 
         poorList = (ListView) findViewById(R.id.poor_list);
-        mShowView = new CommonShowView(this, poorList);
-        mShowView.showByType(CommonShowView.TYPE_EMPTY);
+        mLoadStatusView = (LoadStatusView) findViewById(R.id.lsv_load_status);
+        mLoadStatusView.setOnRefreshListener(new LoadStatusView.OnRefreshListener() {
+            @Override
+            public void onRefreshListener() {
+                //重新加载操作在这里
+                getData();
+            }
+        });
 
         footer = LinearLayout.inflate(this, R.layout.foot_boot, null);
         footer.setVisibility(View.GONE);
@@ -102,19 +108,23 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getData() {
-
-        httpUtils = new HttpUtils();
-        params = new RequestParams();
-        params.addBodyParameter("pageNow", "1");
-        params.addBodyParameter("pageSize", "10");
-        params.addBodyParameter("missionId", missionId);
-        params.addBodyParameter("userId", String.valueOf(userId));
-        params.addBodyParameter("selectPoverty",querStrPoverty);
-        params.addBodyParameter("selectYear",querStrYear);
-        httpUtilsConnection(Constant.URL_POOR_LIST, params, HttpMethod.POST);
-        PoorOnScerllListenner onScrollListener = new PoorOnScerllListenner(footer, missionId, userId, querStrYear, querStrPoverty);
-        onScrollListener.setOnLoadDataListener(this);
-        poorList.setOnScrollListener(onScrollListener);
+        if (NetUtil.isConnected(this)) {
+            mLoadStatusView.setLoading();
+            httpUtils = new HttpUtils();
+            params = new RequestParams();
+            params.addBodyParameter("pageNow", "1");
+            params.addBodyParameter("pageSize", "10");
+            params.addBodyParameter("missionId", missionId);
+            params.addBodyParameter("userId", String.valueOf(userId));
+            params.addBodyParameter("selectPoverty", querStrPoverty);
+            params.addBodyParameter("selectYear", querStrYear);
+            httpUtilsConnection(Constant.URL_POOR_LIST, params, HttpMethod.POST);
+            PoorOnScerllListenner onScrollListener = new PoorOnScerllListenner(footer, missionId, userId, querStrYear, querStrPoverty);
+            onScrollListener.setOnLoadDataListener(this);
+            poorList.setOnScrollListener(onScrollListener);
+        } else {
+            mLoadStatusView.setNoNet();
+        }
     }
 
     private void httpUtilsConnection(String url, RequestParams params, HttpMethod method) {
@@ -125,14 +135,14 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
                 Gson gson = new Gson();
                 PoorListBean listBean = gson.fromJson(responseInfo.result, PoorListBean.class);
                 poorListBean = listBean.getPoorhouses();
+                mLoadStatusView.setHide();
                 showListView(poorListBean);
             }
 
             @Override
             public void onFailure(HttpException e, String s) {
                 LogUtil.v("POOR_HTTP", "onFailure" + s);
-                mShowView.showByType(CommonShowView.TYPE_ERROR);
-
+                mLoadStatusView.setFailRefresh();
             }
         });
 
@@ -141,13 +151,12 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
     private void showListView(List<Poorhouses> data) {
         if (data.size() != 0) {
             if (poorListAdapter == null) {
-                LogUtil.v("hhhhhhhhhhlist","==1==>>>>"+data.toString());
+                LogUtil.v("hhhhhhhhhhlist", "==1==>>>>" + data.toString());
                 poorListAdapter = new PoorListAdapter(this, data);
                 poorList.setAdapter(poorListAdapter);
-                mShowView.showByType(CommonShowView.TYPE_CONTENT);
                 poorList.setOnItemClickListener(this);
-            }else {
-                LogUtil.v("hhhhhhhhhhlist","==2==>>>>"+data.toString());
+            } else {
+                LogUtil.v("hhhhhhhhhhlist", "==2==>>>>" + data.toString());
                 //不为空，则刷新数据
                 poorListBean.addAll(data);
                 poorListAdapter.setData(poorListBean);
@@ -198,7 +207,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()){
+        switch (parent.getId()) {
             case R.id.spinner_left:
                 querStrYear = (String) parent.getSelectedItem();
                 LogUtil.v("querStr", "querStrTime====" + querStrYear);

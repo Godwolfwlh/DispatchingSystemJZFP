@@ -20,13 +20,13 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.yhzhcs.dispatchingsystemjzfp.R;
 import com.yhzhcs.dispatchingsystemjzfp.activitys.HotDetailsActivity;
 import com.yhzhcs.dispatchingsystemjzfp.adapters.ProduceAdapter;
-import com.yhzhcs.dispatchingsystemjzfp.bean.Dtlist;
 import com.yhzhcs.dispatchingsystemjzfp.bean.InformationBean;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Ncplist;
 import com.yhzhcs.dispatchingsystemjzfp.onscrolls.ProduceOnScerllListenner;
-import com.yhzhcs.dispatchingsystemjzfp.utils.CommonShowView;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+import com.yhzhcs.dispatchingsystemjzfp.utils.NetUtil;
+import com.yhzhcs.dispatchingsystemjzfp.view.LoadStatusView;
 
 import java.util.List;
 
@@ -45,9 +45,10 @@ public class ProduceFragment extends Fragment implements ProduceOnScerllListenne
     private ListView proListView;
 
     private ProduceAdapter adapter;
-    private CommonShowView mShowView;
-
-    /** Fragment当前状态是否可见 */
+    private LoadStatusView mLoadStatusView;
+    /**
+     * Fragment当前状态是否可见
+     */
     protected boolean isVisible;
     private boolean mHasLoadedOnce = false;
     private boolean isPrepared = false;
@@ -55,16 +56,16 @@ public class ProduceFragment extends Fragment implements ProduceOnScerllListenne
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.information_fragment_produce,container,false);
-        getDatas();
+        v = inflater.inflate(R.layout.information_fragment_produce, container, false);
         inView();
+        getDatas();
         return v;
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(getUserVisibleHint()) {
+        if (getUserVisibleHint()) {
             isVisible = true;
             lazyLoad();
         } else {
@@ -86,32 +87,44 @@ public class ProduceFragment extends Fragment implements ProduceOnScerllListenne
     }
 
     private void getDatas() {
-        HttpUtils httpUtils = new HttpUtils();
-        LogUtil.v("ssssssssss", "==================getDatas=====================");
-        httpUtils.send(HttpMethod.GET, Constant.URL_NEWS_INFORMATION, new RequestCallBack<String>() {
-            @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
-                LogUtil.i("RequestCallBack", "onSuccess==>>>" + responseInfo.result.toString());
-                String body = responseInfo.result;
-                Gson gson = new Gson();
-                InformationBean informationBean = gson.fromJson(body,InformationBean.class);
-                listNcplist = informationBean.getNcpList();
-                showListView(listNcplist);
-            }
+        if (NetUtil.isConnected(getActivity())) {
+            mLoadStatusView.setLoading();
+            HttpUtils httpUtils = new HttpUtils();
+            LogUtil.v("ssssssssss", "==================getDatas=====================");
+            httpUtils.send(HttpMethod.GET, Constant.URL_NEWS_INFORMATION, new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(ResponseInfo<String> responseInfo) {
+                    LogUtil.i("RequestCallBack", "onSuccess==>>>" + responseInfo.result.toString());
+                    String body = responseInfo.result;
+                    Gson gson = new Gson();
+                    InformationBean informationBean = gson.fromJson(body, InformationBean.class);
+                    listNcplist = informationBean.getNcpList();
+                    mLoadStatusView.setHide();
+                    showListView(listNcplist);
+                }
 
-            @Override
-            public void onFailure(HttpException e, String s) {
-                LogUtil.i("RequestCallBack", "onFailure==>>>" + s.toString()+"==========="+e.toString());
-                mShowView.showByType(CommonShowView.TYPE_ERROR);
-            }
-        });
+                @Override
+                public void onFailure(HttpException e, String s) {
+                    LogUtil.i("RequestCallBack", "onFailure==>>>" + s.toString() + "===========" + e.toString());
+                    mLoadStatusView.setFailRefresh();
+                }
+            });
+        } else {
+            mLoadStatusView.setNoNet();
+        }
     }
 
-    private void inView(){
+    private void inView() {
 
         proListView = (ListView) v.findViewById(R.id.produce_list_view);
-        mShowView = new CommonShowView(getActivity(), proListView);
-        mShowView.showByType(CommonShowView.TYPE_EMPTY);
+        mLoadStatusView = (LoadStatusView) v.findViewById(R.id.lsv_load_status);
+        mLoadStatusView.setOnRefreshListener(new LoadStatusView.OnRefreshListener() {
+            @Override
+            public void onRefreshListener() {
+                //重新加载操作在这里
+                getDatas();
+            }
+        });
         footer = LinearLayout.inflate(getActivity(), R.layout.foot_boot, null);
         footer.setVisibility(View.GONE);
         proListView.addFooterView(footer);
@@ -126,14 +139,13 @@ public class ProduceFragment extends Fragment implements ProduceOnScerllListenne
      *
      * @param data
      */
-    private void showListView(List<Ncplist> data){
+    private void showListView(List<Ncplist> data) {
 
-        if (adapter == null){
-            adapter = new ProduceAdapter(getActivity(),data);
+        if (adapter == null) {
+            adapter = new ProduceAdapter(getActivity(), data);
             proListView.setAdapter(adapter);
             proListView.setOnItemClickListener(this);
-            mShowView.showByType(CommonShowView.TYPE_CONTENT);
-        }else {
+        } else {
             listNcplist.addAll(data);
             adapter.notifyDataSetChanged();
         }
@@ -151,8 +163,8 @@ public class ProduceFragment extends Fragment implements ProduceOnScerllListenne
         Bundle bundle = new Bundle();
         String ID = info.getId();
         String MassageType = info.getMassageType();
-        bundle.putString("ID",ID);
-        bundle.putString("MassageType",MassageType);
+        bundle.putString("ID", ID);
+        bundle.putString("MassageType", MassageType);
         intent.putExtras(bundle);
         startActivity(intent);
     }

@@ -23,9 +23,10 @@ import com.yhzhcs.dispatchingsystemjzfp.adapters.PolicyAdapter;
 import com.yhzhcs.dispatchingsystemjzfp.bean.InformationBean;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Zclist;
 import com.yhzhcs.dispatchingsystemjzfp.onscrolls.PolicyOnScerllListenner;
-import com.yhzhcs.dispatchingsystemjzfp.utils.CommonShowView;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
 import com.yhzhcs.dispatchingsystemjzfp.utils.LogUtil;
+import com.yhzhcs.dispatchingsystemjzfp.utils.NetUtil;
+import com.yhzhcs.dispatchingsystemjzfp.view.LoadStatusView;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ import java.util.List;
  * Created by Administrator on 2018/1/25.
  */
 
-public class PolicyFragment extends Fragment implements PolicyOnScerllListenner.OnloadDataListener,AdapterView.OnItemClickListener {
+public class PolicyFragment extends Fragment implements PolicyOnScerllListenner.OnloadDataListener, AdapterView.OnItemClickListener {
 
     private View v;
     private List<Zclist> listZclist;
@@ -44,9 +45,10 @@ public class PolicyFragment extends Fragment implements PolicyOnScerllListenner.
     private ListView policyListView;
 
     private PolicyAdapter adapter;
-    private CommonShowView mShowView;
-
-    /** Fragment当前状态是否可见 */
+    private LoadStatusView mLoadStatusView;
+    /**
+     * Fragment当前状态是否可见
+     */
     protected boolean isVisible;
     private boolean mHasLoadedOnce = false;
     private boolean isPrepared = false;
@@ -55,15 +57,15 @@ public class PolicyFragment extends Fragment implements PolicyOnScerllListenner.
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.information_fragment_policy, container, false);
-        getDatas();
         inView();
+        getDatas();
         return v;
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if(getUserVisibleHint()) {
+        if (getUserVisibleHint()) {
             isVisible = true;
             lazyLoad();
         } else {
@@ -85,30 +87,42 @@ public class PolicyFragment extends Fragment implements PolicyOnScerllListenner.
     }
 
     private void getDatas() {
-        HttpUtils httpUtils = new HttpUtils();
-        httpUtils.send(HttpMethod.GET, Constant.URL_NEWS_INFORMATION, new RequestCallBack<String>() {
-            @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
-                LogUtil.i("RequestCallBack", "onSuccess==>>>" + responseInfo.result.toString());
-                String body = responseInfo.result;
-                Gson gson = new Gson();
-                InformationBean informationBean = gson.fromJson(body,InformationBean.class);
-                listZclist = informationBean.getZcList();
-                showListView(listZclist);
-            }
+        if (NetUtil.isConnected(getActivity())) {
+            mLoadStatusView.setLoading();
+            HttpUtils httpUtils = new HttpUtils();
+            httpUtils.send(HttpMethod.GET, Constant.URL_NEWS_INFORMATION, new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(ResponseInfo<String> responseInfo) {
+                    LogUtil.i("RequestCallBack", "onSuccess==>>>" + responseInfo.result.toString());
+                    String body = responseInfo.result;
+                    Gson gson = new Gson();
+                    InformationBean informationBean = gson.fromJson(body, InformationBean.class);
+                    listZclist = informationBean.getZcList();
+                    mLoadStatusView.setHide();
+                    showListView(listZclist);
+                }
 
-            @Override
-            public void onFailure(HttpException e, String s) {
-                LogUtil.i("RequestCallBack", "onFailure==>>>" + s.toString()+"==========="+e.toString());
-                mShowView.showByType(CommonShowView.TYPE_ERROR);
-            }
-        });
+                @Override
+                public void onFailure(HttpException e, String s) {
+                    LogUtil.i("RequestCallBack", "onFailure==>>>" + s.toString() + "===========" + e.toString());
+                    mLoadStatusView.setFailRefresh();
+                }
+            });
+        } else {
+            mLoadStatusView.setNoNet();
+        }
     }
 
     private void inView() {
         policyListView = (ListView) v.findViewById(R.id.policy_list_view);
-        mShowView = new CommonShowView(getActivity(), policyListView);
-        mShowView.showByType(CommonShowView.TYPE_EMPTY);
+        mLoadStatusView = (LoadStatusView) v.findViewById(R.id.lsv_load_status);
+        mLoadStatusView.setOnRefreshListener(new LoadStatusView.OnRefreshListener() {
+            @Override
+            public void onRefreshListener() {
+                //重新加载操作在这里
+                getDatas();
+            }
+        });
         footer = LinearLayout.inflate(getActivity(), R.layout.foot_boot, null);
         footer.setVisibility(View.GONE);
         policyListView.addFooterView(footer);
@@ -129,7 +143,6 @@ public class PolicyFragment extends Fragment implements PolicyOnScerllListenner.
             adapter = new PolicyAdapter(getActivity(), data);
             policyListView.setAdapter(adapter);
             policyListView.setOnItemClickListener(this);
-            mShowView.showByType(CommonShowView.TYPE_CONTENT);
         } else {
             listZclist.addAll(data);
             adapter.notifyDataSetChanged();
@@ -148,8 +161,8 @@ public class PolicyFragment extends Fragment implements PolicyOnScerllListenner.
         Bundle bundle = new Bundle();
         String ID = info.getId();
         String MassageType = info.getMassageType();
-        bundle.putString("ID",ID);
-        bundle.putString("MassageType",MassageType);
+        bundle.putString("ID", ID);
+        bundle.putString("MassageType", MassageType);
         intent.putExtras(bundle);
         startActivity(intent);
     }

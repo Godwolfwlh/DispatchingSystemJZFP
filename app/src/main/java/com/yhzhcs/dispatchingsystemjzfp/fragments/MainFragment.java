@@ -89,7 +89,6 @@ public class MainFragment extends Fragment implements MainOnScerllListener.Onloa
     private HttpUtils httpUtils;
     private MainOnScerllListener onScrollListener;
     private BottomScrollView sv;
-//    private CommonShowView mShowView;
     private boolean isSvToBottom = false;
     private float mLastY;
 
