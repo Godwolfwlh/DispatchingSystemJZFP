@@ -18,6 +18,8 @@ public class Constant {
     public static final String URL_TITLE = "http://192.168.1.189:8080/cathy_fpb/appController/";
     //pan
 //    public static final String URL_TITLE = "http://192.168.1.252:8080/cathy_fpb/appController/";
+    //服务器数据接口
+//    public static final String URL_TITLE = "http://39.108.193.47/appController/";
 
     /**
      * 查询新闻动态、政策数据

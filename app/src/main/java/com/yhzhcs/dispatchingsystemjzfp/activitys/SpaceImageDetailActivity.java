@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView.ScaleType;
 
@@ -44,6 +45,23 @@ public class SpaceImageDetailActivity extends Activity {
         bitmapUtils = new BitmapUtils(this);    //创建BitmapUtils对象，通过xUtils框架获取
         bitmapUtils.configDefaultBitmapConfig(Bitmap.Config.RGB_565);   //设置图片清晰度
         bitmapUtils.display(imageView, inglists.getAnnexPath());
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView.setOnTransformListener(new SmoothImageView.TransformListener() {
+                    @Override
+                    public void onTransformComplete(int mode) {
+                        Intent intent = new Intent(SpaceImageDetailActivity.this, PoorDetailsActivity.class);
+                        intent.putExtra("FRAGMENT_ID", 3);
+                        intent.putExtra("poorHouseId", poorHouseId);
+                        intent.putExtra("poorCardNumber", poorCardNumber);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                imageView.transformOut();
+            }
+        });
 //		imageView.setImageResource(R.drawable.temp);
         // ScaleAnimation scaleAnimation = new ScaleAnimation(0.5f, 1.0f, 0.5f,
         // 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,

@@ -41,7 +41,7 @@ public class FamilyFragment extends Fragment implements View.OnClickListener,Ada
     private ListView familyListView;
     private TextView headEdit;
 
-    private String poorHouseId;
+    private String poorHouseId,poorCardNumber;
 
     private View v;
 
@@ -60,6 +60,7 @@ public class FamilyFragment extends Fragment implements View.OnClickListener,Ada
         v = inflater.inflate(R.layout.fragment_poor_family,container,false);
         Bundle bundle = getArguments();
         poorHouseId = bundle.getString("poorHouseId");
+        poorCardNumber = bundle.getString("poorCardNumber");
         familyListView = (ListView) v.findViewById(R.id.fragment_poor_family_list);
         headEdit = (TextView) v.findViewById(R.id.poor_head_edit);
         headEdit.setOnClickListener(this);
@@ -166,8 +167,10 @@ public class FamilyFragment extends Fragment implements View.OnClickListener,Ada
             Bundle bundle = new Bundle();
             bundle.putParcelable("POOR_LIST",poorlist);
             bundle.putString("poorHouseId",poorHouseId);
+            bundle.putString("poorCardNumber",poorCardNumber);
             intent.putExtras(bundle);
             startActivity(intent);
+            getActivity().finish();
         }
     }
 

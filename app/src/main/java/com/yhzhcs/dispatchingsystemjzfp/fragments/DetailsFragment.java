@@ -207,6 +207,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
                 } else {
                     intento.putExtras(bundle);
                     startActivity(intento);
+                    getActivity().finish();
                 }
                 break;
             case R.id.poor_details_edit:
@@ -216,6 +217,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
                 } else {
                     intentt.putExtras(bundle);
                     startActivity(intentt);
+                    getActivity().finish();
                 }
                 break;
         }

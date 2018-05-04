@@ -40,6 +40,7 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
 //    private String strAge;
     private PercentLinearLayout withPercentLinear;
     private String poorHouseId = null;
+    private String poorCardNumber = null;
     private Intent intent = null;
 
     @Override
@@ -49,6 +50,7 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
         Bundle bundle = getIntent().getExtras();
         poorlist = bundle.getParcelable("POOR_LIST");
         poorHouseId = bundle.getString("poorHouseId");
+        poorCardNumber = bundle.getString("poorCardNumber");
         LogUtil.v("POOR_LIST",poorlist.toString());
         intView();
     }
@@ -107,6 +109,7 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
                 intent = new Intent(ModifyPoorFamily.this,PoorDetailsActivity.class);
                 intent.putExtra("FRAGMENT_ID",1);
                 intent.putExtra("poorHouseId",poorHouseId);
+                intent.putExtra("poorCardNumber",poorCardNumber);
                 startActivity(intent);
                 finish();
             }

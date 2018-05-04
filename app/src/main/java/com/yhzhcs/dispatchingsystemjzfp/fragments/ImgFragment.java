@@ -335,8 +335,10 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
         Bundle bundle = new Bundle();
         Intent intent = new Intent(getActivity(), SampleCameraActivity.class);
         bundle.putString("entityId", entityId);
+        bundle.putString("poorCardNumber",poorCardNumber);
         intent.putExtras(bundle);
         startActivity(intent);
+        getActivity().finish();
     }
 
     /**
@@ -518,7 +520,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                 @Override
                 public void onClick(View v) {
                     if (isState == false) {
-                        Intent intent = new Intent(getActivity(), SpaceImageDetailActivity.class);
+                        Intent intent = new Intent(context, SpaceImageDetailActivity.class);
                         intent.putExtra("images", inglists);//非必须
                         intent.putExtra("position", position);
                         intent.putExtra("poorHouseId", entityId);
@@ -531,6 +533,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
                         intent.putExtra("width", finalViewHolder.image.getWidth());//必须
                         intent.putExtra("height", finalViewHolder.image.getHeight());//必须
                         startActivity(intent);
+                        getActivity().finish();
 //                    overridePendingTransition(0, 0);
                     } else {
                         LogUtil.v("00000111", "======================");

@@ -5,16 +5,22 @@ import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.support.v7.widget.AppCompatImageView;
+
+import com.lidroid.xutils.bitmap.core.AsyncDrawable;
 
 /**
  * 2d平滑变化的显示图片的ImageView
@@ -150,8 +156,17 @@ public class SmoothImageView extends AppCompatImageView {
         if (getDrawable() == null) {
             return;
         }
-        if (mBitmap == null || mBitmap.isRecycled()) {
-            mBitmap = ((BitmapDrawable) getDrawable()).getBitmap();
+        if (getDrawable() instanceof BitmapDrawable) {
+            if (mBitmap == null || mBitmap.isRecycled()) {
+                mBitmap = ((BitmapDrawable) getDrawable()).getBitmap();
+            }
+        } else if (getDrawable() instanceof AsyncDrawable) {
+            mBitmap = Bitmap.createBitmap(getWidth(), getHeight(), getDrawable().getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565);
+            Canvas canvas1 = new Canvas(mBitmap);
+            // canvas.setBitmap(bitmap);
+            getDrawable().setBounds(0, 0, getWidth(),
+                    getHeight());
+            getDrawable().draw(canvas1);
         }
         //防止mTransfrom重复的做同样的初始化
         if (mTransfrom != null) {

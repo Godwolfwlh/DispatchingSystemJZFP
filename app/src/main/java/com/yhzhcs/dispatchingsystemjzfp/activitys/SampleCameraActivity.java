@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
@@ -102,6 +103,7 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
      */
     private ArrayList<String> mSelectedImage = new ArrayList<String>();
     private ArrayList<ImageView> SelectedImageViews = new ArrayList<ImageView>();
+    private String poorCardNumber;
 
     /**
      * 为View绑定数据
@@ -152,6 +154,7 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
         setContentView(R.layout.activity_sample_camera);
         Bundle bundle = getIntent().getExtras();
         entityId = bundle.getString("entityId");
+        poorCardNumber = bundle.getString("poorCardNumber");
         LogUtil.i("entityId", entityId);
         DisplayMetrics outMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
@@ -283,6 +286,11 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
             @Override
             public void onClick(View view) {
                 serImage();
+                Intent intent = new Intent(SampleCameraActivity.this, PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID", 3);
+                intent.putExtra("poorHouseId", entityId);
+                intent.putExtra("poorCardNumber", poorCardNumber);
+                startActivity(intent);
                 finish();
             }
         });

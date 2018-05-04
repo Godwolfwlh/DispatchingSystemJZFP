@@ -236,6 +236,7 @@ public class IncomeFragment extends Fragment implements View.OnClickListener {
                     } else {
                         intent.putExtras(bundle);
                         startActivity(intent);
+                        getActivity().finish();
                     }
                 }
                 break;
