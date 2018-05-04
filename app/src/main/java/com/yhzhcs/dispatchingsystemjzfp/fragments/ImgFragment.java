@@ -66,7 +66,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
 
     private GridView gridView;
 
-    private String entityId,poorCardNumber;
+    private String entityId, poorCardNumber;
 
     private List<Inglists> listBean;
 
@@ -214,10 +214,10 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
     //是否在多选状态
     private void isMultiselect(boolean isShowDelete) {
         butDeleta.setText(isShowDelete ? "取消" : "删除");
-        if (isShowDelete){
-            ToastUtil.showInfo(getActivity(),"请选择需要删除的图片！");
-        }else {
-            ToastUtil.showInfo(getActivity(),"退出删除图片模式！");
+        if (isShowDelete) {
+            ToastUtil.showInfo(getActivity(), "请选择需要删除的图片！");
+        } else {
+            ToastUtil.showInfo(getActivity(), "退出删除图片模式！");
         }
     }
 
@@ -512,48 +512,48 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
             bitmapUtils.configDefaultBitmapConfig(Bitmap.Config.RGB_565);   //设置图片清晰度
             bitmapUtils.display(viewHolder.image, inglists.getAnnexPath());
             viewHolder.delete.setVisibility(isState ? View.VISIBLE : View.GONE);
-            LogUtil.v("isStateTag","=========="+isState);
+            LogUtil.v("isStateTag", "==========" + isState);
             final ViewHolder finalViewHolder = viewHolder;
-                viewHolder.image.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (isState == false) {
-                            Intent intent = new Intent(getActivity(), SpaceImageDetailActivity.class);
-                            intent.putExtra("images", inglists);//非必须
-                            intent.putExtra("position", position);
-                            intent.putExtra("poorHouseId",entityId);
-                            intent.putExtra("poorCardNumber",poorCardNumber);
-                            int[] location = new int[2];
-                            finalViewHolder.image.getLocationOnScreen(location);
-                            intent.putExtra("locationX", location[0]);//必须
-                            intent.putExtra("locationY", location[1]);//必须
+            viewHolder.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (isState == false) {
+                        Intent intent = new Intent(getActivity(), SpaceImageDetailActivity.class);
+                        intent.putExtra("images", inglists);//非必须
+                        intent.putExtra("position", position);
+                        intent.putExtra("poorHouseId", entityId);
+                        intent.putExtra("poorCardNumber", poorCardNumber);
+                        int[] location = new int[2];
+                        finalViewHolder.image.getLocationOnScreen(location);
+                        intent.putExtra("locationX", location[0]);//必须
+                        intent.putExtra("locationY", location[1]);//必须
 
-                            intent.putExtra("width", finalViewHolder.image.getWidth());//必须
-                            intent.putExtra("height", finalViewHolder.image.getHeight());//必须
-                            startActivity(intent);
+                        intent.putExtra("width", finalViewHolder.image.getWidth());//必须
+                        intent.putExtra("height", finalViewHolder.image.getHeight());//必须
+                        startActivity(intent);
 //                    overridePendingTransition(0, 0);
-                        }else {
-                            LogUtil.v("00000111", "======================");
-                            AlertDialog.Builder deleteDialog = new AlertDialog.Builder(getActivity());
-                            deleteDialog.setMessage("你确定要删除这张图片吗？")
-                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            annentId = listBean.get(position).getAnnentid();
-                                            annexPathDown = listBean.get(position).getAnnexPathDown();
-                                            deletePhoto(position, annentId, annexPathDown);
+                    } else {
+                        LogUtil.v("00000111", "======================");
+                        AlertDialog.Builder deleteDialog = new AlertDialog.Builder(getActivity());
+                        deleteDialog.setMessage("你确定要删除这张图片吗？")
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        annentId = listBean.get(position).getAnnentid();
+                                        annexPathDown = listBean.get(position).getAnnexPathDown();
+                                        deletePhoto(position, annentId, annexPathDown);
 
-                                        }
-                                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    }
+                                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
-                                }
-                            });
-                            deleteDialog.show();
-                        }
+                            }
+                        });
+                        deleteDialog.show();
                     }
-                });
+                }
+            });
             return convertView;
         }
 

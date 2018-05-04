@@ -8,34 +8,34 @@ import android.util.Log;
 
 /**
  * 正方形的ImageView
- * @author dty
  *
+ * @author dty
  */
 public class SquareCenterImageView extends AppCompatImageView {
     public SquareCenterImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
- 
+
     public SquareCenterImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
- 
+
     public SquareCenterImageView(Context context) {
         super(context);
     }
-    
+
     @Override
     public void setImageBitmap(Bitmap bm) {
-    	Log.d("roamer", "bm.getWidth():"+bm.getWidth());
-    	Log.d("roamer", "bm.getHeight():"+bm.getHeight());
-    	
-    	super.setImageBitmap(bm);
+        Log.d("roamer", "bm.getWidth():" + bm.getWidth());
+        Log.d("roamer", "bm.getHeight():" + bm.getHeight());
+
+        super.setImageBitmap(bm);
     }
-    
-    private void clipCenterImage(){
-    	
+
+    private void clipCenterImage() {
+
     }
- 
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // For simple implementation, or internal size is always 0.
@@ -44,7 +44,7 @@ public class SquareCenterImageView extends AppCompatImageView {
         // adding and removing different arbitrary views and do not
         // want the layout to change as this happens.
         setMeasuredDimension(getDefaultSize(0, widthMeasureSpec), getDefaultSize(0, heightMeasureSpec));
- 
+
         // Children are just made to fill our space.
         int childWidthSize = getMeasuredWidth();
         int childHeightSize = getMeasuredHeight();
