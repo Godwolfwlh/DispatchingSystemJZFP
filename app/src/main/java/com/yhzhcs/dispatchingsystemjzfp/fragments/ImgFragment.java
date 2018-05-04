@@ -20,8 +20,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -42,6 +40,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.yhzhcs.dispatchingsystemjzfp.R;
 import com.yhzhcs.dispatchingsystemjzfp.activitys.SampleCameraActivity;
+import com.yhzhcs.dispatchingsystemjzfp.activitys.SpaceImageDetailActivity;
 import com.yhzhcs.dispatchingsystemjzfp.bean.Inglists;
 import com.yhzhcs.dispatchingsystemjzfp.bean.PoorImageBean;
 import com.yhzhcs.dispatchingsystemjzfp.utils.Constant;
@@ -61,13 +60,13 @@ import static android.app.Activity.RESULT_OK;
  * Created by Administrator on 2018/1/24.
  */
 
-public class ImgFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener {
+public class ImgFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemLongClickListener {
 
     private View v;
 
     private GridView gridView;
 
-    private String entityId;
+    private String entityId,poorCardNumber;
 
     private List<Inglists> listBean;
 
@@ -97,6 +96,7 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
         v = inflater.inflate(R.layout.fragment_poor_img, container, false);
         Bundle bundle = getArguments();
         entityId = bundle.getString("poorHouseId");
+        poorCardNumber = bundle.getString("poorCardNumber");
         LogUtil.i("entityId", entityId);
         iniView();
         return v;
@@ -188,7 +188,6 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
 
         Upload.setOnClickListener(this);
         butDeleta.setOnClickListener(this);
-        gridView.setOnItemClickListener(this);
         gridView.setOnItemLongClickListener(this);
     }
 
@@ -232,31 +231,6 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
         isMultiselect(isShowDelete);
         adapter.setIsState(isShowDelete);
         return true;
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
-        LogUtil.v("00000111", "======================");
-        AlertDialog.Builder deleteDialog = new AlertDialog.Builder(getActivity());
-        deleteDialog.setMessage("你确定要删除这张图片吗？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        annentId = listBean.get(position).getAnnentid();
-                        annexPathDown = listBean.get(position).getAnnexPathDown();
-                        deletePhoto(position, annentId, annexPathDown);
-
-                    }
-                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        if (isShowDelete == true){
-            deleteDialog.show();
-        }
-
     }
 
     //删除服务器文件
@@ -514,10 +488,9 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
+        public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder viewHolder = null;
-            Inglists inglists = listBean.get(position);
+            final Inglists inglists = listBean.get(position);
             if (convertView == null) {
 
                 viewHolder = new ViewHolder();
@@ -538,8 +511,49 @@ public class ImgFragment extends Fragment implements View.OnClickListener, Adapt
             bitmapUtils = new BitmapUtils(context);    //创建BitmapUtils对象，通过xUtils框架获取
             bitmapUtils.configDefaultBitmapConfig(Bitmap.Config.RGB_565);   //设置图片清晰度
             bitmapUtils.display(viewHolder.image, inglists.getAnnexPath());
-
             viewHolder.delete.setVisibility(isState ? View.VISIBLE : View.GONE);
+            LogUtil.v("isStateTag","=========="+isState);
+            final ViewHolder finalViewHolder = viewHolder;
+                viewHolder.image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (isState == false) {
+                            Intent intent = new Intent(getActivity(), SpaceImageDetailActivity.class);
+                            intent.putExtra("images", inglists);//非必须
+                            intent.putExtra("position", position);
+                            intent.putExtra("poorHouseId",entityId);
+                            intent.putExtra("poorCardNumber",poorCardNumber);
+                            int[] location = new int[2];
+                            finalViewHolder.image.getLocationOnScreen(location);
+                            intent.putExtra("locationX", location[0]);//必须
+                            intent.putExtra("locationY", location[1]);//必须
+
+                            intent.putExtra("width", finalViewHolder.image.getWidth());//必须
+                            intent.putExtra("height", finalViewHolder.image.getHeight());//必须
+                            startActivity(intent);
+//                    overridePendingTransition(0, 0);
+                        }else {
+                            LogUtil.v("00000111", "======================");
+                            AlertDialog.Builder deleteDialog = new AlertDialog.Builder(getActivity());
+                            deleteDialog.setMessage("你确定要删除这张图片吗？")
+                                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            annentId = listBean.get(position).getAnnentid();
+                                            annexPathDown = listBean.get(position).getAnnexPathDown();
+                                            deletePhoto(position, annentId, annexPathDown);
+
+                                        }
+                                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                            deleteDialog.show();
+                        }
+                    }
+                });
             return convertView;
         }
 
