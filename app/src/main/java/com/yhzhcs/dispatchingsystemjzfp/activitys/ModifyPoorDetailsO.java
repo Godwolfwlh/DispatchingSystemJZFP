@@ -59,7 +59,8 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
     private List<TownBean> townBeans;
     List<Childs> childs;
     private Intent intent = null;
-    private String poorHouseId;
+    private String poorHouseId = null;
+    private String poorCardNumber = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.modify_poor_details);
         Bundle bundle = getIntent().getExtras();
         poorHouseId = bundle.getString("poorHouseId");
+        poorCardNumber = bundle.getString("poorCardNumber");
         poorDetailsBean = bundle.getParcelable("POOR_LIST_BUNDLE");
         LogUtil.v("BDUSERINFO", poorDetailsBean.getPoor().toString());
         getPoorAdd();
@@ -159,6 +161,7 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
                 intent = new Intent(ModifyPoorDetailsO.this,PoorDetailsActivity.class);
                 intent.putExtra("FRAGMENT_ID",0);
                 intent.putExtra("poorHouseId",poorHouseId);
+                intent.putExtra("poorCardNumber",poorCardNumber);
                 startActivity(intent);
                 finish();
                 break;

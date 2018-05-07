@@ -35,7 +35,7 @@ import com.yhzhcs.dispatchingsystemjzfp.utils.ToastUtil;
 
 public class DetailsFragment extends Fragment implements View.OnClickListener {
 
-    private String poorHouseId;
+    private String poorHouseId,poorCardNumber;
     private View v;
     private ImageView poorImghead;
     private TextView nameInput, familyNum, reasonInput, attributeInput, telephoneInput, paperInput, addressInput;
@@ -60,6 +60,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         v = inflater.inflate(R.layout.fragment_poor_base_situation, container, false);
         Bundle bundle = getArguments();
         poorHouseId = bundle.getString("poorHouseId");
+        poorCardNumber = bundle.getString("poorCardNumber");
         isPrepared = true;
         return v;
     }
@@ -123,6 +124,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
                 bundle = new Bundle();
                 bundle.putParcelable("POOR_LIST_BUNDLE", poorDetailsBean);
                 bundle.putString("poorHouseId",poorHouseId);
+                bundle.putString("poorCardNumber",poorCardNumber);
 
             }
 
