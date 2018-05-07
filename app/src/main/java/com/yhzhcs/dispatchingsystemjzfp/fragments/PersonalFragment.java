@@ -177,6 +177,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
                 deleteUserMss();
                 Intent intent = new Intent(getActivity(), EnterActivity.class);  //进入主界面
                 startActivity(intent);  //开始跳转
+                getActivity().finish();
                 break;
         }
     }

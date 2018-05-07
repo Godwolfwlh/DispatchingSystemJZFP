@@ -1,6 +1,7 @@
 package com.yhzhcs.dispatchingsystemjzfp.activitys;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -102,8 +103,6 @@ public class ModifyPassActivity extends AppCompatActivity implements View.OnClic
                     ToastUtil.showInfo(this, "您输入的确认密码与新密码不同，请重新输入！");
                 } else {
                     upPassword(oldPassStr,newPassStr);
-                    finish();
-
                 }
                 break;
         }
@@ -120,6 +119,9 @@ public class ModifyPassActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 LogUtil.v("MODIFYPASSHTTP", "onSuccess" + responseInfo.result.toString());
+                Intent intent = new Intent(ModifyPassActivity.this,EnterActivity.class);
+                startActivity(intent);
+                finish();
             }
 
             @Override
