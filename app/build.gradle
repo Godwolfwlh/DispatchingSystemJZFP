@@ -41,7 +41,7 @@ android {
         release {
             buildConfigField "boolean", "LOG_ON", "false" //不显示Log
 
-            minifyEnabled true                               //开启混淆
+            minifyEnabled false                               //开启混淆
             zipAlignEnabled true                             //开启Zipalign优化
             shrinkResources false                             //移除无用的resource文件，此项只有在开启混淆时才生效
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
