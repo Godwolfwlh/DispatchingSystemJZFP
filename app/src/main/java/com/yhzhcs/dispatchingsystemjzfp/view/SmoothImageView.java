@@ -46,19 +46,28 @@ public class SmoothImageView extends AppCompatImageView {
     private final int mBgColor = 0xFF000000;
     private int mBgAlpha = 0;
     private Paint mPaint;
+    private Context context = null;
+    private AttributeSet attrs = null;
+    private int defStyle;
 
     public SmoothImageView(Context context) {
         super(context);
+        this.context = context;
         init();
     }
 
     public SmoothImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
+        this.attrs = attrs;
         init();
     }
 
     public SmoothImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        this.context = context;
+        this.attrs = attrs;
+        this.defStyle = defStyle;
         init();
     }
 
@@ -356,7 +365,7 @@ public class SmoothImageView extends AppCompatImageView {
                 mTransfrom.rect.height = (Float) animation.getAnimatedValue("height");
                 mBgAlpha = (Integer) animation.getAnimatedValue("alpha");
                 invalidate();
-                ((Activity) getContext()).getWindow().getDecorView().invalidate();
+                ((Activity) context).getWindow().getDecorView().invalidate();
             }
         });
         valueAnimator.addListener(new ValueAnimator.AnimatorListener() {
