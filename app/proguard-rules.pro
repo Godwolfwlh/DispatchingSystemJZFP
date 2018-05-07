@@ -119,3 +119,7 @@
 
 -dontwarn com.baidu.**
 -dontwarn com.tencent.**
+
+# 反射
+-keepattributes Signature
+-keepattributes EnclosingMethod

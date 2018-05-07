@@ -101,10 +101,10 @@ public class ModifyPoorDetailsT extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title_left:
-                intent = new Intent(ModifyPoorDetailsT.this,PoorDetailsActivity.class);
-                intent.putExtra("FRAGMENT_ID",0);
-                intent.putExtra("poorHouseId",poorHouseId);
-                intent.putExtra("poorCardNumber",poorCardNumber);
+                intent = new Intent(ModifyPoorDetailsT.this, PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID", 0);
+                intent.putExtra("poorHouseId", poorHouseId);
+                intent.putExtra("poorCardNumber", poorCardNumber);
                 startActivity(intent);
                 finish();
                 break;
@@ -136,19 +136,19 @@ public class ModifyPoorDetailsT extends AppCompatActivity implements View.OnClic
         RequestParams params = new RequestParams();
         params.addBodyParameter("cradNumber", poorDetailsBean.getPoor().getCradNumber());
         params.addBodyParameter("poverty", Three);
-        params.addBodyParameter("isTeach",Eleven);
-        params.addBodyParameter("isCooperative",One);
-        params.addBodyParameter("isDrinkingWater",Four);
-        params.addBodyParameter("isElectricity",Five);
-        params.addBodyParameter("isDrinkingSafe",Six);
-        params.addBodyParameter("isHe",Seven);
-        params.addBodyParameter("isDilapidatedHouse",Eight);
-        params.addBodyParameter("isRelocatedHouse",Nine);
-        params.addBodyParameter("dangerouLevel",Ten);
-        params.addBodyParameter("isCommodityHouse",Twelve);
-        params.addBodyParameter("isCar",Thirteen);
-        params.addBodyParameter("isCivilServant",Fourteen);
-        params.addBodyParameter("isBusinessRegister",Fifteen);
+        params.addBodyParameter("isTeach", Eleven);
+        params.addBodyParameter("isCooperative", One);
+        params.addBodyParameter("isDrinkingWater", Four);
+        params.addBodyParameter("isElectricity", Five);
+        params.addBodyParameter("isDrinkingSafe", Six);
+        params.addBodyParameter("isHe", Seven);
+        params.addBodyParameter("isDilapidatedHouse", Eight);
+        params.addBodyParameter("isRelocatedHouse", Nine);
+        params.addBodyParameter("dangerouLevel", Ten);
+        params.addBodyParameter("isCommodityHouse", Twelve);
+        params.addBodyParameter("isCar", Thirteen);
+        params.addBodyParameter("isCivilServant", Fourteen);
+        params.addBodyParameter("isBusinessRegister", Fifteen);
 //        params.addBodyParameter("admin",Four);
 //        params.addBodyParameter("1",Four);
 
@@ -156,9 +156,10 @@ public class ModifyPoorDetailsT extends AppCompatActivity implements View.OnClic
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 LogUtil.v("MODIFYLIFEREQUIREDETAILSOHTTP", "onSuccess：" + responseInfo.result.toString());
-                intent = new Intent(ModifyPoorDetailsT.this,PoorDetailsActivity.class);
-                intent.putExtra("FRAGMENT_ID",0);
-                intent.putExtra("poorHouseId",poorHouseId);
+                intent = new Intent(ModifyPoorDetailsT.this, PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID", 0);
+                intent.putExtra("poorHouseId", poorHouseId);
+                intent.putExtra("poorCardNumber", poorCardNumber);
                 startActivity(intent);
                 finish();
             }

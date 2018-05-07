@@ -203,6 +203,7 @@ public class PoorActivity extends AppCompatActivity implements View.OnClickListe
         bundle.putString("poorCardNumber", poorCardNumber);
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
     }
 
     @Override

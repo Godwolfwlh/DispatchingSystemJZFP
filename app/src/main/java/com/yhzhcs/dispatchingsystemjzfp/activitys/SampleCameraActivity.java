@@ -264,6 +264,11 @@ public class SampleCameraActivity extends Activity implements ListImageDirPopupW
         tv_return.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(SampleCameraActivity.this, PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID", 3);
+                intent.putExtra("poorHouseId", entityId);
+                intent.putExtra("poorCardNumber", poorCardNumber);
+                startActivity(intent);
                 finish();
             }
         });

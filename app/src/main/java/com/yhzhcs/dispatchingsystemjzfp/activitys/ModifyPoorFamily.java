@@ -128,6 +128,7 @@ public class ModifyPoorFamily extends AppCompatActivity implements View.OnClickL
                 intent = new Intent(ModifyPoorFamily.this,PoorDetailsActivity.class);
                 intent.putExtra("FRAGMENT_ID",1);
                 intent.putExtra("poorHouseId",poorHouseId);
+                intent.putExtra("poorCardNumber",poorCardNumber);
                 startActivity(intent);
                 finish();
                 break;

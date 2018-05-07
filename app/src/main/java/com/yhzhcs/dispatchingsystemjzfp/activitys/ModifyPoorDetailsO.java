@@ -47,9 +47,9 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
     private TextView titleName;
     private ImageView titleImgR;
 
-    private EditText poorName, poorNum, poorOne, poorTow, poorPho,poorAdd;//poorTown,poorChild;
+    private EditText poorName, poorNum, poorOne, poorTow, poorPho, poorAdd;//poorTown,poorChild;
     private Spinner childsSpi, townSpi;
-    private String PorName, PorNum, PorOne, PorTow, PorPho, PorAdd, StrChilds, StrTown,TownId,ChildsId;
+    private String PorName, PorNum, PorOne, PorTow, PorPho, PorAdd, StrChilds, StrTown, TownId, ChildsId;
 
     PoorDetailsBean poorDetailsBean;
     List<PoorAddBean> poorAddBeans;
@@ -123,7 +123,7 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 StrTown = townBeans.get(i).getValue().toString();
                 TownId = townBeans.get(i).getId().toString();
-                LogUtil.logJson("StrTown", "选择的元素是：" + "\n城镇：" + StrTown );
+                LogUtil.logJson("StrTown", "选择的元素是：" + "\n城镇：" + StrTown);
                 childs = new ArrayList<>();
                 for (int j = 0; j < townBeans.get(i).getChilds().size(); j++) {
                     childs.add(townBeans.get(i).getChilds().get(j));
@@ -158,10 +158,10 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title_left:
-                intent = new Intent(ModifyPoorDetailsO.this,PoorDetailsActivity.class);
-                intent.putExtra("FRAGMENT_ID",0);
-                intent.putExtra("poorHouseId",poorHouseId);
-                intent.putExtra("poorCardNumber",poorCardNumber);
+                intent = new Intent(ModifyPoorDetailsO.this, PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID", 0);
+                intent.putExtra("poorHouseId", poorHouseId);
+                intent.putExtra("poorCardNumber", poorCardNumber);
                 startActivity(intent);
                 finish();
                 break;
@@ -195,9 +195,11 @@ public class ModifyPoorDetailsO extends AppCompatActivity implements View.OnClic
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 LogUtil.v("MODIFYPOORDETAILSOHTTP", "onSuccess：" + responseInfo.result.toString());
-                intent = new Intent(ModifyPoorDetailsO.this,PoorDetailsActivity.class);
-                intent.putExtra("FRAGMENT_ID",0);
-                intent.putExtra("poorHouseId",poorHouseId);
+                intent = new Intent(ModifyPoorDetailsO.this, PoorDetailsActivity.class);
+                intent.putExtra("FRAGMENT_ID", 0);
+                intent.putExtra("poorHouseId", poorHouseId);
+                intent.putExtra("poorCardNumber", poorCardNumber);
+                LogUtil.v("poorHouseIdsssssss", poorHouseId);
                 startActivity(intent);
                 finish();
             }
